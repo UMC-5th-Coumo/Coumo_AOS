@@ -5,6 +5,7 @@
 
     <!-- component Color -->
     <color name="main">#643DAF</color>
+    <color name="sub">#F5EFFF</color>
 
     <!-- font Color -->
     <color name="font_main">#643DAF</color>

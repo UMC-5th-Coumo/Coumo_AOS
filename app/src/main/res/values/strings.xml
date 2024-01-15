@@ -5,4 +5,9 @@
     <string name="coupon">내 쿠폰</string>
     <string name="community">동네 소식</string>
     <string name="account">내 계정</string>
+    
+    <string name="my_profile">내 프로필</string>
+    <string name="service_center">쿠모 고객센터</string>
+    <string name="logout">로그아웃</string>
+    <string name="call_number">1577–9999</string>
 </resources>

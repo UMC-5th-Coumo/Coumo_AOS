@@ -6,4 +6,5 @@
     <dimen name="bottom_navi_selected_margin">30dp</dimen>
     <dimen name="bottom_navi_unselected_margin">22dp</dimen>
 
+    <dimen name="btn_size">24dp</dimen>
 </resources>
