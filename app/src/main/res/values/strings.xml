@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Coumo</string>
-
+    
+    <string name="home">홈</string>
+    <string name="coupon">내 쿠폰</string>
+    <string name="community">동네 소식</string>
+    <string name="account">내 계정</string>
 </resources>

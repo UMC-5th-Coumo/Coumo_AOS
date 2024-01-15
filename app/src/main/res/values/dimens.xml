@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottom_navi_icon_size">24dp</dimen>
+    <dimen name="bottom_navi_icon_background_size">40dp</dimen>
+
+    <dimen name="bottom_navi_selected_margin">30dp</dimen>
+    <dimen name="bottom_navi_unselected_margin">22dp</dimen>
+
+</resources>

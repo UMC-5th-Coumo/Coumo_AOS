@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.umc.coumo.domain.type.TabType"/>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.umc.coumo.domain.viewmodel.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,22 +16,213 @@
         android:layout_height="match_parent"
         tools:context=".presentation.activity.MainActivity">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fl_main"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:navGraph="@navigation/nav_main"/>
+            android:layout_height="0dp"
+            android:layout_marginBottom="64dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom_navi"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/shape_bottom_navi"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/shape_bottom_navi"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_home"
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                app:selectedNaviMargin="@{viewModel.currentPageIndex == TabType.HOME}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_coupon">
 
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/img_home_back"
+                    android:layout_width="@dimen/bottom_navi_icon_background_size"
+                    android:layout_height="@dimen/bottom_navi_icon_background_size"
+                    android:src="@drawable/shape_bottom_btn_background"
+                    android:visibility="@{viewModel.currentPageIndex == TabType.HOME ? View.VISIBLE : View.INVISIBLE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/img_home"
+                    android:layout_width="@dimen/bottom_navi_icon_size"
+                    android:layout_height="@dimen/bottom_navi_icon_size"
+                    android:src="@{viewModel.currentPageIndex == TabType.HOME ? @drawable/icon_home_selected : @drawable/icon_home_default}"
+                    app:selectedNaviMargin2="@{viewModel.currentPageIndex == TabType.HOME}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_home">
+
+                </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+                <TextView
+                    android:id="@+id/tv_home"
+                    style="@style/BottomNaviTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_home_back">
+
+                </TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_coupon"
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                app:selectedNaviMargin="@{viewModel.currentPageIndex == TabType.COUPON}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_community"
+                app:layout_constraintStart_toEndOf="@id/btn_home">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/img_coupon_back"
+                    android:layout_width="@dimen/bottom_navi_icon_background_size"
+                    android:layout_height="@dimen/bottom_navi_icon_background_size"
+                    android:src="@drawable/shape_bottom_btn_background"
+                    android:visibility="@{viewModel.currentPageIndex == TabType.COUPON ? View.VISIBLE : View.INVISIBLE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/img_coupon"
+                    android:layout_width="@dimen/bottom_navi_icon_size"
+                    android:layout_height="@dimen/bottom_navi_icon_size"
+                    android:src="@{viewModel.currentPageIndex == TabType.COUPON ? @drawable/icon_coupon_selected : @drawable/icon_coupon_default}"
+                    app:selectedNaviMargin2="@{viewModel.currentPageIndex == TabType.COUPON}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_coupon">
+
+                </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+                <TextView
+                    android:id="@+id/tv_coupon"
+                    style="@style/BottomNaviTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coupon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_coupon_back">
+
+                </TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_community"
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                app:selectedNaviMargin="@{viewModel.currentPageIndex == TabType.COMMUNITY}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_coupon"
+                app:layout_constraintEnd_toStartOf="@id/btn_account">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/img_community_back"
+                    android:layout_width="@dimen/bottom_navi_icon_background_size"
+                    android:layout_height="@dimen/bottom_navi_icon_background_size"
+                    android:src="@drawable/shape_bottom_btn_background"
+                    android:visibility="@{viewModel.currentPageIndex == TabType.COMMUNITY ? View.VISIBLE : View.INVISIBLE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/img_community"
+                    android:layout_width="@dimen/bottom_navi_icon_size"
+                    android:layout_height="@dimen/bottom_navi_icon_size"
+                    android:src="@{viewModel.currentPageIndex == TabType.COMMUNITY ? @drawable/icon_community_selected : @drawable/icon_community_default}"
+                    app:selectedNaviMargin2="@{viewModel.currentPageIndex == TabType.COMMUNITY}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_community">
+
+                </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+                <TextView
+                    android:id="@+id/tv_community"
+                    style="@style/BottomNaviTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/community"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_community_back">
+
+                </TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_account"
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                app:selectedNaviMargin="@{viewModel.currentPageIndex == TabType.ACCOUNT}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_community"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/img_account_back"
+                    android:layout_width="@dimen/bottom_navi_icon_background_size"
+                    android:layout_height="@dimen/bottom_navi_icon_background_size"
+                    android:src="@drawable/shape_bottom_btn_background"
+                    android:visibility="@{viewModel.currentPageIndex == TabType.ACCOUNT ? View.VISIBLE : View.INVISIBLE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/img_account"
+                    android:layout_width="@dimen/bottom_navi_icon_size"
+                    android:layout_height="@dimen/bottom_navi_icon_size"
+                    android:src="@{viewModel.currentPageIndex == TabType.ACCOUNT ? @drawable/icon_account_selected : @drawable/icon_account_default}"
+                    app:selectedNaviMargin2="@{viewModel.currentPageIndex == TabType.ACCOUNT}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_account">
+
+                </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+                <TextView
+                    android:id="@+id/tv_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account"
+                    style="@style/BottomNaviTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_account_back">
+
+                </TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
