@@ -5,6 +5,7 @@
 
     <!-- component Color -->
     <color name="main">#643DAF</color>
+    <color name="sub">#F5EFFF</color>
 
     <!-- font Color -->
     <color name="font_main">#643DAF</color>
@@ -14,4 +15,6 @@
     <color name="font_text">#2F2A37</color>
     <color name="font_disable">#B9B5C0</color>
     <color name="font_white">#FFFFFF</color>
+    <color name="font_button_main">#FCFCFC</color>
+    <color name="font_button_sub">#35332F</color>
 </resources>
