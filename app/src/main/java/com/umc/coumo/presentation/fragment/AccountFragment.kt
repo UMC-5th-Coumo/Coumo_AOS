@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentAccountBinding
 import com.umc.coumo.domain.viewmodel.AccountViewModel
+import com.umc.coumo.presentation.dialog.LogoutBottomSheetDialog
 import com.umc.coumo.utils.binding.BindingFragment
 
 class AccountFragment: BindingFragment<FragmentAccountBinding>(R.layout.fragment_account) {
@@ -25,6 +26,11 @@ class AccountFragment: BindingFragment<FragmentAccountBinding>(R.layout.fragment
                 data = Uri.parse("tel:" + "1577-9999")
             }
             startActivity(dialIntent)
+        }
+
+        binding.btnLogout.setOnClickListener {
+            val dialog = LogoutBottomSheetDialog()
+            dialog.show(parentFragmentManager, null)
         }
     }
 }
