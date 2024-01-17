@@ -56,9 +56,10 @@ fun setImageUri(imageView: ImageView, imageUri: Uri?) {
     if (imageUri != null) {
         Glide.with(imageView)
             .load(imageUri)
-            .apply(RequestOptions().transform(RoundedCorners(((4f) * Resources.getSystem().displayMetrics.density).toInt())))
+            .fitCenter().centerCrop()
             .into(imageView)
     } else {
-        imageView.setImageResource(R.drawable.default_image);
+        imageView.setImageResource(R.drawable.default_image)
+        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
     }
 }
