@@ -40,7 +40,7 @@ fun setSelectedMargin2(view: View, isSelected: Boolean) {
     view.layoutParams = layoutParams
 }
 
-@BindingAdapter("app:selectedNaviText")
-fun setSelectedTextStyle(view: View, isSelected: Boolean) {
-
+@BindingAdapter("app:selected")
+fun setSelect(view: View, isSelected: Boolean) {
+    view.isSelected = isSelected
 }
