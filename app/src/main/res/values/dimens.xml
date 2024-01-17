@@ -9,4 +9,8 @@
     <dimen name="profile_margin">16dp</dimen>
 
     <dimen name="btn_size">24dp</dimen>
+
+    <dimen name="chip_padding">12dp</dimen>
+
+    <dimen name="horizontal_padding">26dp</dimen>
 </resources>

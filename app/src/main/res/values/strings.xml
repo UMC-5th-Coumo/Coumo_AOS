@@ -5,7 +5,17 @@
     <string name="coupon">내 쿠폰</string>
     <string name="community">동네 소식</string>
     <string name="account">내 계정</string>
-    
+    <!-- home -->
+
+    <!-- coupon -->
+
+    <!-- community -->
+    <string name="view_all">전체보기</string>
+    <string name="new_menu">✨ 신메뉴</string>
+    <string name="no_show">⏰ 노쇼 빈자리 SALE</string>
+    <string name="event">🎉 이벤트</string>
+
+    <!-- account page -->
     <string name="my_profile">내 프로필</string>
     <string name="service_center">쿠모 고객센터</string>
     <string name="logout">로그아웃</string>
@@ -16,4 +26,5 @@
     <string name="nick">닉네임</string>
     <string name="gender">성별</string>
     <string name="phone">전화번호</string>
+
 </resources>

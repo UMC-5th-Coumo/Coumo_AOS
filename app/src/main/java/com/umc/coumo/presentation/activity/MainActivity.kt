@@ -26,6 +26,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         val adapter = MainFragmentAdapter(this)
         binding.viewpager.adapter = adapter
+        binding.viewpager.isUserInputEnabled = false //스와이프 방지
 
         setNaviButton()
     }
@@ -34,25 +35,21 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         binding.btnHome.setOnClickListener {
             binding.viewpager.setCurrentItem(0, true)
             viewModel.changePageIndex(TabType.HOME)
-            Log.d("TEST Navi",viewModel.currentPageIndex.value.toString())
         }
 
         binding.btnCoupon.setOnClickListener {
             binding.viewpager.setCurrentItem(1, true)
             viewModel.changePageIndex(TabType.COUPON)
-            Log.d("TEST Navi",viewModel.currentPageIndex.value.toString())
         }
 
         binding.btnCommunity.setOnClickListener {
             binding.viewpager.setCurrentItem(2, true)
             viewModel.changePageIndex(TabType.COMMUNITY)
-            Log.d("TEST Navi",viewModel.currentPageIndex.value.toString())
         }
 
         binding.btnAccount.setOnClickListener {
             binding.viewpager.setCurrentItem(3, true)
             viewModel.changePageIndex(TabType.ACCOUNT)
-            Log.d("TEST Navi",viewModel.currentPageIndex.value.toString())
         }
     }
 }

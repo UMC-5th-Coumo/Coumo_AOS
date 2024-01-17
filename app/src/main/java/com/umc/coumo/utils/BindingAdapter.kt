@@ -1,9 +1,14 @@
 package com.umc.coumo.utils
 
+import android.content.res.Resources
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.umc.coumo.R
 
 @BindingAdapter("app:selectedNaviMargin")
@@ -40,7 +45,21 @@ fun setSelectedMargin2(view: View, isSelected: Boolean) {
     view.layoutParams = layoutParams
 }
 
-@BindingAdapter("app:selectedNaviText")
-fun setSelectedTextStyle(view: View, isSelected: Boolean) {
+@BindingAdapter("selected")
+fun setSelect(view: View, isSelected: Boolean) {
+    view.isSelected = isSelected
+}
 
+//사진 삽입
+@BindingAdapter("imageUri")
+fun setImageUri(imageView: ImageView, imageUri: Uri?) {
+    if (imageUri != null) {
+        Glide.with(imageView)
+            .load(imageUri)
+            .fitCenter().centerCrop()
+            .into(imageView)
+    } else {
+        imageView.setImageResource(R.drawable.default_image)
+        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+    }
 }
