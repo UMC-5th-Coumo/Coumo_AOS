@@ -19,7 +19,7 @@
             android:layout_height="80dp"
             android:background="@drawable/shape_rect_round_left_6"
             android:clipToOutline="true"
-            app:imageUri="@{null}"
+            app:imageUri="@{item.image}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/default_image"
@@ -41,25 +41,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_bold"
-                android:text="앙떼띠 로스터리(강남점)"
+                android:text="@{item.name}"
                 android:textColor="@color/font_title"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/tv_coupon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread_inside" />
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                tools:text="앙떼띠 로스터리(강남점)"/>
 
             <TextView
                 android:id="@+id/tv_coupon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_bold"
-                android:text="쿠모로 4개 모았어요!"
+                android:text="@{@string/coupon_format(item.coupon)}"
                 android:textColor="@color/main"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                tools:text="쿠모로 4개 모았어요!"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
