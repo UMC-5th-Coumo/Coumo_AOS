@@ -19,7 +19,7 @@
             android:layout_height="156dp"
             android:background="@drawable/shape_rect_round_top_6"
             android:clipToOutline="true"
-            app:imageUri="@{null}"
+            imageUri="@{item.image}"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/default_image"
             tools:scaleType="centerCrop"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="@font/pretendard_bold"
-                android:text="앙떼띠 로스터리(강남점)"
+                android:text="@{item.name}"
                 android:textColor="@color/font_title"
                 android:textSize="16sp" />
 
@@ -58,7 +58,7 @@
                 android:fontFamily="@font/pretendard_medium"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="4dp"
-                android:text="강남구 테헤란로 43-7"
+                android:text="@{item.address}"
                 android:textColor="@color/font_button_main"
                 android:textSize="10sp" />
 
@@ -70,8 +70,7 @@
                 android:fontFamily="@font/pretendard_medium"
                 android:lineSpacingExtra="3dp"
                 android:maxLines="2"
-                android:text="양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에
-아메리카노 2000원 이벤트를 진행 중입니다."
+                android:text="@{item.content}"
                 android:textColor="@color/font_content"
                 android:textSize="8sp"
                 tools:ignore="SmallSp" />
