@@ -13,4 +13,6 @@
     <dimen name="chip_padding">12dp</dimen>
 
     <dimen name="horizontal_padding">26dp</dimen>
+    <dimen name="item_between_horizontal">10dp</dimen>
+    <dimen name="item_between_vertical">14dp</dimen>
 </resources>

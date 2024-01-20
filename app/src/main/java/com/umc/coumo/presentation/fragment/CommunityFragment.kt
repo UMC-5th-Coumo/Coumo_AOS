@@ -1,15 +1,21 @@
 package com.umc.coumo.presentation.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentCommunityBinding
 import com.umc.coumo.domain.model.StoreInfoModel
+import com.umc.coumo.domain.type.CommunityTabType
 import com.umc.coumo.domain.viewmodel.CommunityViewModel
 import com.umc.coumo.presentation.adapter.StoreInfoAdapter
 import com.umc.coumo.utils.binding.BindingFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.fragment_community) {
 
@@ -21,23 +27,28 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        testRecyclerView()
+        setFragment()
+
     }
 
-    private fun testRecyclerView() {
-        val storeInfoAdapter = StoreInfoAdapter()
-
-        binding.rvTest.apply {
-            adapter = storeInfoAdapter
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+    private fun setFragment() {
+        viewModel.currentTab.observe(viewLifecycleOwner) { type ->
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                when (type) {
+                    CommunityTabType.ALL -> {showFragment(CommunityAllFragment())}
+                    CommunityTabType.NEW_MENU -> {Log.d("TEST", "화면 교체 1")}
+                    CommunityTabType.NO_SHOW -> {Log.d("TEST", "화면 교체 2")}
+                    CommunityTabType.EVENT -> {Log.d("TEST", "화면 교체 3")}
+                    else -> {}
+                }
+            }
         }
-        val list = listOf<StoreInfoModel>(
-            StoreInfoModel(1, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
-                    "아메리카노 2000원 이벤트를 진행 중입니다."),
-            StoreInfoModel(2, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
-                    "아메리카노 2000원 이벤트를 진행 중입니다.")
-        )
-
-        storeInfoAdapter.submitList(list)
     }
+
+    private fun showFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
 }
