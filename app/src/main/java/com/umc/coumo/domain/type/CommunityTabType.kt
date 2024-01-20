@@ -1,6 +1,6 @@
 package com.umc.coumo.domain.type
 
-enum class CommunityTabType(title: String?) {
+enum class CommunityTabType(val title: String?) {
     ALL(null),
     NEW_MENU("우리동네 신메뉴들을 찾아봤어요"),
     NO_SHOW("우리동네 노쇼빈자리 SALE을 찾아봤어요"),

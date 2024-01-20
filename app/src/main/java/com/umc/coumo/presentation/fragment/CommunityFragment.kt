@@ -36,9 +36,9 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
                 when (type) {
                     CommunityTabType.ALL -> {showFragment(CommunityAllFragment())}
-                    CommunityTabType.NEW_MENU -> {Log.d("TEST", "화면 교체 1")}
-                    CommunityTabType.NO_SHOW -> {Log.d("TEST", "화면 교체 2")}
-                    CommunityTabType.EVENT -> {Log.d("TEST", "화면 교체 3")}
+                    CommunityTabType.NEW_MENU -> {showFragment(CommunityFilterFragment())}
+                    CommunityTabType.NO_SHOW -> {showFragment(CommunityFilterFragment())}
+                    CommunityTabType.EVENT -> {showFragment(CommunityFilterFragment())}
                     else -> {}
                 }
             }
