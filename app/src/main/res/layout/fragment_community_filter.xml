@@ -12,6 +12,8 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:paddingBottom="@dimen/bottom_above"
         android:orientation="vertical">
 
         <TextView
@@ -30,7 +32,8 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/horizontal_padding"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"/>
+            android:paddingBottom="80dp"
+            android:nestedScrollingEnabled="false"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

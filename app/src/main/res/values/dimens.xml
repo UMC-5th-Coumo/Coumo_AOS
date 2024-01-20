@@ -15,4 +15,9 @@
     <dimen name="horizontal_padding">26dp</dimen>
     <dimen name="item_between_horizontal">10dp</dimen>
     <dimen name="item_between_vertical">14dp</dimen>
+
+    <dimen name="tab_bar_height">56dp</dimen>
+
+    <!-- recyclerView bottom 띄우기 위해서 -->
+    <dimen name="bottom_above">28dp</dimen>
 </resources>
