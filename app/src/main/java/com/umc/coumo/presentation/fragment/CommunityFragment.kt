@@ -1,17 +1,21 @@
 package com.umc.coumo.presentation.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentCommunityBinding
-import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoModel
+import com.umc.coumo.domain.type.CommunityTabType
 import com.umc.coumo.domain.viewmodel.CommunityViewModel
-import com.umc.coumo.presentation.adapter.StoreCouponCountAdapter
 import com.umc.coumo.presentation.adapter.StoreInfoAdapter
 import com.umc.coumo.utils.binding.BindingFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.fragment_community) {
 
@@ -23,21 +27,28 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        testRecyclerView()
+        setFragment()
+
     }
 
-    private fun testRecyclerView() {
-        val storeCouponCountAdapter = StoreCouponCountAdapter()
-
-        binding.rvTest.apply {
-            adapter = storeCouponCountAdapter
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+    private fun setFragment() {
+        viewModel.currentTab.observe(viewLifecycleOwner) { type ->
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                when (type) {
+                    CommunityTabType.ALL -> {showFragment(CommunityAllFragment())}
+                    CommunityTabType.NEW_MENU -> {showFragment(CommunityFilterFragment())}
+                    CommunityTabType.NO_SHOW -> {showFragment(CommunityFilterFragment())}
+                    CommunityTabType.EVENT -> {showFragment(CommunityFilterFragment())}
+                    else -> {}
+                }
+            }
         }
-        val list = listOf<StoreCouponCountModel>(
-            StoreCouponCountModel(id = 1, name="앙떼띠 로스터리(강남점)", coupon = 4),
-            StoreCouponCountModel(id = 2, name="앙떼띠 로스터리(강남점)", coupon = 3),
-        )
-
-        storeCouponCountAdapter.submitList(list)
     }
+
+    private fun showFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
 }

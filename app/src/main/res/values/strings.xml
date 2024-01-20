@@ -15,6 +15,13 @@
     <string name="no_show">⏰ 노쇼 빈자리 SALE</string>
     <string name="event">🎉 이벤트</string>
 
+    <string name="all_title_1">우리동네 여러 혜택을 모아봤어요</string>
+    <string name="all_title_2">우리동네 인기상품 리스트!</string>
+
+    <string name="new_menu_title">우리동네 신메뉴들을 찾아봤어요</string>
+    <string name="no_show_title">우리동네 노쇼빈자리 SALE을 찾아봤어요</string>
+    <string name="event_title">우리동네 이벤트들을 찾아봤어요</string>
+
     <string name="coupon_format">쿠모로 %d개 모았어요!</string>
 
     <!-- account page -->
