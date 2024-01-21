@@ -34,9 +34,10 @@
         
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/iv_coupon"
-            android:layout_width="308dp"
-            android:layout_height="180dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
             android:src="@drawable/coupon"
             app:layout_constraintTop_toBottomOf="@id/tv_coupon_title"
             app:layout_constraintStart_toStartOf="parent"/>
