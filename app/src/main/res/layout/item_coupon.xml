@@ -3,18 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="item"
+            type="com.umc.coumo.domain.model.CouponModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp">
 
         <TextView
             android:id="@+id/tv_coupon_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="왕십리 청춘카페"
+            android:text="@{item.name}"
             android:textSize="18sp"
             android:textColor="@color/font_text"
             android:fontFamily="@font/pretendard_bold"
