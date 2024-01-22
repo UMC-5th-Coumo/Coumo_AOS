@@ -22,6 +22,14 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
     private val viewModel: CouponViewModel by activityViewModels()
     private var isFabOpen = false
 
+    private lateinit var permissionUtils: PermissionUtils
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        permissionUtils = PermissionUtils(this)
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -32,13 +40,11 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
         setFABEvent()
     }
 
+
     private fun setFABEvent() {
         binding.fabMain.setOnClickListener {
-            val permissionUtils = PermissionUtils(this)
-            if (permissionUtils.isPermissionGranted(Manifest.permission.CAMERA)) {
-                    findNavController().navigate(R.id.action_couponListFragment_to_couponQRFragment)
-            } else {
-                permissionUtils.requestPermission(Manifest.permission.CAMERA,PermissionUtils.REQUEST_CAMERA_PERMISSION)
+            permissionUtils.requestPermission(Manifest.permission.CAMERA) {
+                findNavController().navigate(R.id.action_couponListFragment_to_couponQRFragment)
             }
         }
     }

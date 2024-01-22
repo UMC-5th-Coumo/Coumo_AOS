@@ -1,44 +1,55 @@
 package com.umc.coumo.utils
 
-import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.core.app.ActivityCompat
+import android.net.Uri
+import android.provider.Settings
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
-class PermissionUtils(private val any: Any) {
+class PermissionUtils(private val fragment: Fragment) {
     companion object {
-        const val REQUEST_CAMERA_PERMISSION = 1001
     }
 
-    fun requestPermission(permission: String, requestCode: Int) {
-        when (any) {
-            is Activity -> {
-                if (ContextCompat.checkSelfPermission(any, permission)
-                    != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(any, arrayOf(permission), requestCode)
-                }
-            }
-            is Fragment -> {
-                if (ContextCompat.checkSelfPermission(any.requireContext(), permission)
-                    != PackageManager.PERMISSION_GRANTED) {
-                    any.requestPermissions(arrayOf(permission), requestCode)
-                }
-            }
-            else -> throw IllegalArgumentException("Context must be an instance of Activity or Fragment")
+    private lateinit var onPermissionGranted: () -> Unit
+
+    private val permissionLauncher = fragment.registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+        if (isGranted) {
+            onPermissionGranted.invoke()
+        } else {
+            showPermissionDeniedDialog()
         }
     }
 
-    fun isPermissionGranted(permission: String): Boolean {
-        return when (any) {
-            is Activity -> {
-                ContextCompat.checkSelfPermission(any, permission) == PackageManager.PERMISSION_GRANTED
-            }
-            is Fragment -> {
-                ContextCompat.checkSelfPermission(any.requireContext(), permission) == PackageManager.PERMISSION_GRANTED
-            }
-            else -> throw IllegalArgumentException("Context must be an instance of Activity or Fragment")
+    fun requestPermission(permission: String, onPermissionGranted: () -> Unit) {
+        this.onPermissionGranted = onPermissionGranted
+
+        if (ContextCompat.checkSelfPermission(fragment.requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+            permissionLauncher.launch(permission)
+        } else {
+            onPermissionGranted.invoke()
         }
+    }
+
+    private fun showPermissionDeniedDialog() {
+        val builder = AlertDialog.Builder(fragment.requireContext())
+        builder.setTitle("권한이 필요합니다.")
+        builder.setMessage("이 기능을 활용하기 위해서는 권한이 필요합니다.\n권한을 부여하시겠습니까?")
+        builder.setPositiveButton("네") { _, _ ->
+            openAppSettings()
+        }
+        builder.setNegativeButton("아니오") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun openAppSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        intent.data = Uri.parse("package:${fragment.requireContext().packageName}")
+        fragment.requireContext().startActivity(intent)
     }
 }
-
