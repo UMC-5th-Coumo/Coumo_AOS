@@ -1,7 +1,10 @@
 package com.umc.coumo.presentation.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
@@ -19,10 +22,17 @@ class CouponQRFragment: BindingFragment<FragmentCouponQrBinding>(R.layout.fragme
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        setCamera()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.viewFinder.resume()
     }
 
     override fun onPause() {
         super.onPause()
+        binding.viewFinder.pause()
         if (isAdded)
             findNavController().popBackStack()
     }
@@ -31,4 +41,16 @@ class CouponQRFragment: BindingFragment<FragmentCouponQrBinding>(R.layout.fragme
         super.onBackPressed()
         findNavController().popBackStack()
     }
+
+    private fun setCamera() {
+        binding.viewFinder.apply {
+            decodeSingle() { result ->
+                Toast.makeText(requireContext(),"$result",Toast.LENGTH_SHORT).show()
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(result.result.toString())
+                startActivity(intent)
+            }
+        }
+    }
+
 }
