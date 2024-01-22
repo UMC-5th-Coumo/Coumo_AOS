@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.umc.coumo.domain.type.CouponAlignType"/>
+        <variable
+            name="viewModel"
+            type="com.umc.coumo.domain.viewmodel.CouponViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/fab_main"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:elevation="6dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/icon_plus"
+            android:background="@drawable/shape_fab"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_coupon_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:textSize="24sp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="@dimen/horizontal_padding"
+                    highlightText="@{viewModel.align.align}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/section_chip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_coupon_title">
+
+                    <HorizontalScrollView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        app:layout_constraintStart_toEndOf="@id/chip_align"
+                        app:layout_constraintTop_toTopOf="@id/chip_align"
+                        app:layout_constraintBottom_toBottomOf="@id/chip_align"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingEnd="@dimen/horizontal_padding"
+                            android:orientation="horizontal"
+                            tools:ignore="RtlSymmetry">
+
+                            <TextView
+                                android:id="@+id/chip_most"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/most_store"
+                                android:background="@drawable/selector_chip_background"
+                                android:textColor="@color/selector_chip_text_color"
+                                android:layout_marginStart="4dp"
+                                android:onClick="@{() -> viewModel.changeAlign(CouponAlignType.MOST)}"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:selected="@{viewModel.align == CouponAlignType.MOST}"/>
+
+                            <TextView
+                                android:id="@+id/chip_no_show"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/recent_store"
+                                android:background="@drawable/selector_chip_background"
+                                android:textColor="@color/selector_chip_text_color"
+                                android:layout_marginStart="4dp"
+                                android:onClick="@{() -> viewModel.changeAlign(CouponAlignType.RECENT)}"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:selected="@{viewModel.align == CouponAlignType.RECENT}"/>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:id="@+id/chip_align"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/align"
+                        android:background="@drawable/shape_rect_side_round"
+                        android:backgroundTint="@color/main"
+                        android:textColor="@color/font_white"
+                        android:padding="12dp"
+                        android:layout_marginStart="@dimen/horizontal_padding"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:paddingHorizontal="@dimen/horizontal_padding"
+                    app:layout_constraintTop_toBottomOf="@id/section_chip"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

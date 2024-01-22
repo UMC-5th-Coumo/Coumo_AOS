@@ -12,6 +12,8 @@
     <string name="most_store">👍 많이 적립한 가게</string>
     <string name="recent_store">⏰ 최근 적립한 가게</string>
 
+    <string name="qr_title">QR/바코드로 빠른 적립</string>
+
     <!-- community -->
     <string name="view_all">전체보기</string>
     <string name="new_menu">✨ 신메뉴</string>
