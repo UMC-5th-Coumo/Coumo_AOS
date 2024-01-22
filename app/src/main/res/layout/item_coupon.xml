@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.umc.coumo.domain.model.CouponModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp">
+
+        <TextView
+            android:id="@+id/tv_coupon_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.name}"
+            android:textSize="18sp"
+            android:textColor="@color/font_text"
+            android:fontFamily="@font/pretendard_bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="강남구 테헤란로 43-7"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_regular"
+            android:layout_marginStart="12dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_coupon_title"
+            app:layout_constraintStart_toEndOf="@id/tv_coupon_title"/>
+        
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/iv_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/coupon"
+            app:layout_constraintTop_toBottomOf="@id/tv_coupon_title"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

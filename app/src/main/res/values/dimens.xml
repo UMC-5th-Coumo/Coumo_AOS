@@ -18,6 +18,9 @@
 
     <dimen name="tab_bar_height">56dp</dimen>
 
+    <dimen name="fab_size">64dp</dimen>
+    <dimen name="fab_sub_size">48dp</dimen>
     <!-- recyclerView bottom 띄우기 위해서 -->
     <dimen name="bottom_above">28dp</dimen>
+
 </resources>

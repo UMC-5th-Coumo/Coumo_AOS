@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_coupon"
+    app:startDestination="@id/couponListFragment">
+
+    <fragment
+        android:id="@+id/couponListFragment"
+        android:name="com.umc.coumo.presentation.fragment.CouponListFragment"
+        android:label="CouponListFragment" >
+        <action
+            android:id="@+id/action_couponListFragment_to_couponQRFragment"
+            app:destination="@id/couponQRFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/couponQRFragment"
+        android:name="com.umc.coumo.presentation.fragment.CouponQRFragment"
+        android:label="CouponQRFragment" />
+</navigation>
