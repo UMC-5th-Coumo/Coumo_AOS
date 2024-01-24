@@ -1,5 +1,7 @@
 package com.umc.coumo.presentation.fragment
 
+
+import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -10,6 +12,7 @@ import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentCouponListBinding
 import com.umc.coumo.domain.viewmodel.CouponViewModel
 import com.umc.coumo.presentation.adapter.CouponAdapter
+import com.umc.coumo.utils.PermissionUtils
 import com.umc.coumo.utils.binding.BindingFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +21,14 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
 
     private val viewModel: CouponViewModel by activityViewModels()
     private var isFabOpen = false
+
+    private lateinit var permissionUtils: PermissionUtils
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        permissionUtils = PermissionUtils(this)
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,10 +40,12 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
         setFABEvent()
     }
 
+
     private fun setFABEvent() {
         binding.fabMain.setOnClickListener {
-            //TODO(permission check)
-            findNavController().navigate(R.id.action_couponListFragment_to_couponQRFragment)
+            permissionUtils.requestPermission(Manifest.permission.CAMERA) {
+                findNavController().navigate(R.id.action_couponListFragment_to_couponQRFragment)
+            }
         }
     }
 
