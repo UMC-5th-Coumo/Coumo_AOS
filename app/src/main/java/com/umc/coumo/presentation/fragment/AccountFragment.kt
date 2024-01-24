@@ -7,8 +7,9 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentAccountBinding
+import com.umc.coumo.domain.type.AccountAction
 import com.umc.coumo.domain.viewmodel.AccountViewModel
-import com.umc.coumo.presentation.dialog.LogoutBottomSheetDialog
+import com.umc.coumo.presentation.dialog.AccountBottomSheetDialog
 import com.umc.coumo.utils.binding.BindingFragment
 
 class AccountFragment: BindingFragment<FragmentAccountBinding>(R.layout.fragment_account) {
@@ -29,7 +30,12 @@ class AccountFragment: BindingFragment<FragmentAccountBinding>(R.layout.fragment
         }
 
         binding.btnLogout.setOnClickListener {
-            val dialog = LogoutBottomSheetDialog()
+            val dialog = AccountBottomSheetDialog(AccountAction.LOGOUT)
+            dialog.show(parentFragmentManager, null)
+        }
+
+        binding.btnWithdraw.setOnClickListener {
+            val dialog = AccountBottomSheetDialog(AccountAction.WITHDRAW)
             dialog.show(parentFragmentManager, null)
         }
     }
