@@ -35,4 +35,10 @@
         <item name="android:fontFamily">@font/pretendard_medium</item>
         <item name="android:textColor">@color/font_text</item>
     </style>
+
+    <style name="ChipTextStyle">
+        <item name="android:textColor">#F6F6F6</item>
+        <item name="android:fontFamily">@font/pretendard_600</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>
