@@ -1,7 +1,5 @@
 package com.umc.coumo.utils
 
-import android.content.Context
-import android.content.res.Resources
 import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
@@ -11,10 +9,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.umc.coumo.R
 
 @BindingAdapter("app:selectedNaviMargin")
@@ -49,6 +46,11 @@ fun setSelectedMargin2(view: View, isSelected: Boolean) {
         layoutParams.setMargins(0, 0, 0, marginInPx)
     }
     view.layoutParams = layoutParams
+}
+
+@BindingAdapter("app:bottomTextViewFontFamily")
+fun TextView.bottomTextViewFontFamily(isSelected: Boolean) {
+    this.typeface = ResourcesCompat.getFont(this.context,if(isSelected) R.font.pretendard_600 else R.font.pretendard_400)
 }
 
 @BindingAdapter("selected")

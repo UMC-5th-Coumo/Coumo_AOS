@@ -2,12 +2,15 @@
 <resources>
     <style name="BottomNaviTextView">
         <item name="android:textColor">@color/font_white</item>
-        <item name="android:textSize">12sp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:layout_marginTop">6dp</item>
-        <item name="android:fontFamily">@font/pretendard_medium</item>
     </style>
 
+    <style name="AccountTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="android:fontFamily">@font/pretendard_600</item>
+    </style>
     <style name="ProfileText">
         <item name="android:textSize">14sp</item>
         <item name="android:layout_gravity">start</item>
@@ -16,12 +19,12 @@
 
     <style name="ProfileTitle" parent="ProfileText">
         <item name="android:textColor">@color/font_text</item>
-        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:fontFamily">@font/pretendard_700</item>
     </style>
 
     <style name="ProfileContent" parent="ProfileText">
         <item name="android:textColor">@color/font_content</item>
-        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:fontFamily">@font/pretendard_400</item>
     </style>
     
     <style name="CommunityTitle">
@@ -29,5 +32,15 @@
         <item name="android:layout_gravity">start</item>
         <item name="android:fontFamily">@font/pretendard_medium</item>
         <item name="android:textColor">@color/font_text</item>
+    </style>
+
+    <style name="ChipTextStyle">
+        <item name="android:textColor">#F6F6F6</item>
+        <item name="android:fontFamily">@font/pretendard_600</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="BottomNaviItemStyle">
+        <item name="android:elevation">12dp</item>
     </style>
 </resources>

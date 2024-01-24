@@ -123,6 +123,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/coupon"
+                    app:bottomTextViewFontFamily="@{viewModel.currentPageIndex == TabType.COUPON}"
+                    android:textSize="@{viewModel.currentPageIndex == TabType.COUPON ? @dimen/bottom_navi_selected_text_size : @dimen/bottom_navi_unselected_text_size}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/img_coupon_back">
