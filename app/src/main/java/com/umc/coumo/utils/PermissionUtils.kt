@@ -23,14 +23,14 @@ class PermissionUtils(private val fragment: Fragment) {
         }
     }
 
-    fun requestPermission(permission: String, onPermissionGranted: () -> Unit) {
+    fun requestPermission(permissions: List<String>, onPermissionGranted: () -> Unit) {
         this.onPermissionGranted = onPermissionGranted
-
-        if (ContextCompat.checkSelfPermission(fragment.requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
-            permissionLauncher.launch(permission)
-        } else {
-            onPermissionGranted.invoke()
-        }
+        for(permission in permissions)
+            if (ContextCompat.checkSelfPermission(fragment.requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionLauncher.launch(permission)
+            } else {
+                onPermissionGranted.invoke()
+            }
     }
 
     private fun showPermissionDeniedDialog() {
