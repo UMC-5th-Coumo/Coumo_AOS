@@ -77,6 +77,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/home"
+                    app:bottomTextViewFontFamily="@{viewModel.currentPageIndex == TabType.HOME}"
+                    android:textSize="@{viewModel.currentPageIndex == TabType.HOME ? @dimen/bottom_navi_selected_text_size : @dimen/bottom_navi_unselected_text_size}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/img_home_back">
@@ -171,8 +173,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/community"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:bottomTextViewFontFamily="@{viewModel.currentPageIndex == TabType.COMMUNITY}"
+                    android:textSize="@{viewModel.currentPageIndex == TabType.COMMUNITY ? @dimen/bottom_navi_selected_text_size : @dimen/bottom_navi_unselected_text_size}"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/img_community_back">
 
                 </TextView>
@@ -217,6 +221,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/account"
                     style="@style/BottomNaviTextView"
+                    app:bottomTextViewFontFamily="@{viewModel.currentPageIndex == TabType.ACCOUNT}"
+                    android:textSize="@{viewModel.currentPageIndex == TabType.ACCOUNT ? @dimen/bottom_navi_selected_text_size : @dimen/bottom_navi_unselected_text_size}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/img_account_back">
