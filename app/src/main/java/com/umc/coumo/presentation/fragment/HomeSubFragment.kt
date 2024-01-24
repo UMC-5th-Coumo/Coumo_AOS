@@ -23,7 +23,7 @@ class HomeSubFragment: BindingFragment<FragmentHomeSubBinding>(R.layout.fragment
         val innerNavController = binding.flHomeSub.findNavController()
         val innerBackStackEntryCount = innerNavController.currentBackStack.value.size
 
-        if (innerBackStackEntryCount > 0 ){
+        if (innerBackStackEntryCount > 2 ){
             innerNavController.popBackStack()
         } else {
             findNavController().popBackStack()
