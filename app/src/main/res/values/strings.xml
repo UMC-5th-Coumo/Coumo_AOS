@@ -41,4 +41,7 @@
     <string name="gender">성별</string>
     <string name="phone">전화번호</string>
 
+    <string name="dialog_logout">로그아웃하기</string>
+    <string name="dialog_logout_content">로그아웃 시, 재인증이 필요합니다</string>
+    <string name="dialog_cancel">취소</string>
 </resources>
