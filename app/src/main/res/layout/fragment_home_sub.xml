@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/section_tab_bar"
+            android:id="@+id/section_tool_bar"
             android:layout_width="match_parent"
             style="@style/TabBarDefaultStyle"
             app:layout_constraintTop_toTopOf="parent">
@@ -45,7 +45,7 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/section_tool_bar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:navGraph="@navigation/nav_home_sub"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
