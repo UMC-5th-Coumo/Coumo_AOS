@@ -6,6 +6,9 @@
     <dimen name="bottom_navi_selected_margin">30dp</dimen>
     <dimen name="bottom_navi_unselected_margin">22dp</dimen>
 
+    <dimen name="bottom_navi_selected_text_size">14dp</dimen>
+    <dimen name="bottom_navi_unselected_text_size">12dp</dimen>
+
     <dimen name="profile_margin">16dp</dimen>
 
     <dimen name="btn_size">24dp</dimen>
