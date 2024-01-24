@@ -43,4 +43,11 @@
     <style name="BottomNaviItemStyle">
         <item name="android:elevation">12dp</item>
     </style>
+
+    <style name="TabBarDefaultStyle">
+        <item name="android:layout_height">@dimen/tab_bar_height</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:elevation">6dp</item>
+        <item name="android:paddingHorizontal">26dp</item>
+    </style>
 </resources>
