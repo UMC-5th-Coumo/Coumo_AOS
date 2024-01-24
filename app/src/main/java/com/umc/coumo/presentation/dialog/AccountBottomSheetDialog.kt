@@ -1,20 +1,22 @@
 package com.umc.coumo.presentation.dialog
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.umc.coumo.R
-import com.umc.coumo.databinding.DialogBottomSheetLogoutBinding
+import com.umc.coumo.databinding.DialogBottomSheetAccountBinding
+import com.umc.coumo.domain.type.AccountAction
 import com.umc.coumo.utils.binding.BindingBottomSheet
 
-class LogoutBottomSheetDialog: BindingBottomSheet<DialogBottomSheetLogoutBinding>(R.layout.dialog_bottom_sheet_logout) {
+class AccountBottomSheetDialog(val type: AccountAction): BindingBottomSheet<DialogBottomSheetAccountBinding>(R.layout.dialog_bottom_sheet_account) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.type = type
+
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        binding.btnLogout.setOnClickListener {
-            Log.d("Logout","로그아웃!!")
+        binding.btnDialog.setOnClickListener {
+            //로그아웃 혹은 탈퇴 코드
             dismissAllowingStateLoss()
         }
 
