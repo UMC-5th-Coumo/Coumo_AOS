@@ -43,7 +43,7 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
 
     private fun setFABEvent() {
         binding.fabMain.setOnClickListener {
-            permissionUtils.requestPermission(Manifest.permission.CAMERA) {
+            permissionUtils.requestPermission(listOf( Manifest.permission.CAMERA)) {
                 findNavController().navigate(R.id.action_couponListFragment_to_couponQRFragment)
             }
         }
