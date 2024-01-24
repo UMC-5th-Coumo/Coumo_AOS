@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:fontFamily="@font/pretendard_bold"
+                android:fontFamily="@font/pretendard_700"
                 android:text="@{item.name}"
                 android:textColor="@color/font_title"
                 android:textSize="16sp" />
@@ -55,19 +55,20 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/shape_rect_side_round"
                 android:backgroundTint="#512F8F"
-                android:fontFamily="@font/pretendard_medium"
+                android:fontFamily="@font/pretendard_400"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="4dp"
                 android:text="@{item.address}"
                 android:textColor="@color/font_button_main"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:fontFamily="@font/pretendard_medium"
+                android:fontFamily="@font/pretendard_400"
                 android:lineSpacingExtra="3dp"
                 android:maxLines="2"
                 android:text="@{item.content}"
