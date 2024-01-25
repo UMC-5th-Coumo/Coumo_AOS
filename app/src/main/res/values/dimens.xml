@@ -25,5 +25,8 @@
     <dimen name="fab_sub_size">48dp</dimen>
     <!-- recyclerView bottom 띄우기 위해서 -->
     <dimen name="bottom_above">28dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 
 </resources>

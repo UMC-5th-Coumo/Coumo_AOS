@@ -3,6 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <!-- botton Color -->
+    <color name="btn_background">#F0EFF2</color>
+    <color name="btn_border_none_selected">#DECDFF</color>
+    <color name="btn_border_seleted">#7C43E8</color>
+
     <!-- component Color -->
     <color name="main">#643DAF</color>
     <color name="sub">#F5EFFF</color>
