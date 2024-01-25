@@ -54,6 +54,6 @@
     <style name="TabTextStyle">
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/pretendard_700</item>
-        <item name="android:textColor">@color/font_main</item>
+        <item name="android:textColor">@color/selector_tab_text_color</item>
     </style>
 </resources>

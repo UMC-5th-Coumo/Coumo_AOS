@@ -1,10 +1,7 @@
 package com.umc.coumo.presentation.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.umc.coumo.R
 import com.umc.coumo.databinding.ActivityMainBinding
 import com.umc.coumo.domain.type.TabType
@@ -29,6 +26,14 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         binding.viewpager.isUserInputEnabled = false //스와이프 방지
 
         setNaviButton()
+        setObserver()
+    }
+
+    private fun setObserver () {
+        viewModel.currentPageIndex.observe(this) {
+            if (it == TabType.COUPON)
+                binding.viewpager.setCurrentItem(1, true)
+        }
     }
 
     private fun setNaviButton() {
