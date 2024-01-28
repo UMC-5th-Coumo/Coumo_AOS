@@ -6,4 +6,6 @@ data class MenuModel(
     val id: Int,
     val name: String,
     val content: String,
-    val image: Uri? = null,)
+    val image: Uri? = null,
+    val isNew: Boolean = false
+)
