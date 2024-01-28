@@ -27,7 +27,7 @@
         
         <TextView
             style="@style/NewChipStyle"
-            android:visibility="@{item.isNew ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{item.isNew ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
