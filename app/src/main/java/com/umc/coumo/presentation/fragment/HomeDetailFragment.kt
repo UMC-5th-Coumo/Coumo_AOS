@@ -24,6 +24,8 @@ class HomeDetailFragment: BindingFragmentNoneBackPress<FragmentHomeDetailBinding
     private fun setViewPager() {
         val pagerAdapter = HomeDetailViewPagerAdapter(requireActivity())
 
+        viewModel.changeTab(DetailTabType.INFO)
+
         binding.vpStore.apply {
             adapter = pagerAdapter
             offscreenPageLimit = 1
