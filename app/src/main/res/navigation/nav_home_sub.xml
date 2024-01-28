@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_home_sub"
+    app:startDestination="@id/homeListFragment">
+
+    <fragment
+        android:id="@+id/homeListFragment"
+        android:name="com.umc.coumo.presentation.fragment.HomeListFragment"
+        android:label="HomeListFragment" >
+        <action
+            android:id="@+id/action_homeListFragment_to_homeDetailFragment"
+            app:destination="@id/homeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeDetailFragment"
+        android:name="com.umc.coumo.presentation.fragment.HomeDetailFragment"
+        android:label="HomeDetailFragment" >
+        <action
+            android:id="@+id/action_homeDetailFragment_to_homeMenuFragment"
+            app:destination="@id/homeMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeMenuFragment"
+        android:name="com.umc.coumo.presentation.fragment.HomeMenuFragment"
+        android:label="HomeMenuFragment" />
+</navigation>
