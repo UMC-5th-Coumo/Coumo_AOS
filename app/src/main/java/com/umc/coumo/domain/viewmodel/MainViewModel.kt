@@ -12,6 +12,8 @@ class MainViewModel @Inject constructor(): ViewModel() {
     private val _currentPageIndex = MutableLiveData<TabType>(TabType.HOME)
     val currentPageIndex: LiveData<TabType> get() = _currentPageIndex
 
+
+
     fun changePageIndex(type: TabType) {
         _currentPageIndex.value = type
     }

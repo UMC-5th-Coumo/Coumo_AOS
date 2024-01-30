@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.umc.coumo.databinding.ItemStoreCouponCountBinding
-import com.umc.coumo.databinding.ItemStoreInfoBinding
 import com.umc.coumo.domain.model.StoreCouponCountModel
-import com.umc.coumo.domain.model.StoreInfoModel
 import com.umc.coumo.utils.ItemDiffCallback
 
 class StoreCouponCountAdapter(
