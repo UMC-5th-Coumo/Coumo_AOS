@@ -1,5 +1,6 @@
 package com.umc.coumo.domain.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,7 +43,8 @@ class HomeViewModel @Inject constructor(): ViewModel() {
             location = "가게 위치 정보",
             longitude = 126.12,
             latitude = 36.12,
-            image = null,
+            image = listOf(Uri.parse(""),
+                ),
             coupon = CouponModel("?",1,"1",1,null),
             menuList = listOf(
                 MenuModel("메뉴 이름1","메뉴 정보1"),

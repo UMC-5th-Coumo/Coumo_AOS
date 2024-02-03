@@ -14,13 +14,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/iv_store_image"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/section_store_image"
             android:layout_width="match_parent"
             android:layout_height="234dp"
-            android:src="@drawable/media"
             android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_store_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
