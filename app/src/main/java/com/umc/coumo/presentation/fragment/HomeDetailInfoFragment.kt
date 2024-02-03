@@ -39,9 +39,9 @@ class HomeDetailInfoFragment: BindingFragmentNoneBackPress<FragmentHomeDetailInf
             }
         })
 
-        viewModel.menuList.observe(viewLifecycleOwner) {
+        viewModel.storeData.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                menuAdapter.submitList(it)
+                menuAdapter.submitList(it.menuList)
             }
         }
     }

@@ -17,7 +17,7 @@
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@drawable/shape_rect_round_6"
+            android:background="@drawable/shape_rect_round_12"
             imageUri="@{item.image}"
             android:scaleType="centerCrop"
             android:clipToOutline="true"

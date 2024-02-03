@@ -3,7 +3,9 @@ package com.umc.coumo.domain.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MenuModel
+import com.umc.coumo.domain.model.StoreInfoModel
 import com.umc.coumo.domain.type.DetailTabType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -17,6 +19,9 @@ class HomeViewModel @Inject constructor(): ViewModel() {
     private val _menuList = MutableLiveData<List<MenuModel>>()
     val menuList: LiveData<List<MenuModel>> get() = _menuList
 
+    private val _storeData = MutableLiveData<StoreInfoModel>()
+    val storeData: LiveData<StoreInfoModel> get() = _storeData
+
     init {
         testData()
     }
@@ -25,14 +30,26 @@ class HomeViewModel @Inject constructor(): ViewModel() {
         _currentTab.value = tab
     }
 
+    fun loadStoreData() {
+        // TODO( API 에서 데이터 가져오기 )
+        testData()
+    }
+
     private fun testData() {
-        val list = listOf(
-            MenuModel(id = 0, name = "아이스 바닐라 라떼", content = "Tall: 4,800\nGrande: 6,800\nTrenta: 6,800"),
-            MenuModel(id = 1, name = "아이스 바닐라 라떼2", content = "Tall: 4,800\nGrande: 6,800\nTrenta: 6,800", isNew = true),
-            MenuModel(id = 2, name = "아이스 바닐라 라떼3", content = "Tall: 4,800\nGrande: 6,800\nTrenta: 6,800",),
-            MenuModel(id = 3, name = "아이스 바닐라 라떼4", content = "Tall: 4,800\nGrande: 6,800\nTrenta: 6,800",),
-            MenuModel(id = 4, name = "아이스 바닐라 라떼5", content = "Tall: 4,800\nGrande: 6,800\nTrenta: 6,800",),
+        _storeData.value = StoreInfoModel(
+            name = "가게 이름",
+            description = "가게 정보",
+            location = "가게 위치 정보",
+            longitude = 126.12,
+            latitude = 36.12,
+            image = null,
+            coupon = CouponModel("?",1,"1",1,null),
+            menuList = listOf(
+                MenuModel("메뉴 이름1","메뉴 정보1"),
+                MenuModel("메뉴 이름2","메뉴 정보2", isNew = true),
+                MenuModel("메뉴 이름3","메뉴 정보3"),
+                MenuModel("메뉴 이름4","메뉴 정보4"),
+            )
         )
-        _menuList.value = list
     }
 }
