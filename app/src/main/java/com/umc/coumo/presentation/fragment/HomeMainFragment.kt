@@ -2,6 +2,7 @@ package com.umc.coumo.presentation.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -9,12 +10,15 @@ import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentHomeMainBinding
 import com.umc.coumo.domain.model.BannerCardModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
+import com.umc.coumo.domain.viewmodel.HomeViewModel
 import com.umc.coumo.presentation.adapter.BannerPagerAdapter
 import com.umc.coumo.presentation.adapter.StoreInfoAdapter
 import com.umc.coumo.utils.ItemSpacingDecoration
 import com.umc.coumo.utils.binding.BindingFragment
 
 class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragment_home_main) {
+
+    private val viewModel : HomeViewModel by activityViewModels ()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +34,7 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
                 putString("type","cafe")
             }
             findNavController().navigate(
-                R.id.action_homeMainFragment_to_homeSubFragment, bundle
+                R.id.action_homeMainFragment_to_homeListFragment, bundle
             )
         }
     }
@@ -56,6 +60,17 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
             )
 
         storeInfoAdapter.submitList(list)
+
+        storeInfoAdapter.setOnItemClickListener(object : StoreInfoAdapter.OnItemClickListener{
+            override fun onItemClick(id: Int) {
+
+                viewModel.loadStoreData()
+                findNavController().navigate(
+                    R.id.action_homeMainFragment_to_homeDetailFragment,
+                )
+            }
+
+        })
     }
 
     private fun setBanner() {

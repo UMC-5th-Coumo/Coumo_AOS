@@ -11,16 +11,18 @@ import com.umc.coumo.databinding.FragmentHomeListBinding
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.viewmodel.HomeViewModel
 import com.umc.coumo.presentation.adapter.StoreCouponCountAdapter
-import com.umc.coumo.utils.binding.BindingFragmentNoneBackPress
+import com.umc.coumo.utils.binding.BindingFragment
 
-class HomeListFragment: BindingFragmentNoneBackPress<FragmentHomeListBinding>(R.layout.fragment_home_list) {
+class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragment_home_list) {
 
     private val viewModel : HomeViewModel by activityViewModels ()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        setButton()
 
         val storeCouponAdapter = StoreCouponCountAdapter()
 
@@ -55,5 +57,16 @@ class HomeListFragment: BindingFragmentNoneBackPress<FragmentHomeListBinding>(R.
 
         storeCouponAdapter.submitList(list)
 
+    }
+
+    private fun setButton() {
+        binding.btnToolbarBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        findNavController().popBackStack()
     }
 }

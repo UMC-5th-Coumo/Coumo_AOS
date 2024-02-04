@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentHomeDetailBinding
 import com.umc.coumo.domain.type.DetailTabType
 import com.umc.coumo.domain.viewmodel.HomeViewModel
 import com.umc.coumo.presentation.adapter.HomeDetailViewPagerAdapter
 import com.umc.coumo.presentation.adapter.ImageViewPagerAdapter
-import com.umc.coumo.utils.binding.BindingFragmentNoneBackPress
+import com.umc.coumo.utils.binding.BindingFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeDetailFragment: BindingFragmentNoneBackPress<FragmentHomeDetailBinding>(R.layout.fragment_home_detail) {
+class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fragment_home_detail) {
 
     private val viewModel: HomeViewModel by activityViewModels()
 
@@ -50,15 +51,26 @@ class HomeDetailFragment: BindingFragmentNoneBackPress<FragmentHomeDetailBinding
     private fun setStoreImage() {
         val imageAdapter = ImageViewPagerAdapter(requireContext())
 
-        binding.vpStoreImage.apply {
+/*        binding.vpStoreImage.apply {
             adapter = imageAdapter
             offscreenPageLimit = 1
-        }
+        }*/
 
         viewModel.storeData.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
                 imageAdapter.submitList(it.image)
             }
         }
+    }
+
+    private fun setButton() {
+        binding.btnToolbarBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        findNavController().popBackStack()
     }
 }
