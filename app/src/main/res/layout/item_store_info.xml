@@ -71,7 +71,7 @@
                 android:fontFamily="@font/pretendard_400"
                 android:lineSpacingExtra="3dp"
                 android:maxLines="2"
-                android:text="@{item.content}"
+                android:text="@{item.description}"
                 android:textColor="@color/font_content"
                 android:textSize="8sp"
                 tools:ignore="SmallSp" />

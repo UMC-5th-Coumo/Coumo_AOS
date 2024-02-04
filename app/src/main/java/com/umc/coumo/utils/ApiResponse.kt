@@ -1,6 +1,6 @@
 package com.umc.coumo.utils
 
-import com.umc.coumo.domain.model.Status
+import com.umc.coumo.domain.type.Status
 
 
 data class ApiResponse<out T>(val status: Status, val data: T?, val throwable: Throwable?) {

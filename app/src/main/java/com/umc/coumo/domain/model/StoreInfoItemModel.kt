@@ -7,5 +7,5 @@ data class StoreInfoItemModel(
     val image: Uri? = null,
     val name: String,
     val address: String,
-    val content: String,
+    val description: String,
 )

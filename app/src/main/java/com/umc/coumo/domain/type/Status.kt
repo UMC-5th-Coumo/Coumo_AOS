@@ -1,4 +1,4 @@
-package com.umc.coumo.domain.model
+package com.umc.coumo.domain.type
 
 enum class Status {
     SUCCESS,

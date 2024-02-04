@@ -10,6 +10,7 @@ import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentHomeMainBinding
 import com.umc.coumo.domain.model.BannerCardModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
+import com.umc.coumo.domain.type.CategoryType
 import com.umc.coumo.domain.viewmodel.HomeViewModel
 import com.umc.coumo.presentation.adapter.BannerPagerAdapter
 import com.umc.coumo.presentation.adapter.StoreInfoAdapter
@@ -30,11 +31,39 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
 
     private fun setButton() {
         binding.ivCafe.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString("type","cafe")
-            }
+            viewModel.selectCategory(CategoryType.CAFE)
             findNavController().navigate(
-                R.id.action_homeMainFragment_to_homeListFragment, bundle
+                R.id.action_homeMainFragment_to_homeListFragment
+            )
+        }
+        binding.ivRetail1.setOnClickListener {
+            viewModel.selectCategory(CategoryType.RETAIL1)
+            findNavController().navigate(
+                R.id.action_homeMainFragment_to_homeListFragment
+            )
+        }
+        binding.ivFood.setOnClickListener {
+            viewModel.selectCategory(CategoryType.FOOD)
+            findNavController().navigate(
+                R.id.action_homeMainFragment_to_homeListFragment
+            )
+        }
+        binding.ivRetail2.setOnClickListener {
+            viewModel.selectCategory(CategoryType.RETAIL2)
+            findNavController().navigate(
+                R.id.action_homeMainFragment_to_homeListFragment
+            )
+        }
+        binding.ivBeauty.setOnClickListener {
+            viewModel.selectCategory(CategoryType.BEAUTY)
+            findNavController().navigate(
+                R.id.action_homeMainFragment_to_homeListFragment
+            )
+        }
+        binding.ivClass.setOnClickListener {
+            viewModel.selectCategory(CategoryType.CLASS)
+            findNavController().navigate(
+                R.id.action_homeMainFragment_to_homeListFragment
             )
         }
     }

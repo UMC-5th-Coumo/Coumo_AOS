@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MenuModel
+import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoModel
+import com.umc.coumo.domain.type.CategoryType
 import com.umc.coumo.domain.type.DetailTabType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -17,14 +19,29 @@ class HomeViewModel @Inject constructor(): ViewModel() {
     private val _currentTab = MutableLiveData(DetailTabType.INFO)
     val currentTab: LiveData<DetailTabType> get() = _currentTab
 
-    private val _menuList = MutableLiveData<List<MenuModel>>()
-    val menuList: LiveData<List<MenuModel>> get() = _menuList
-
     private val _storeData = MutableLiveData<StoreInfoModel>()
     val storeData: LiveData<StoreInfoModel> get() = _storeData
 
+    //카테고리
+    private val _category = MutableLiveData<CategoryType>(CategoryType.CAFE)
+    val category: LiveData<CategoryType> get() = _category
+
+    //근처 매장 리스트
+    private val _nearStoreList = MutableLiveData<List<StoreCouponCountModel>>()
+    val nearStoreList: LiveData<List<StoreCouponCountModel>> get() = _nearStoreList
+
+    //인기 매장 리스트
+    private val _popularStoreList = MutableLiveData<List<StoreCouponCountModel>>()
+    val popularStoreList: LiveData<List<StoreCouponCountModel>> get() = _popularStoreList
+
+
     fun changeTab(tab: DetailTabType) {
         _currentTab.value = tab
+    }
+
+    fun selectCategory(category: CategoryType) {
+        _category.value = category
+        //리스트 요청
     }
 
     fun loadStoreData() {
