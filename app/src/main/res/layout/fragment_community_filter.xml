@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background"
-        android:paddingBottom="@dimen/bottom_above"
         android:orientation="vertical">
 
         <TextView
@@ -32,7 +31,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/horizontal_padding"
             android:layout_marginTop="16dp"
-            android:paddingBottom="80dp"
+            android:paddingBottom="16dp"
             android:nestedScrollingEnabled="false"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
