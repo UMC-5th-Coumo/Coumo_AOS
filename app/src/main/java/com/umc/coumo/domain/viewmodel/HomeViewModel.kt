@@ -23,10 +23,6 @@ class HomeViewModel @Inject constructor(): ViewModel() {
     private val _storeData = MutableLiveData<StoreInfoModel>()
     val storeData: LiveData<StoreInfoModel> get() = _storeData
 
-    init {
-        testData()
-    }
-
     fun changeTab(tab: DetailTabType) {
         _currentTab.value = tab
     }
@@ -38,8 +34,9 @@ class HomeViewModel @Inject constructor(): ViewModel() {
 
     private fun testData() {
         _storeData.value = StoreInfoModel(
-            name = "가게 이름",
-            description = "가게 정보",
+            name = "앙떼띠 로스터리(강남점)",
+            description = "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
+                    "아메리카노 2000원 이벤트를 진행 중입니다.",
             location = "가게 위치 정보",
             longitude = 127.02629637,
             latitude = 37.500075,
