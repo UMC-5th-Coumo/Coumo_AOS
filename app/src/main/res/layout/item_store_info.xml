@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.umc.coumo.domain.model.StoreInfoModel" />
+            type="com.umc.coumo.domain.model.StoreInfoItemModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,7 +71,7 @@
                 android:fontFamily="@font/pretendard_400"
                 android:lineSpacingExtra="3dp"
                 android:maxLines="2"
-                android:text="@{item.content}"
+                android:text="@{item.description}"
                 android:textColor="@color/font_content"
                 android:textSize="8sp"
                 tools:ignore="SmallSp" />

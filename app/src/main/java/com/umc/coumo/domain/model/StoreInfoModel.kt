@@ -3,9 +3,13 @@ package com.umc.coumo.domain.model
 import android.net.Uri
 
 data class StoreInfoModel(
-    val id : Int,
-    val image: Uri? = null,
     val name: String,
-    val address: String,
-    val content: String,
-)
+    val description: String,
+    val location: String,
+    val longitude: Double,
+    val latitude: Double,
+    val image: List<Uri>?,
+    val coupon: CouponModel,
+    val menuList: List<MenuModel>,
+) {
+}

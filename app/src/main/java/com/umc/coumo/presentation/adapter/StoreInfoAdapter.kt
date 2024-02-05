@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.umc.coumo.databinding.ItemStoreInfoBinding
-import com.umc.coumo.domain.model.StoreInfoModel
+import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.utils.ItemDiffCallback
 
 class StoreInfoAdapter(
 
-): ListAdapter<StoreInfoModel, RecyclerView.ViewHolder>(
-    ItemDiffCallback<StoreInfoModel>(
+): ListAdapter<StoreInfoItemModel, RecyclerView.ViewHolder>(
+    ItemDiffCallback<StoreInfoItemModel>(
         onContentsTheSame = {old, new -> old == new},
         onItemsTheSame = {old, new -> old.id == new.id}
     )
@@ -35,7 +35,7 @@ class StoreInfoAdapter(
     inner class StoreInfoViewHolder(
         private val binding: ItemStoreInfoBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: StoreInfoModel) {
+        fun bind(item: StoreInfoItemModel) {
             binding.item = item
 
             itemView.setOnClickListener {

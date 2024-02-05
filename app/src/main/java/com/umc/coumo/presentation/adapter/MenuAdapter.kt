@@ -15,7 +15,7 @@ class MenuAdapter(
 ): ListAdapter<MenuModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<MenuModel>(
         onContentsTheSame = {old, new -> old == new},
-        onItemsTheSame = {old, new -> old.id == new.id}
+        onItemsTheSame = {old, new -> old.name == new.name}
     )
 ) {
 companion object {
@@ -49,17 +49,11 @@ companion object {
         }
     }
 
-
-
     inner class MenuViewHolder(
         private val binding: ItemMenuBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MenuModel) {
             binding.item = item
-
-            itemView.setOnClickListener {
-                listener?.onItemClick(item.id)
-            }
         }
     }
 
@@ -68,10 +62,6 @@ companion object {
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MenuModel) {
             binding.item = item
-
-            itemView.setOnClickListener {
-                listener?.onItemClick(item.id)
-            }
         }
     }
 

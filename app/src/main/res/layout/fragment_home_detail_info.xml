@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.umc.coumo.domain.viewmodel.HomeViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -12,13 +14,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/bottom_above">
 
             <TextView
                 android:id="@+id/tv_store_intro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에 아메리카노 2000원 이벤트를 진행 중입니다."
+                android:text="@{viewModel.storeData.description}"
                 android:textSize="14sp"
                 android:textColor="#161515"
                 android:fontFamily="@font/pretendard_400"
@@ -64,6 +67,14 @@
                 app:layout_constraintTop_toBottomOf="@id/rv_menu"
                 app:layout_constraintStart_toStartOf="parent"/>
 
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="@dimen/horizontal_padding"
+                app:layout_constraintTop_toBottomOf="@id/tv_map_title"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

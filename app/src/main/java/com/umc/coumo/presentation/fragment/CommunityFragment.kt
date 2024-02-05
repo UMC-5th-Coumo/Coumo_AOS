@@ -1,18 +1,14 @@
 package com.umc.coumo.presentation.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentCommunityBinding
-import com.umc.coumo.domain.model.StoreInfoModel
 import com.umc.coumo.domain.type.CommunityTabType
 import com.umc.coumo.domain.viewmodel.CommunityViewModel
-import com.umc.coumo.presentation.adapter.StoreInfoAdapter
 import com.umc.coumo.utils.binding.BindingFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,9 +1,14 @@
 package com.umc.coumo.domain.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MenuModel
+import com.umc.coumo.domain.model.StoreCouponCountModel
+import com.umc.coumo.domain.model.StoreInfoModel
+import com.umc.coumo.domain.type.CategoryType
 import com.umc.coumo.domain.type.DetailTabType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,25 +19,53 @@ class HomeViewModel @Inject constructor(): ViewModel() {
     private val _currentTab = MutableLiveData(DetailTabType.INFO)
     val currentTab: LiveData<DetailTabType> get() = _currentTab
 
-    private val _menuList = MutableLiveData<List<MenuModel>>()
-    val menuList: LiveData<List<MenuModel>> get() = _menuList
+    private val _storeData = MutableLiveData<StoreInfoModel>()
+    val storeData: LiveData<StoreInfoModel> get() = _storeData
 
-    init {
-        testData()
-    }
+    //카테고리
+    private val _category = MutableLiveData<CategoryType>(CategoryType.CAFE)
+    val category: LiveData<CategoryType> get() = _category
+
+    //근처 매장 리스트
+    private val _nearStoreList = MutableLiveData<List<StoreCouponCountModel>>()
+    val nearStoreList: LiveData<List<StoreCouponCountModel>> get() = _nearStoreList
+
+    //인기 매장 리스트
+    private val _popularStoreList = MutableLiveData<List<StoreCouponCountModel>>()
+    val popularStoreList: LiveData<List<StoreCouponCountModel>> get() = _popularStoreList
+
 
     fun changeTab(tab: DetailTabType) {
         _currentTab.value = tab
     }
 
+    fun selectCategory(category: CategoryType) {
+        _category.value = category
+        //리스트 요청
+    }
+
+    fun loadStoreData() {
+        // TODO( API 에서 데이터 가져오기 )
+        testData()
+    }
+
     private fun testData() {
-        val list = listOf(
-            MenuModel(id = 0, name = "아이스 바닐라 라떼", content = "Tall: 4,800\nGrande: 6,800\nTrenta: 6,800"),
-            MenuModel(id = 1, name = "아이스 바닐라 라떼2", content = "Tall: 4,800\nGrande: 6,800\nTrenta: 6,800", isNew = true),
-            MenuModel(id = 2, name = "아이스 바닐라 라떼3", content = "Tall: 4,800\nGrande: 6,800\nTrenta: 6,800",),
-            MenuModel(id = 3, name = "아이스 바닐라 라떼4", content = "Tall: 4,800\nGrande: 6,800\nTrenta: 6,800",),
-            MenuModel(id = 4, name = "아이스 바닐라 라떼5", content = "Tall: 4,800\nGrande: 6,800\nTrenta: 6,800",),
+        _storeData.value = StoreInfoModel(
+            name = "앙떼띠 로스터리(강남점)",
+            description = "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
+                    "아메리카노 2000원 이벤트를 진행 중입니다.",
+            location = "가게 위치 정보",
+            longitude = 127.02629637,
+            latitude = 37.500075,
+            image = listOf(Uri.parse(""),
+                ),
+            coupon = CouponModel("?",1,"1",1,null),
+            menuList = listOf(
+                MenuModel("메뉴 이름1","메뉴 정보1"),
+                MenuModel("메뉴 이름2","메뉴 정보2", isNew = true),
+                MenuModel("메뉴 이름3","메뉴 정보3"),
+                MenuModel("메뉴 이름4","메뉴 정보4"),
+            )
         )
-        _menuList.value = list
     }
 }

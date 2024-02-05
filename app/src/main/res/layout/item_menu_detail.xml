@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendard_700"
-                    android:text="@{item.content}"
+                    android:text="@{item.description}"
                     android:textColor="@color/main"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -79,7 +79,7 @@
         <TextView
             style="@style/NewChipStyle"
             android:visibility="@{item.isNew ? View.VISIBLE : View.INVISIBLE}"
-            android:layout_marginEnd="40dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

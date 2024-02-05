@@ -7,11 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentCommunityFilterBinding
 import com.umc.coumo.domain.model.StoreCouponCountModel
-import com.umc.coumo.domain.model.StoreInfoModel
 import com.umc.coumo.domain.viewmodel.CommunityViewModel
 import com.umc.coumo.presentation.adapter.StoreCouponCountAdapter
-import com.umc.coumo.presentation.adapter.StoreInfoAdapter
-import com.umc.coumo.utils.ItemSpacingDecoration
 import com.umc.coumo.utils.binding.BindingFragment
 
 class CommunityFilterFragment: BindingFragment<FragmentCommunityFilterBinding>(R.layout.fragment_community_filter) {
