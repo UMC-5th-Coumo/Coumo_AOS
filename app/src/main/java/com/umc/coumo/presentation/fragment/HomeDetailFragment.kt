@@ -25,6 +25,7 @@ class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fr
         binding.lifecycleOwner = viewLifecycleOwner
         setViewPager()
         setStoreImage()
+        setButton()
     }
 
     private fun setViewPager() {
