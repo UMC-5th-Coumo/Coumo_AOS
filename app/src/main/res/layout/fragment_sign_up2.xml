@@ -8,10 +8,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="26dp">
 
-        <ImageView
-            android:id="@+id/iv_sign_up2_left_arrow"
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/btn_sign_up2_left_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_left_arrow"
@@ -26,7 +27,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/font_main"
-            app:layout_constraintTop_toBottomOf="@id/iv_sign_up2_left_arrow"
+            app:layout_constraintTop_toBottomOf="@id/btn_sign_up2_left_arrow"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp" />
 
@@ -86,12 +87,10 @@
                     android:textSize="16sp"
                     android:layout_marginTop="30dp" />
 
-                <Spinner
+                <View
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginTop="10dp"
-                    android:prompt="선택해주세요" />
+                    android:layout_marginTop="10dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -172,11 +171,13 @@
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/btn_next_sign_up2"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="다음으로"
                     android:layout_marginTop="50dp"
-                    android:layout_marginHorizontal="30dp" />
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginBottom="26dp"/>
 
             </LinearLayout>
         </ScrollView>
