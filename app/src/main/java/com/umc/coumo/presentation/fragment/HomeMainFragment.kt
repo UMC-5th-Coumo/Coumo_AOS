@@ -9,7 +9,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentHomeMainBinding
 import com.umc.coumo.domain.model.BannerCardModel
-import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.type.CategoryType
 import com.umc.coumo.domain.viewmodel.HomeViewModel
 import com.umc.coumo.presentation.adapter.BannerPagerAdapter
@@ -71,24 +70,18 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
     private fun setRecyclerView() {
         val storeInfoAdapter = StoreInfoAdapter()
 
+        viewModel.getPopularStoreList(127.02629637,37.500075)
+
         binding.rvPopular.apply {
             adapter = storeInfoAdapter
             addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.item_between_horizontal)))
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
-        val list = listOf<StoreInfoItemModel>(
-            StoreInfoItemModel(1, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
-                    "아메리카노 2000원 이벤트를 진행 중입니다."),
-            StoreInfoItemModel(2, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
-                    "아메리카노 2000원 이벤트를 진행 중입니다."),
-            StoreInfoItemModel(3, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
-                    "아메리카노 2000원 이벤트를 진행 중입니다."),
-            StoreInfoItemModel(4, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
-                    "아메리카노 2000원 이벤트를 진행 중입니다."),
-            )
+        viewModel.popularStoreList.observe(viewLifecycleOwner) {
+            storeInfoAdapter.submitList(it)
+        }
 
-        storeInfoAdapter.submitList(list)
 
         storeInfoAdapter.setOnItemClickListener(object : StoreInfoAdapter.OnItemClickListener{
             override fun onItemClick(id: Int) {

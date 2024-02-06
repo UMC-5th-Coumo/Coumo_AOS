@@ -1,8 +1,8 @@
 package com.umc.coumo.di
 
 import com.google.gson.GsonBuilder
+import com.umc.coumo.data.remote.api.CoumoApi
 import com.umc.coumo.utils.Constants.BASE_URL
-import com.umc.coumo.data.remote.api.DummyApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,13 +26,13 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideApiService(): DummyApi {
+    fun provideApiService(): CoumoApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            //.client(okHttpClient(AppInterceptor())) //Interceptor 필요할 때
+            .client(okHttpClient(AppInterceptor())) //Interceptor 필요할 때
             .build()
-            .create(DummyApi::class.java)
+            .create(CoumoApi::class.java)
     }
 
 
@@ -51,7 +51,7 @@ object RetrofitModule {
         override fun intercept(chain: Interceptor.Chain): Response = with(chain) {
             val accessToken = "" //App.prefs.getString("accessToken","")
             val newRequest = request().newBuilder()
-                .addHeader("Authorization",accessToken)
+                //.addHeader("Authorization",accessToken)
                 .build()
             proceed(newRequest)
         }

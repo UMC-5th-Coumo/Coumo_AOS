@@ -4,17 +4,23 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MenuModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
+import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.model.StoreInfoModel
+import com.umc.coumo.domain.repository.CoumoRepository
 import com.umc.coumo.domain.type.CategoryType
 import com.umc.coumo.domain.type.DetailTabType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(): ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val repository: CoumoRepository
+): ViewModel() {
 
     private val _currentTab = MutableLiveData(DetailTabType.INFO)
     val currentTab: LiveData<DetailTabType> get() = _currentTab
@@ -31,9 +37,15 @@ class HomeViewModel @Inject constructor(): ViewModel() {
     val nearStoreList: LiveData<List<StoreCouponCountModel>> get() = _nearStoreList
 
     //인기 매장 리스트
-    private val _popularStoreList = MutableLiveData<List<StoreCouponCountModel>>()
-    val popularStoreList: LiveData<List<StoreCouponCountModel>> get() = _popularStoreList
+    private val _popularStoreList = MutableLiveData<List<StoreInfoItemModel>>()
+    val popularStoreList: LiveData<List<StoreInfoItemModel>> get() = _popularStoreList
 
+
+    fun getPopularStoreList(longitude: Double, latitude: Double) {
+        viewModelScope.launch {
+            _popularStoreList.value = repository.getPopularStoreList(longitude = longitude, latitude = latitude)
+        }
+    }
 
     fun changeTab(tab: DetailTabType) {
         _currentTab.value = tab
