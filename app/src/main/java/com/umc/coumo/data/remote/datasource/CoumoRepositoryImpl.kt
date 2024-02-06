@@ -22,6 +22,7 @@ class CoumoRepositoryImpl @Inject constructor(
 
     override suspend fun postJoin() {
         coumoApi.postLogin(RequestLoginModel())
+        //coumoApi.postJoin(RequestJoinModel())
     }
 
     private fun mapToStoreInfoItemModelList(responseList: List<ResponsePopularStoreModel>?): List<StoreInfoItemModel>? {
