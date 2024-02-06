@@ -1,7 +1,9 @@
 package com.umc.coumo.di
 
 import com.google.gson.GsonBuilder
+import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.CoumoApi
+import com.umc.coumo.data.remote.api.LoginApi
 import com.umc.coumo.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -35,6 +37,15 @@ object RetrofitModule {
             .create(CoumoApi::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideLoginService(): LoginApi {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(LoginApi::class.java)
+    }
 
     @Provides
     @Singleton
@@ -49,9 +60,9 @@ object RetrofitModule {
     class AppInterceptor: Interceptor {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response = with(chain) {
-            val accessToken = "" //App.prefs.getString("accessToken","")
+            val accessToken = App.prefs.getString("accessToken","")
             val newRequest = request().newBuilder()
-                //.addHeader("Authorization",accessToken)
+                .addHeader("Authorization",accessToken)
                 .build()
             proceed(newRequest)
         }

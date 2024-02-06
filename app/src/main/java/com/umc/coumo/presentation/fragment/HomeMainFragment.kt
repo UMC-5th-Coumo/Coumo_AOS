@@ -26,8 +26,6 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
         setBanner()
         setRecyclerView()
         setButton()
-
-        viewModel.testJoin()
     }
 
     private fun setButton() {
@@ -72,7 +70,7 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
     private fun setRecyclerView() {
         val storeInfoAdapter = StoreInfoAdapter()
 
-        viewModel.getPopularStoreList(127.02629637,37.500075)
+        viewModel.getPopularStoreList(87.02629637,37.500075)
 
         binding.rvPopular.apply {
             adapter = storeInfoAdapter

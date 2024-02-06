@@ -1,8 +1,8 @@
 package com.umc.coumo.data.remote.model.request
 
 data class RequestJoinModel(
-    val loginId: String = "testId",
-    val password: String = "testPassword",
+    val loginId: String = "testId2",
+    val password: String = "testPassword2",
     val name: String = "테스트 사용자",
     val birthday: String = "2000.01.01",
     val gender: String = "MALE",

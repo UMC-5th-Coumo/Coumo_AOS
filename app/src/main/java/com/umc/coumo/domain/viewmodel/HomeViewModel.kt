@@ -40,12 +40,6 @@ class HomeViewModel @Inject constructor(
     private val _popularStoreList = MutableLiveData<List<StoreInfoItemModel>>()
     val popularStoreList: LiveData<List<StoreInfoItemModel>> get() = _popularStoreList
 
-    fun testJoin() {
-        viewModelScope.launch {
-            repository.postJoin()
-        }
-    }
-
 
     fun getPopularStoreList(longitude: Double, latitude: Double) {
         viewModelScope.launch {
