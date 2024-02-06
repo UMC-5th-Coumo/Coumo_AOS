@@ -35,8 +35,8 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
                 R.id.action_homeMainFragment_to_homeListFragment
             )
         }
-        binding.ivRetail1.setOnClickListener {
-            viewModel.selectCategory(CategoryType.RETAIL1)
+        binding.ivEntertainment.setOnClickListener {
+            viewModel.selectCategory(CategoryType.ENTERTAINMENT)
             findNavController().navigate(
                 R.id.action_homeMainFragment_to_homeListFragment
             )
@@ -47,8 +47,8 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
                 R.id.action_homeMainFragment_to_homeListFragment
             )
         }
-        binding.ivRetail2.setOnClickListener {
-            viewModel.selectCategory(CategoryType.RETAIL2)
+        binding.ivRetail.setOnClickListener {
+            viewModel.selectCategory(CategoryType.RETAIL)
             findNavController().navigate(
                 R.id.action_homeMainFragment_to_homeListFragment
             )
