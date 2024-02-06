@@ -26,6 +26,8 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
         setBanner()
         setRecyclerView()
         setButton()
+
+        viewModel.testJoin()
     }
 
     private fun setButton() {

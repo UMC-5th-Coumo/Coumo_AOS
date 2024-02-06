@@ -2,6 +2,7 @@ package com.umc.coumo.data.remote.datasource
 
 import android.net.Uri
 import com.umc.coumo.data.remote.api.CoumoApi
+import com.umc.coumo.data.remote.model.request.RequestLoginModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.repository.CoumoRepository
@@ -17,6 +18,10 @@ class CoumoRepositoryImpl @Inject constructor(
     ): List<StoreInfoItemModel>? {
         val data = coumoApi.getPopularStoreList(longitude = longitude,latitude = latitude)
         return mapToStoreInfoItemModelList(data.body())
+    }
+
+    override suspend fun postJoin() {
+        coumoApi.postLogin(RequestLoginModel())
     }
 
     private fun mapToStoreInfoItemModelList(responseList: List<ResponsePopularStoreModel>?): List<StoreInfoItemModel>? {
