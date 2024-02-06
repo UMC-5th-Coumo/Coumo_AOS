@@ -1,6 +1,6 @@
 package com.umc.coumo.data.remote.api
 
-import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
+import com.umc.coumo.data.remote.model.response.ResponsePopularStoreListModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,6 +12,6 @@ interface CoumoApi {
     suspend fun getPopularStoreList(
         @Query("longitude") longitude: Double,
         @Query("latitude") latitude: Double
-    ): Response<List<ResponsePopularStoreModel>>
+    ): Response<ResponsePopularStoreListModel>
 
 }
