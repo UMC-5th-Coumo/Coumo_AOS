@@ -13,6 +13,8 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         binding.btnLogin.setOnClickListener {
             val intent = Intent(requireActivity(), MainActivity::class.java)
             startActivity(intent)
@@ -22,8 +24,18 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
             findNavController().navigate(R.id.action_loginFragment_to_signUp1Fragment)
         }
 
-        binding.tvFindIdPw.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_phoneVerificationFragment)
+        binding.btnFindId.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("selected_btn", "id")
+
+            findNavController().navigate(R.id.action_loginFragment_to_phoneVerificationFragment, bundle)
+        }
+
+        binding.btnFindPw.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("selected_btn", "pw")
+
+            findNavController().navigate(R.id.action_loginFragment_to_phoneVerificationFragment, bundle)
         }
     }
 
