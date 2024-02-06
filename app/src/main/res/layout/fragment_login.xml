@@ -106,13 +106,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register"
+                android:textSize="14sp"
                 android:layout_marginEnd="20dp" />
 
             <TextView
-                android:id="@+id/tv_find_id_pw"
+                android:id="@+id/btn_find_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/find_id_pw" />
+                android:textSize="14sp"
+                android:text="아이디 찾기"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:textSize="14sp"
+                android:text="/" />
+            <TextView
+                android:id="@+id/btn_find_pw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="비밀번호 찾기" />
         </LinearLayout>
 
         <ProgressBar

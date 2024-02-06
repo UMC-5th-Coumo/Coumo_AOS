@@ -40,9 +40,16 @@
         <action
             android:id="@+id/action_phoneVerificationFragment_to_resetPasswordFragment"
             app:destination="@id/resetPasswordFragment" />
+        <action
+            android:id="@+id/action_phoneVerificationFragment_to_foundIdFragment"
+            app:destination="@id/foundIdFragment" />
     </fragment>
     <fragment
         android:id="@+id/resetPasswordFragment"
         android:name="com.umc.coumo.presentation.fragment.ResetPasswordFragment"
         android:label="ResetPasswordFragment" />
+    <fragment
+        android:id="@+id/foundIdFragment"
+        android:name="com.umc.coumo.presentation.fragment.FoundIdFragment"
+        android:label="FoundIdFragment" />
 </navigation>

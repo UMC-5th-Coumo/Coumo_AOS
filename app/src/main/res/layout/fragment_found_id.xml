@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="26dp">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/btn_found_id_left_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_left_arrow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_found_id_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아이디를 찾았어요!"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/btn_found_id_left_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/font_main"/>
+
+        <TextView
+            android:id="@+id/tv_found_id_under_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="고객님의 쿠모 아이디를 찾았습니다"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_found_id_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="21dp"/>
+
+        <View
+            android:id="@+id/divider_found_id"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_gray"
+            app:layout_constraintTop_toBottomOf="@id/tv_found_id_under_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="19dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/divider_found_id"
+            app:layout_constraintBottom_toTopOf="@id/btn_found_id_go_login">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:src="@drawable/coupon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_found_id_go_login"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="16sp"
+            android:text="로그인하러 가기"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="60dp"
+            android:layout_marginHorizontal="26dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
