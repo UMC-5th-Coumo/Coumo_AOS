@@ -1,4 +1,4 @@
-package com.umc.coumo.presentation.fragment
+package com.umc.coumo.presentation.fragment.login
 
 import android.os.Bundle
 import android.view.View

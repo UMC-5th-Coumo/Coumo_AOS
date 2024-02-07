@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/couponListFragment"
-        android:name="com.umc.coumo.presentation.fragment.CouponListFragment"
+        android:name="com.umc.coumo.presentation.fragment.coupon.CouponListFragment"
         android:label="CouponListFragment" >
         <action
             android:id="@+id/action_couponListFragment_to_couponQRFragment"
@@ -14,6 +14,6 @@
     </fragment>
     <fragment
         android:id="@+id/couponQRFragment"
-        android:name="com.umc.coumo.presentation.fragment.CouponQRFragment"
+        android:name="com.umc.coumo.presentation.fragment.coupon.CouponQRFragment"
         android:label="CouponQRFragment" />
 </navigation>

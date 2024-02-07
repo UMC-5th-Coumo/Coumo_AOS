@@ -3,8 +3,8 @@ package com.umc.coumo.presentation.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.umc.coumo.presentation.fragment.HomeDetailCouponFragment
-import com.umc.coumo.presentation.fragment.HomeDetailInfoFragment
+import com.umc.coumo.presentation.fragment.home.HomeDetailCouponFragment
+import com.umc.coumo.presentation.fragment.home.HomeDetailInfoFragment
 
 class HomeDetailViewPagerAdapter(fragment: FragmentActivity): FragmentStateAdapter(fragment) {
     val fragments: ArrayList<Fragment> = arrayListOf(HomeDetailInfoFragment(), HomeDetailCouponFragment())

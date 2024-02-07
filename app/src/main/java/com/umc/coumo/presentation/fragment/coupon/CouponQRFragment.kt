@@ -1,4 +1,4 @@
-package com.umc.coumo.presentation.fragment
+package com.umc.coumo.presentation.fragment.coupon
 
 import android.content.Intent
 import android.net.Uri

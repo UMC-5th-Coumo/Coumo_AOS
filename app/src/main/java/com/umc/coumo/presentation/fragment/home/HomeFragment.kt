@@ -1,4 +1,4 @@
-package com.umc.coumo.presentation.fragment
+package com.umc.coumo.presentation.fragment.home
 
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentHomeBinding
