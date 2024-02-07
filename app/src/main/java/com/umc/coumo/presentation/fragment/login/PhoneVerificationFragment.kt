@@ -1,8 +1,7 @@
-package com.umc.coumo.presentation.fragment
+package com.umc.coumo.presentation.fragment.login
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentPhoneVerificationBinding

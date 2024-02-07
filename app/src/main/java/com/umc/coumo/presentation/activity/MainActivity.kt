@@ -27,16 +27,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         setNaviButton()
         setObserver()
-
-        setTestLogin()
     }
-
-    //TODO(테스트 코드)
-    private fun setTestLogin() {
-        //viewModel.postJoin()
-        viewModel.postLogin()
-    }
-
 
     private fun setObserver () {
         viewModel.currentPageIndex.observe(this) {

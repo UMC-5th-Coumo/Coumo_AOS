@@ -1,10 +1,11 @@
-package com.umc.coumo.presentation.fragment
+package com.umc.coumo.presentation.fragment.account
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import com.umc.coumo.App
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentAccountBinding
 import com.umc.coumo.domain.type.AccountAction
@@ -30,12 +31,15 @@ class AccountFragment: BindingFragment<FragmentAccountBinding>(R.layout.fragment
         }
 
         binding.btnLogout.setOnClickListener {
-            val dialog = AccountBottomSheetDialog(AccountAction.LOGOUT)
+            val dialog = AccountBottomSheetDialog(AccountAction.LOGOUT) {
+                App.prefs.setString("accessToken","") //Token 없애기
+                requireActivity().finish()
+            }
             dialog.show(parentFragmentManager, null)
         }
 
         binding.btnWithdraw.setOnClickListener {
-            val dialog = AccountBottomSheetDialog(AccountAction.WITHDRAW)
+            val dialog = AccountBottomSheetDialog(AccountAction.WITHDRAW) {}
             dialog.show(parentFragmentManager, null)
         }
     }

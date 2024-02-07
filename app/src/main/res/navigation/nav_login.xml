@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.umc.coumo.presentation.fragment.LoginFragment"
+        android:name="com.umc.coumo.presentation.fragment.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_signUp1Fragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUp1Fragment"
-        android:name="com.umc.coumo.presentation.fragment.SignUp1Fragment"
+        android:name="com.umc.coumo.presentation.fragment.login.SignUp1Fragment"
         android:label="SignUp1Fragment" >
         <action
             android:id="@+id/action_signUp1Fragment_to_signUp2Fragment"
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUp2Fragment"
-        android:name="com.umc.coumo.presentation.fragment.SignUp2Fragment"
+        android:name="com.umc.coumo.presentation.fragment.login.SignUp2Fragment"
         android:label="SignUp2Fragment">
         <action
             android:id="@+id/action_home"
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/phoneVerificationFragment"
-        android:name="com.umc.coumo.presentation.fragment.PhoneVerificationFragment"
+        android:name="com.umc.coumo.presentation.fragment.login.PhoneVerificationFragment"
         android:label="PhoneVerificationFragment" >
         <action
             android:id="@+id/action_phoneVerificationFragment_to_resetPasswordFragment"
@@ -46,10 +46,10 @@
     </fragment>
     <fragment
         android:id="@+id/resetPasswordFragment"
-        android:name="com.umc.coumo.presentation.fragment.ResetPasswordFragment"
+        android:name="com.umc.coumo.presentation.fragment.login.ResetPasswordFragment"
         android:label="ResetPasswordFragment" />
     <fragment
         android:id="@+id/foundIdFragment"
-        android:name="com.umc.coumo.presentation.fragment.FoundIdFragment"
+        android:name="com.umc.coumo.presentation.fragment.login.FoundIdFragment"
         android:label="FoundIdFragment" />
 </navigation>

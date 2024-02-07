@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/homeMainFragment"
-        android:name="com.umc.coumo.presentation.fragment.HomeMainFragment"
+        android:name="com.umc.coumo.presentation.fragment.home.HomeMainFragment"
         android:label="HomeMainFragment" >
         <action
             android:id="@+id/action_homeMainFragment_to_homeListFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeDetailFragment"
-        android:name="com.umc.coumo.presentation.fragment.HomeDetailFragment"
+        android:name="com.umc.coumo.presentation.fragment.home.HomeDetailFragment"
         android:label="HomeDetailFragment" >
         <action
             android:id="@+id/action_homeDetailFragment_to_homeMenuFragment"
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeListFragment"
-        android:name="com.umc.coumo.presentation.fragment.HomeListFragment"
+        android:name="com.umc.coumo.presentation.fragment.home.HomeListFragment"
         android:label="HomeListFragment" >
         <action
             android:id="@+id/action_homeListFragment_to_homeDetailFragment"
@@ -33,6 +33,6 @@
     </fragment>
     <fragment
         android:id="@+id/homeMenuFragment2"
-        android:name="com.umc.coumo.presentation.fragment.HomeMenuFragment"
+        android:name="com.umc.coumo.presentation.fragment.home.HomeMenuFragment"
         android:label="HomeMenuFragment" />
 </navigation>
