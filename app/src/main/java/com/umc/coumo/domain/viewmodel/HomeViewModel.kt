@@ -1,6 +1,7 @@
 package com.umc.coumo.domain.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,12 +41,24 @@ class HomeViewModel @Inject constructor(
     private val _popularStoreList = MutableLiveData<List<StoreInfoItemModel>>()
     val popularStoreList: LiveData<List<StoreInfoItemModel>> get() = _popularStoreList
 
+    private val _longitude = MutableLiveData<Double>(87.02629637)
+    val longitude: LiveData<Double> get() = _longitude
 
-    fun getPopularStoreList(longitude: Double, latitude: Double) {
+    private val _latitude = MutableLiveData<Double>(37.500075)
+    val latitude: LiveData<Double> get() = _latitude
+
+    fun getPopularStoreList() {
         viewModelScope.launch {
-            _popularStoreList.value = repository.getPopularStoreList(longitude = longitude, latitude = latitude)
+            _popularStoreList.value = repository.getPopularStoreList(longitude = _longitude.value!!, latitude = _latitude.value!!) //빈 값 없으니 이렇게 처리
         }
     }
+
+    private fun getNearStoreList(category: CategoryType?) {
+        viewModelScope.launch {
+            _nearStoreList.value = repository.getNearStoreList(category = category, longitude = _longitude.value!!, latitude = _latitude.value!!)
+        }
+    }
+
 
     fun changeTab(tab: DetailTabType) {
         _currentTab.value = tab
@@ -53,12 +66,12 @@ class HomeViewModel @Inject constructor(
 
     fun selectCategory(category: CategoryType) {
         _category.value = category
-        //리스트 요청
+        getNearStoreList(category)
     }
 
-    fun loadStoreData() {
+    fun loadStoreData(storeId: Int) {
         // TODO( API 에서 데이터 가져오기 )
-        testData()
+        Log.d("OKHTTP_TEST","$storeId")
     }
 
     private fun testData() {

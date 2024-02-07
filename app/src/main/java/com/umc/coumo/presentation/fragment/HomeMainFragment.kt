@@ -70,7 +70,7 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
     private fun setRecyclerView() {
         val storeInfoAdapter = StoreInfoAdapter()
 
-        viewModel.getPopularStoreList(87.02629637,37.500075)
+        viewModel.getPopularStoreList()
 
         binding.rvPopular.apply {
             adapter = storeInfoAdapter
@@ -85,8 +85,7 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
 
         storeInfoAdapter.setOnItemClickListener(object : StoreInfoAdapter.OnItemClickListener{
             override fun onItemClick(id: Int) {
-
-                viewModel.loadStoreData()
+                viewModel.loadStoreData(id)
                 findNavController().navigate(
                     R.id.action_homeMainFragment_to_homeDetailFragment,
                 )

@@ -28,12 +28,12 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         setNaviButton()
         setObserver()
 
-        //setTestLogin()
+        setTestLogin()
     }
 
     //TODO(테스트 코드)
     private fun setTestLogin() {
-        viewModel.postJoin()
+        //viewModel.postJoin()
         viewModel.postLogin()
     }
 
