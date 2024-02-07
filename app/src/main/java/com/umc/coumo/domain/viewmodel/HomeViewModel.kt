@@ -68,7 +68,13 @@ class HomeViewModel @Inject constructor(
 
     fun loadStoreData(storeId: Int) {
         viewModelScope.launch {
-            _storeData.value = repository.getStoreData(storeId)
+            repository.getStoreData(storeId).let {
+                if (it != null) {
+                    _storeData.value = it
+                } else {
+                    listOf<StoreInfoModel>() //값을 못 받아 왔을 때, 빈 값 처리
+                }
+            }
         }
         Log.d("OKHTTP_TEST","$storeId \n${_storeData.value}")
     }
