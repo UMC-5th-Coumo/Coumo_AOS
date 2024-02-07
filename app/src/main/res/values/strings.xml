@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">Coumo</string>
-    
+
+    <!-- login page -->
+    <string name="id">아이디</string>
+    <string name="password">비밀번호</string>
+    <string name="login_btn">로그인하기</string>
+    <string name="register">회원가입</string>
+    <string name="find_id_pw">아이디/비밀번호 찾기</string>
+
+    <!-- sign up page -->
+    <string name="at">\@</string>
+
+
     <string name="home">홈</string>
     <string name="coupon">내 쿠폰</string>
     <string name="community">동네 소식</string>
