@@ -45,11 +45,9 @@ class HomeDetailInfoFragment: BindingFragmentNoneBackPress<FragmentHomeDetailInf
             addItemDecoration(ItemSpacingDecoration(requireContext(),0))
         }
 
-        menuAdapter.setOnItemClickListener(object : MenuAdapter.OnItemClickListener {
-            override fun onItemClick(id: Int) {
-                findNavController().navigate(R.id.action_homeDetailFragment_to_homeMenuFragment)
-            }
-        })
+        binding.btnMenuAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_homeDetailFragment_to_homeMenuFragment)
+        }
 
         viewModel.storeData.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
