@@ -3,7 +3,7 @@ package com.umc.coumo.data.remote.datasource
 import android.net.Uri
 import com.umc.coumo.data.remote.api.CoumoApi
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
-import com.umc.coumo.data.remote.model.response.ResponsePopularStoreListModel
+import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.repository.CoumoRepository
@@ -19,7 +19,7 @@ class CoumoRepositoryImpl @Inject constructor(
         latitude: Double
     ): List<StoreInfoItemModel>? {
         val data = coumoApi.getPopularStoreList(longitude = longitude,latitude = latitude)
-        return mapToStoreInfoItemModelList(data.body())
+        return mapToStoreInfoItemModelList(data.body()?.result)
     }
 
     override suspend fun getNearStoreList(
@@ -44,8 +44,8 @@ class CoumoRepositoryImpl @Inject constructor(
         }
     }
 
-    private fun mapToStoreInfoItemModelList(responseList: ResponsePopularStoreListModel?): List<StoreInfoItemModel>? {
-        return responseList?.result?.map { response ->
+    private fun mapToStoreInfoItemModelList(responseList: List<ResponsePopularStoreModel>?): List<StoreInfoItemModel>? {
+        return responseList?.map { response ->
             StoreInfoItemModel(
                 id = response.storeId,
                 image = Uri.parse(response.storeImage),
