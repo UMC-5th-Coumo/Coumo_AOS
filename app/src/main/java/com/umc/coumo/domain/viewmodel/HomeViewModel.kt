@@ -41,21 +41,21 @@ class HomeViewModel @Inject constructor(
     private val _popularStoreList = MutableLiveData<List<StoreInfoItemModel>>()
     val popularStoreList: LiveData<List<StoreInfoItemModel>> get() = _popularStoreList
 
-    private val _longitude = MutableLiveData<Double>(87.02629637)
-    val longitude: LiveData<Double> get() = _longitude
+    private val _currentLongitude = MutableLiveData<Double>(127.00091673551657)
+    val currentLongitude: LiveData<Double> get() = _currentLongitude
 
-    private val _latitude = MutableLiveData<Double>(37.500075)
-    val latitude: LiveData<Double> get() = _latitude
+    private val _currentLatitude = MutableLiveData<Double>(37.55800312017019)
+    val currentLatitude: LiveData<Double> get() = _currentLatitude
 
     fun getPopularStoreList() {
         viewModelScope.launch {
-            _popularStoreList.value = repository.getPopularStoreList(longitude = _longitude.value!!, latitude = _latitude.value!!) //빈 값 없으니 이렇게 처리
+            _popularStoreList.value = repository.getPopularStoreList(longitude = _currentLongitude.value!!, latitude = _currentLatitude.value!!) //빈 값 없으니 이렇게 처리
         }
     }
 
     private fun getNearStoreList(category: CategoryType?) {
         viewModelScope.launch {
-            _nearStoreList.value = repository.getNearStoreList(category = category, longitude = _longitude.value!!, latitude = _latitude.value!!)
+            _nearStoreList.value = repository.getNearStoreList(category = category, longitude = _currentLongitude.value!!, latitude = _currentLatitude.value!!)
         }
     }
 
