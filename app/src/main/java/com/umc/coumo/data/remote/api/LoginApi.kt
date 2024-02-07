@@ -4,6 +4,7 @@ import com.umc.coumo.data.remote.model.request.RequestJoinModel
 import com.umc.coumo.data.remote.model.request.RequestLoginModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
+import com.umc.coumo.data.remote.model.response.ResponseModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -19,6 +20,6 @@ interface LoginApi {
     @POST("/customer/login")
     suspend fun postLogin(
         @Body params: RequestLoginModel
-    ): Response<ResponseLoginModel>
+    ): Response<ResponseModel<ResponseLoginModel>>
 
 }

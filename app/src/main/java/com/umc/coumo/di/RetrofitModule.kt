@@ -43,6 +43,7 @@ object RetrofitModule {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient(AppInterceptor()))
             .build()
             .create(LoginApi::class.java)
     }

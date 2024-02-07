@@ -1,6 +1,6 @@
 package com.umc.coumo.data.remote.model.request
 
 data class RequestLoginModel(
-    val loginId: String = "testId2",
-    val password: String = "testPassword2",
+    val loginId: String = "testId3",
+    val password: String = "testPassword3",
 )
