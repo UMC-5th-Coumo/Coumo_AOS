@@ -1,6 +1,7 @@
 package com.umc.coumo.data.remote.datasource
 
 import android.net.Uri
+import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.CoumoApi
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
@@ -12,6 +13,7 @@ import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.model.StoreInfoModel
 import com.umc.coumo.domain.repository.CoumoRepository
 import com.umc.coumo.domain.type.CategoryType
+import com.umc.coumo.utils.Constants.CUSTOMER_ID
 import javax.inject.Inject
 
 class CoumoRepositoryImpl @Inject constructor(
@@ -38,7 +40,7 @@ class CoumoRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getStoreData(storeId: Int): StoreInfoModel? {
-        val data = coumoApi.getStoreData(storeId)
+        val data = coumoApi.getStoreData(App.prefs.getInt(CUSTOMER_ID,1),storeId)
         return mapToStoreInfoModel(data.body()?.result)
     }
 

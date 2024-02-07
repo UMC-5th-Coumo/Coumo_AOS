@@ -27,8 +27,9 @@ interface CoumoApi {
         @Query("page") page: Int?
     ): Response<ResponseModel<List<ResponseNearStoreModel>>>
 
-    @GET("/api/customer/store/{storeId}/detail")
+    @GET("/api/customer/{customerId}/store/{storeId}/detail")
     suspend fun getStoreData(
+        @Path("customerId") customerId: Int,
         @Path("storeId") storeId: Int
     ): Response<ResponseModel<ResponseStoreDataModel>>
 }
