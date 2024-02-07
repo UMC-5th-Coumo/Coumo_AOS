@@ -9,7 +9,7 @@
     <string name="find_id_pw">아이디/비밀번호 찾기</string>
 
     <!-- sign up page -->
-
+    <string name="at">\@</string>
 
 
     <string name="home">홈</string>

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.umc.coumo.domain.viewmodel.SignUp2ViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,6 +42,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:scrollbars="none"
             app:layout_constraintVertical_bias="0">
 
             <LinearLayout
@@ -55,7 +58,7 @@
                     android:textSize="16sp" />
 
                 <EditText
-                    android:layout_width="148dp"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:maxLines="1"
                     android:maxLength="15"
@@ -74,9 +77,11 @@
                     android:layout_marginTop="30dp" />
 
                 <EditText
-                    android:layout_width="228dp"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/edittext_border"
+                    android:hint="ex) 20240101"
+                    android:textSize="16sp"
                     android:layout_marginTop="10dp" />
 
                 <TextView
@@ -87,9 +92,98 @@
                     android:textSize="16sp"
                     android:layout_marginTop="30dp" />
 
-                <View
+                <Spinner
+                    android:id="@+id/spinner_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:entries="@{viewModel.spinnerGenderItems}"
+                    android:selectedItemPosition="@={viewModel.selectedGenderPosition}"
+                    android:dropDownSelector="@drawable/icon_spinner_drop_down"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="아이디"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="30dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/textbox_sign_up_id"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:hint="happy1234"
+                        android:textSize="16sp"
+                        android:inputType="text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btn_sign_up_check_duplicate"
+                        android:background="@drawable/edittext_border" />
+
+                    <Button
+                        android:id="@+id/btn_sign_up_check_duplicate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:layout_constraintStart_toEndOf="@id/textbox_sign_up_id"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="중복 확인하기"
+                        android:textSize="12sp"
+                        android:layout_marginStart="10dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비밀번호"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="30dp"/>
+
+                <EditText
+                    android:id="@+id/textbox_sign_up_pw"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/edittext_border"
+                    android:hint="비밀번호를 입력하세요"
+                    android:textSize="16sp"
+                    android:inputType="textPassword"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/tv_sign_up_pw_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="잘못된 형식입니다"
+                    android:textColor="@color/design_default_color_error"
+                    android:textSize="12sp"
+                    android:visibility="invisible"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비밀번호 확인하기"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="30dp"/>
+
+                <EditText
+                    android:id="@+id/textbox_sign_up_pw_retype"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/edittext_border"
+                    android:hint="한 번 더 비밀번호를 입력하세요"
+                    android:textSize="16sp"
+                    android:inputType="textPassword"
                     android:layout_marginTop="10dp"/>
 
                 <TextView
@@ -100,14 +194,48 @@
                     android:textSize="16sp"
                     android:layout_marginTop="30dp" />
 
-                <EditText
-                    android:layout_width="200dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/edittext_border"
-                    android:hint="이메일을 입력하세요"
-                    android:inputType="textEmailAddress"
-                    android:textSize="16sp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/textbox_sign_up_email"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edittext_border"
+                        android:hint="이메일을 입력하세요"
+                        android:inputType="text"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_sign_up_at"/>
+
+                    <TextView
+                        android:id="@+id/tv_sign_up_at"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/at"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/textbox_sign_up_email"
+                        app:layout_constraintEnd_toStartOf="@id/spinner_email"
+                        android:layout_marginHorizontal="5dp"/>
+                    
+                    <Spinner
+                        android:id="@+id/spinner_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:entries="@{viewModel.spinnerEmailItems}"
+                        android:selectedItemPosition="@={viewModel.selectedEmailPostion}"
+                        android:dropDownSelector="@drawable/icon_spinner_drop_down"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -117,27 +245,36 @@
                     android:textSize="16sp"
                     android:layout_marginTop="30dp" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:layout_marginTop="10dp">
 
                     <EditText
-                        android:layout_width="150dp"
+                        android:id="@+id/textbox_sign_up_phone"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/edittext_border"
                         android:hint="- 없이 입력하세요"
                         android:textSize="16sp"
-                        android:inputType="phone" />
+                        android:inputType="phone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btn_sign_up_phone_verification_request"/>
 
                     <Button
+                        android:id="@+id/btn_sign_up_phone_verification_request"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="10dp"
                         android:textSize="12sp"
-                        android:text="인증번호 발송" />
-                </LinearLayout>
+                        android:text="인증번호 발송"
+                        app:layout_constraintStart_toEndOf="@id/textbox_sign_up_phone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -147,28 +284,36 @@
                     android:textStyle="bold"
                     android:layout_marginTop="30dp" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal"
                     android:layout_marginTop="10dp">
 
                     <EditText
-                        android:layout_width="150dp"
+                        android:id="@+id/textbox_sign_up_verification_code"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/edittext_border"
-                        android:hint="인증번호 4자리"
+                        android:hint="- 없이 입력하세요"
                         android:textSize="16sp"
-                        android:inputType="number"
-                        android:maxLength="4" />
+                        android:inputType="phone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btn_sign_up_phone_verification_re_request"/>
 
                     <Button
+                        android:id="@+id/btn_sign_up_phone_verification_re_request"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="재발송 요청"
+                        android:layout_marginStart="10dp"
                         android:textSize="12sp"
-                        android:layout_marginStart="20dp" />
-                </LinearLayout>
+                        android:text="인증번호 발송"
+                        app:layout_constraintStart_toEndOf="@id/textbox_sign_up_verification_code"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
                     android:id="@+id/btn_next_sign_up2"
