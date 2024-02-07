@@ -17,7 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Coumo"
-        tools:targetApi="31">
+        android:hardwareAccelerated="true"
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="33">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${GOOGLE_MAPS_API_KEY}" />
+
         <activity
             android:name=".presentation.activity.LoginActivity"
             android:exported="true">
