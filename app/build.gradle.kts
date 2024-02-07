@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.umc.coumo"
-        minSdk = 28
+        minSdk = 31
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
