@@ -2,6 +2,7 @@ package com.umc.coumo.domain.repository
 
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
+import com.umc.coumo.domain.model.StoreInfoModel
 import com.umc.coumo.domain.type.CategoryType
 
 interface CoumoRepository {
@@ -13,4 +14,8 @@ interface CoumoRepository {
         latitude: Double,
         page: Int? = 0
     ): List<StoreCouponCountModel>?
+
+    suspend fun getStoreData(
+        storeId: Int
+    ): StoreInfoModel?
 }
