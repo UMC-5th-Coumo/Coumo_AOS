@@ -24,6 +24,11 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
 
         val storeCouponAdapter = StoreCouponCountAdapter()
 
+        binding.btnRefresh.setOnClickListener {
+            viewModel.loadStoreData(1)
+            findNavController().navigate(R.id.action_homeListFragment_to_homeDetailFragment, null)
+        }
+
         binding.rvStore.apply {
             adapter = storeCouponAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

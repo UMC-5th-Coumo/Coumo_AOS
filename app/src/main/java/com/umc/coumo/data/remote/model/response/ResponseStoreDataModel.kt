@@ -6,6 +6,7 @@ data class ResponseStoreDataModel(
     val location: String,
     val longitude: String,
     val latitude: String,
+    val images: List<String>,
     val coupon: ResponseCouponModel,
     val menus: List<ResponseMenuModel>?,
 )

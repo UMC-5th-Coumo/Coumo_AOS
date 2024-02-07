@@ -10,6 +10,6 @@ data class StoreInfoModel(
     val latitude: Double,
     val image: List<Uri>?,
     val coupon: CouponModel,
-    val menuList: List<MenuModel>,
+    val menuList: List<MenuModel>?,
 ) {
 }
