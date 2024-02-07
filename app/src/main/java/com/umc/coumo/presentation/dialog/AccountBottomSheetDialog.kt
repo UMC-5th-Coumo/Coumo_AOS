@@ -7,7 +7,7 @@ import com.umc.coumo.databinding.DialogBottomSheetAccountBinding
 import com.umc.coumo.domain.type.AccountAction
 import com.umc.coumo.utils.binding.BindingBottomSheet
 
-class AccountBottomSheetDialog(val type: AccountAction): BindingBottomSheet<DialogBottomSheetAccountBinding>(R.layout.dialog_bottom_sheet_account) {
+class AccountBottomSheetDialog(val type: AccountAction, private val action: () -> Unit): BindingBottomSheet<DialogBottomSheetAccountBinding>(R.layout.dialog_bottom_sheet_account) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -16,7 +16,7 @@ class AccountBottomSheetDialog(val type: AccountAction): BindingBottomSheet<Dial
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         binding.btnDialog.setOnClickListener {
-            //로그아웃 혹은 탈퇴 코드
+            action() //로그아웃 혹은 탈퇴하기 코드
             dismissAllowingStateLoss()
         }
 
