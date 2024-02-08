@@ -1,10 +1,17 @@
 package com.umc.coumo.presentation.activity
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.umc.coumo.R
 import com.umc.coumo.databinding.ActivityMainBinding
 import com.umc.coumo.domain.type.TabType
+import com.umc.coumo.domain.viewmodel.HomeViewModel
 import com.umc.coumo.domain.viewmodel.MainViewModel
 import com.umc.coumo.presentation.adapter.MainFragmentAdapter
 import com.umc.coumo.utils.binding.BindingActivity
@@ -14,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val viewModel: MainViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +35,30 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         setNaviButton()
         setObserver()
+        setLocationPermission()
+    }
+
+    private fun setLocationPermission() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+            checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            with(getSystemService(Context.LOCATION_SERVICE) as LocationManager) {
+                requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000L, 5F) {
+                    Log.d("LocationService", "GPS_PROVIDER")
+                    getLocation(it)
+                }
+                requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000L, 5F) {
+                    Log.d("LocationService", "NETWORK_PROVIDER")
+                    getLocation(it)
+                }
+            }
+        } else {
+            //권한 요청 필요한데 이거 메인에서 처리하자
+        }
+
+    }
+
+    private fun getLocation(location: Location) {
+        homeViewModel.setCurrentLocation(location.longitude,location.latitude)
     }
 
     private fun setObserver () {

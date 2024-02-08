@@ -26,6 +26,13 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
         setBanner()
         setRecyclerView()
         setButton()
+        observeLocationChange()
+    }
+
+    private fun observeLocationChange() {
+        viewModel.currentLocation.observe(viewLifecycleOwner) {
+            viewModel.getPopularStoreList()
+        }
     }
 
     private fun setButton() {
