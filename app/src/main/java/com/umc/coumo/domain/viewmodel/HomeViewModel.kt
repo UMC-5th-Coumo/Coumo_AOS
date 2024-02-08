@@ -1,5 +1,6 @@
 package com.umc.coumo.domain.viewmodel
 
+import android.location.Address
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -42,8 +43,16 @@ class HomeViewModel @Inject constructor(
     private val _currentLocation = MutableLiveData<LocationLatLng>(LocationLatLng(127.00091673551657, 37.55800312017019))
     val currentLocation: LiveData<LocationLatLng> get() = _currentLocation
 
+    private val _currentAddress = MutableLiveData<String>()
+    val currentAddress: LiveData<String> get() = _currentAddress
+
     fun setCurrentLocation(longitude: Double, latitude: Double ) {
         _currentLocation.value = LocationLatLng(longitude, latitude)
+    }
+
+    fun setCurrentAddress(address: List<Address>?) {
+        _currentAddress.value = address?.get(0)?.let { it.adminArea + " "+ it.subLocality + " "+ it.thoroughfare }
+        Log.d("TEST Address","${address?.get(0)}")
     }
 
     fun getPopularStoreList() {
@@ -78,7 +87,6 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-        Log.d("OKHTTP_TEST","$storeId \n${_storeData.value}")
     }
 
 }

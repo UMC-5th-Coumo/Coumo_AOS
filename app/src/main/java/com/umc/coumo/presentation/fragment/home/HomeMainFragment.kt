@@ -1,6 +1,9 @@
 package com.umc.coumo.presentation.fragment.home
 
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -15,6 +18,7 @@ import com.umc.coumo.presentation.adapter.BannerPagerAdapter
 import com.umc.coumo.presentation.adapter.StoreInfoAdapter
 import com.umc.coumo.utils.ItemSpacingDecoration
 import com.umc.coumo.utils.binding.BindingFragment
+import java.io.IOException
 
 class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragment_home_main) {
 
@@ -23,15 +27,26 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         setBanner()
+        setLocation()
         setRecyclerView()
         setButton()
-        observeLocationChange()
     }
 
-    private fun observeLocationChange() {
+    private fun setLocation() {
+        val geocoder: Geocoder = Geocoder(requireContext())
+
         viewModel.currentLocation.observe(viewLifecycleOwner) {
             viewModel.getPopularStoreList()
+            try {
+                viewModel.setCurrentAddress(geocoder.getFromLocation(viewModel.currentLocation.value?.latitude!!,viewModel.currentLocation.value?.longitude!!,1))
+            } catch (e: IOException) {
+                Log.e("Location","Location change address IO Exception")
+            }
+
         }
     }
 
@@ -72,12 +87,14 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
                 R.id.action_homeMainFragment_to_homeListFragment
             )
         }
+
+        binding.btnRefresh.setOnClickListener {
+
+        }
     }
 
     private fun setRecyclerView() {
         val storeInfoAdapter = StoreInfoAdapter()
-
-        viewModel.getPopularStoreList()
 
         binding.rvPopular.apply {
             adapter = storeInfoAdapter
@@ -126,5 +143,9 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
                 binding.tvIndicator.text = indicatorText
             }
         })
+    }
+
+    private fun getLocation(location: Location) {
+        viewModel.setCurrentLocation(location.longitude,location.latitude)
     }
 }

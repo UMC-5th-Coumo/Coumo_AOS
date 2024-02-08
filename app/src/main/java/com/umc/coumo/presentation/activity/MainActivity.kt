@@ -38,7 +38,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         setLocationPermission()
     }
 
-    private fun setLocationPermission() {
+    fun setLocationPermission() {
         if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
             checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             with(getSystemService(Context.LOCATION_SERVICE) as LocationManager) {
