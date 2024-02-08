@@ -1,10 +1,12 @@
 package com.umc.coumo.domain.viewmodel
 
+import android.location.Address
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.umc.coumo.domain.model.LocationLatLng
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.model.StoreInfoModel
@@ -38,21 +40,30 @@ class HomeViewModel @Inject constructor(
     private val _popularStoreList = MutableLiveData<List<StoreInfoItemModel>>()
     val popularStoreList: LiveData<List<StoreInfoItemModel>> get() = _popularStoreList
 
-    private val _currentLongitude = MutableLiveData<Double>(127.00091673551657)
-    val currentLongitude: LiveData<Double> get() = _currentLongitude
+    private val _currentLocation = MutableLiveData<LocationLatLng>(LocationLatLng(127.00091673551657, 37.55800312017019))
+    val currentLocation: LiveData<LocationLatLng> get() = _currentLocation
 
-    private val _currentLatitude = MutableLiveData<Double>(37.55800312017019)
-    val currentLatitude: LiveData<Double> get() = _currentLatitude
+    private val _currentAddress = MutableLiveData<String>()
+    val currentAddress: LiveData<String> get() = _currentAddress
+
+    fun setCurrentLocation(longitude: Double, latitude: Double ) {
+        _currentLocation.value = LocationLatLng(longitude, latitude)
+    }
+
+    fun setCurrentAddress(address: List<Address>?) {
+        _currentAddress.value = address?.get(0)?.let { it.adminArea + " "+ it.subLocality + " "+ it.thoroughfare }
+        Log.d("TEST Address","${address?.get(0)}")
+    }
 
     fun getPopularStoreList() {
         viewModelScope.launch {
-            _popularStoreList.value = repository.getPopularStoreList(longitude = _currentLongitude.value!!, latitude = _currentLatitude.value!!) //빈 값 없으니 이렇게 처리
+            _popularStoreList.value = repository.getPopularStoreList(longitude = _currentLocation.value?.longitude!!, latitude = _currentLocation.value?.latitude!!) //빈 값 없으니 이렇게 처리
         }
     }
 
     private fun getNearStoreList(category: CategoryType?) {
         viewModelScope.launch {
-            _nearStoreList.value = repository.getNearStoreList(category = category, longitude = _currentLongitude.value!!, latitude = _currentLatitude.value!!)
+            _nearStoreList.value = repository.getNearStoreList(category = category,longitude = _currentLocation.value?.longitude!!, latitude = _currentLocation.value?.latitude!!)
         }
     }
 
@@ -76,7 +87,6 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-        Log.d("OKHTTP_TEST","$storeId \n${_storeData.value}")
     }
 
 }

@@ -48,12 +48,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_rect_round_6"
-                    android:text="위치를 조정해보세요"
+                    android:text="@{viewModel.currentAddress}"
                     android:textColor="@color/font_text"
                     android:fontFamily="@font/pretendard_500"
                     android:layout_marginStart="2dp"
+                    android:maxLines="1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_locate"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
