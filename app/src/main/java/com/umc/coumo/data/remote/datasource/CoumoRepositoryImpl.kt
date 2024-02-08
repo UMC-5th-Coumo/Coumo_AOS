@@ -60,13 +60,13 @@ class CoumoRepositoryImpl @Inject constructor(
                     stampCount = response.coupon.cnt,
                     color = response.coupon.color,
                     stampMax = 10,
-                    stampImage = Uri.parse(response.coupon.stampType)
+                    stampImage = imageNullCheck(response.coupon.stampType)
                 ),
                 menuList = response.menus?.map {
                     MenuModel(
                         name = it.name,
                         description = it.description,
-                        image = Uri.parse(it.image),
+                        image = imageNullCheck(it.image),
                         isNew = it.isNew
                     )
                 }
@@ -79,7 +79,7 @@ class CoumoRepositoryImpl @Inject constructor(
         return responseList?.map { response ->
             StoreCouponCountModel(
                 id = response.storeId,
-                image = Uri.parse(response.storeImage),
+                image = imageNullCheck(response.storeImage),
                 name = response.name,
                 coupon = response.couponCnt
             )
@@ -90,7 +90,7 @@ class CoumoRepositoryImpl @Inject constructor(
         return responseList?.map { response ->
             StoreInfoItemModel(
                 id = response.storeId,
-                image = Uri.parse(response.storeImage),
+                image = imageNullCheck(response.storeImage),
                 name = response.name,
                 address = response.location,
                 description = response.description,
@@ -98,4 +98,11 @@ class CoumoRepositoryImpl @Inject constructor(
         }
     }
 
+    private fun imageNullCheck(uri: String?): Uri? {
+        return if (uri != null) {
+            Uri.parse(uri)
+        } else {
+            null
+        }
+    }
 }
