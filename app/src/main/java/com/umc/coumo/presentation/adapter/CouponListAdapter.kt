@@ -8,7 +8,7 @@ import com.umc.coumo.databinding.ItemCouponBinding
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.utils.ItemDiffCallback
 
-class CouponAdapter(
+class CouponListAdapter(
 
 ): ListAdapter<CouponModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<CouponModel>(

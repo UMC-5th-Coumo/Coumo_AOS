@@ -1,21 +1,16 @@
 package com.umc.coumo.presentation.fragment.coupon
 
 
-import android.Manifest
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.umc.coumo.App
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentCouponListBinding
-import com.umc.coumo.domain.type.AccountAction
 import com.umc.coumo.domain.viewmodel.CouponViewModel
-import com.umc.coumo.presentation.adapter.CouponAdapter
-import com.umc.coumo.presentation.dialog.AccountBottomSheetDialog
+import com.umc.coumo.presentation.adapter.CouponListAdapter
 import com.umc.coumo.presentation.dialog.CouponDialog
 import com.umc.coumo.utils.PermissionUtils
 import com.umc.coumo.utils.binding.BindingFragment
@@ -57,16 +52,16 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
 
 
     private fun setRecyclerView () {
-        val couponAdapter = CouponAdapter()
+        val couponListAdapter = CouponListAdapter()
 
         viewModel.testData()
 
         binding.rvCoupon.apply {
-            adapter = couponAdapter
+            adapter = couponListAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
 
-        couponAdapter.setOnItemClickListener(object : CouponAdapter.OnItemClickListener {
+        couponListAdapter.setOnItemClickListener(object : CouponListAdapter.OnItemClickListener {
             override fun onItemClick(id: String) {
                 Log.d("TEST Dialog","?")
                 val dialog = CouponDialog()
@@ -76,7 +71,7 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
 
         viewModel.couponList.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                couponAdapter.submitList(it)
+                couponListAdapter.submitList(it)
             }
         }
     }
