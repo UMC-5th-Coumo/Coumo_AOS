@@ -16,6 +16,9 @@ class CouponViewModel @Inject constructor(): ViewModel() {
     private val _couponList = MutableLiveData<List<CouponModel>>()
     val couponList: LiveData<List<CouponModel>> get() = _couponList
 
+    private val _currentCoupon = MutableLiveData<CouponModel>()
+    val currentCoupon: LiveData<CouponModel> get() = _currentCoupon
+
     fun changeAlign(align: CouponAlignType) {
         _align.value = align
     }
@@ -23,9 +26,9 @@ class CouponViewModel @Inject constructor(): ViewModel() {
     fun testData() {
         val list = listOf(
             CouponModel(name = "왕십리 청춘카페", stampCount = 1, color = "?", stampMax = 10, stampImage = null),
-            CouponModel(name = "왕십리 청춘카페2", stampCount = 2, color = "?", stampMax = 10, stampImage = null),
-            CouponModel(name = "왕십리 청춘카페3", stampCount = 3, color = "?", stampMax = 10, stampImage = null),
-            CouponModel(name = "왕십리 청춘카페4", stampCount = 3, color = "?", stampMax = 10, stampImage = null),
+            CouponModel(name = "왕십리 청춘카페2", stampCount = 8, color = "?", stampMax = 8, stampImage = null),
+            CouponModel(name = "왕십리 청춘카페3", stampCount = 3, color = "?", stampMax = 12, stampImage = null),
+            CouponModel(name = "왕십리 청춘카페4", stampCount = 7, color = "?", stampMax = 10, stampImage = null),
         )
         _couponList.value = list
     }

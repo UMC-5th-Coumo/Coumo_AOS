@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="item"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginVertical="3dp"
+        android:layout_marginHorizontal="6dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_stamp"
+            android:backgroundTint="@color/white" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_stamp"
+            android:padding="8dp"
+            android:src="@drawable/icon_stamp_dessert"
+            android:scaleType="centerCrop"
+            android:clipToOutline="true"
+            android:visibility="@{item ? View.VISIBLE : View.INVISIBLE}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

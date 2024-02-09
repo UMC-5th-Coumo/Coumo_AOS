@@ -52,7 +52,7 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
 
 
     private fun setRecyclerView () {
-        val couponListAdapter = CouponListAdapter()
+        val couponListAdapter = CouponListAdapter(requireContext())
 
         viewModel.testData()
 
@@ -63,8 +63,7 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
 
         couponListAdapter.setOnItemClickListener(object : CouponListAdapter.OnItemClickListener {
             override fun onItemClick(id: String) {
-                Log.d("TEST Dialog","?")
-                val dialog = CouponDialog()
+                val dialog = CouponDialog(viewModel)
                 dialog.show(parentFragmentManager, null)
             }
         })
