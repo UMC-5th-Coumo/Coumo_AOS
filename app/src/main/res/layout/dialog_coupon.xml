@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="coupon"
+            type="com.umc.coumo.domain.model.CouponModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.wajahatkarim3.easyflipview.EasyFlipView
+            android:id="@+id/section_coupon"
+            android:layout_width="308dp"
+            android:layout_height="180dp"
+            app:flipOnTouch="true"
+            app:flipEnabled="true"
+            app:flipDuration="400"
+            app:flipType="horizontal"
+            app:flipFrom="front"
+            app:layout_constraintDimensionRatio="308:180"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view_qr"
+                android:layout_width="308dp"
+                android:layout_height="180dp"
+                android:background="@drawable/shape_rect_round_6"
+                android:paddingTop="28dp"
+                app:dynamicBackgroundColor="@{coupon.color}"
+                app:layout_constraintDimensionRatio="308:180"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:backgroundTint="#FFDA26">
+
+                <TextView
+                    android:id="@+id/tv_qr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/modak_400"
+                    android:text="QR uri"
+                    android:textSize="22sp"
+                    app:dynamicTextColor="@{coupon.fontColor}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="COFFEE SHOP" />
+
+                <TextView
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/shape_rect_side_round"
+                    android:backgroundTint="@color/sub"
+                    android:paddingHorizontal="28dp"
+                    android:paddingVertical="8dp"
+                    android:text="적립하기"
+                    android:textColor="@color/main"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_use"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <TextView
+                    android:id="@+id/btn_use"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/shape_rect_side_round"
+                    android:backgroundTint="@color/sub"
+                    android:paddingHorizontal="28dp"
+                    android:paddingVertical="8dp"
+                    android:text="사용하기"
+                    android:textColor="@color/main"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn_add"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view_coupon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_rect_round_6"
+                android:paddingTop="28dp"
+                app:dynamicBackgroundColor="@{coupon.color}"
+                tools:backgroundTint="#FFDA26">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/modak_400"
+                    android:text="COFFEE SHOP"
+                    android:textSize="22sp"
+                    app:dynamicTextColor="@{coupon.fontColor}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="COFFEE SHOP" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_stamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.wajahatkarim3.easyflipview.EasyFlipView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
