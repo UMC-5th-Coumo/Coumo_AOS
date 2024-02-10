@@ -21,16 +21,32 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_coupon_title"
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_700"
                 android:textSize="24sp"
-                android:layout_marginTop="40dp"
-                android:layout_marginStart="@dimen/horizontal_padding"
-                android:text="@string/qr_title"
+                android:text="1"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="28dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_700"
+                android:textSize="16sp"
+                android:text="취소하기"
+                android:background="@drawable/shape_rect_side_round"
+                android:backgroundTint="@color/sub"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="28dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <com.journeyapps.barcodescanner.BarcodeView
                 android:id="@+id/view_finder"
@@ -39,8 +55,8 @@
                 android:layout_margin="@dimen/horizontal_padding"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_coupon_title"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_constraintBottom_toTopOf="@id/btn_cancel"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
