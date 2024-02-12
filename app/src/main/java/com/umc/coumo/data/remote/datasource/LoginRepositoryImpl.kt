@@ -1,5 +1,6 @@
 package com.umc.coumo.data.remote.datasource
 
+import android.util.Log
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.LoginApi
 import com.umc.coumo.data.remote.model.request.RequestJoinModel
@@ -8,6 +9,7 @@ import com.umc.coumo.data.remote.model.response.ResponseJoinModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
 import com.umc.coumo.data.remote.model.response.ResponseModel
 import com.umc.coumo.domain.repository.LoginRepository
+import com.umc.coumo.presentation.dialog.ConfirmDialog
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor(
@@ -37,7 +39,7 @@ class LoginRepositoryImpl @Inject constructor(
     }
 
     override suspend fun postLogin(loginId: String, password: String){
-        //val data = loginApi.postLogin(RequestLoginModel(loginId, password))
+        val data = loginApi.postLogin(RequestLoginModel(loginId, password))
         //App.prefs.setString("accessToken",data.body()?.result?.token?:"")
         //App.prefs.setInt("customerId",data.body()?.result?.customerId?:0)
     }

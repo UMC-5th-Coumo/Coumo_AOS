@@ -59,42 +59,27 @@
     
     <!-- 이용약관 -->
     <string name="string_agree_service">
-        이용수칙1
-
-        이용수칙2
-
-        이용수칙3
-
-        이용수칙4
-
-        이용수칙5
-
+        이용수칙1\n\n
+        이용수칙2\n\n
+        이용수칙3\n\n
+        이용수칙4\n\n
+        이용수칙5\n\n
         이용수칙6
     </string>
     <string name="string_agree_privacy">
-        이용수칙1
-
-        이용수칙2
-
-        이용수칙3
-
-        이용수칙4
-
-        이용수칙5
-
-        이용수칙6
+        이용수칙1\n\n
+        이용수칙2\n\n
+        이용수칙3\n\n
+        이용수칙4\n\n
+        이용수칙5\n\n
+        이용수칙6\n\n
     </string>
     <string name="string_agree_marketing">
-        이용수칙1
-
-        이용수칙2
-
-        이용수칙3
-
-        이용수칙4
-
-        이용수칙5
-
+        이용수칙1\n\n
+        이용수칙2\n\n
+        이용수칙3\n\n
+        이용수칙4\n\n
+        이용수칙5\n\n
         이용수칙6
     </string>
 </resources>
