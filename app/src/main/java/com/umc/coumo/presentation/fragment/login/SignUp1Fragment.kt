@@ -1,7 +1,9 @@
 package com.umc.coumo.presentation.fragment.login
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentSignUp1Binding
@@ -29,7 +31,11 @@ class SignUp1Fragment : BindingFragment<FragmentSignUp1Binding> (R.layout.fragme
         binding.checkboxAgreeService.setOnClickListener { onCheckedChanged(false) }
         binding.checkboxAgreePrivacy.setOnClickListener { onCheckedChanged(false) }
         binding.checkboxAgreeMarketing.setOnClickListener { onCheckedChanged(false) }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        onCheckedChanged(false)
     }
 
     override fun onBackPressed() {

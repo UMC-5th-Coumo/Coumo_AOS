@@ -21,7 +21,7 @@ class ResetPasswordFragment : BindingFragment<FragmentResetPasswordBinding> (R.l
         }
 
         binding.btnResetPasswordConfirm.setOnClickListener {
-            val dialog = ConfirmDialog()
+            val dialog = ConfirmDialog("비밀번호 설정이 완료되었습니다.")
             dialog.show(parentFragmentManager, null)
         }
     }
