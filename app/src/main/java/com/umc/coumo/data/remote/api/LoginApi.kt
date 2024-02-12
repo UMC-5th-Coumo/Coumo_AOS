@@ -15,7 +15,7 @@ interface LoginApi {
     @POST("/customer/join")
     suspend fun postJoin(
         @Body params: RequestJoinModel
-    ): Response<ResponseJoinModel>
+    ): Response<ResponseModel<ResponseJoinModel>>
 
     @POST("/customer/login")
     suspend fun postLogin(

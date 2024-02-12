@@ -14,14 +14,14 @@ class PhoneVerificationFragment : BindingFragment<FragmentPhoneVerificationBindi
 
         val text = requireArguments().getString("selected_btn").toString()
 
-        if (text == "id") {
+        if (text == "find_id") {
             binding.tvFind.text = "아이디 찾기"
 
             binding.btnPhoneVerificationNext.setOnClickListener {
                 findNavController().navigate(R.id.action_phoneVerificationFragment_to_foundIdFragment)
             }
         }
-        else if (text == "pw") {
+        else if (text == "find_pw") {
             binding.tvFind.text = "비밀번호 찾기"
 
             binding.btnPhoneVerificationNext.setOnClickListener {

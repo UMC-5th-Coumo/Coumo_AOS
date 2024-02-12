@@ -19,8 +19,13 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
         binding.btnLogin.setOnClickListener {
-            viewModel.postLogin() //TODO(임시 코드)
+            val loginId: String = binding.textboxLoginId.text.toString()
+            val password: String = binding.textboxLoginPassword.text.toString()
+            viewModel.postLogin(loginId, password) //TODO(임시 코드)
             val intent = Intent(requireActivity(), MainActivity::class.java)
             startActivity(intent)
         }
@@ -31,14 +36,14 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
 
         binding.btnFindId.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("selected_btn", "id")
+            bundle.putString("selected_btn", "find_id")
 
             findNavController().navigate(R.id.action_loginFragment_to_phoneVerificationFragment, bundle)
         }
 
         binding.btnFindPw.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("selected_btn", "pw")
+            bundle.putString("selected_btn", "find_pw")
 
             findNavController().navigate(R.id.action_loginFragment_to_phoneVerificationFragment, bundle)
         }

@@ -94,12 +94,12 @@
 
                 <Spinner
                     android:id="@+id/spinner_gender"
-                    android:layout_width="wrap_content"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:background="@drawable/background_spinner"
                     android:entries="@{viewModel.spinnerGenderItems}"
-                    android:selectedItemPosition="@={viewModel.selectedGenderPosition}"
-                    android:dropDownSelector="@drawable/icon_spinner_drop_down"/>
+                    android:selectedItemPosition="@={viewModel.selectedGenderPosition}"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -226,11 +226,11 @@
                     
                     <Spinner
                         android:id="@+id/spinner_email"
-                        android:layout_width="wrap_content"
+                        android:layout_width="120dp"
                         android:layout_height="match_parent"
+                        android:background="@drawable/background_spinner"
                         android:entries="@{viewModel.spinnerEmailItems}"
                         android:selectedItemPosition="@={viewModel.selectedEmailPostion}"
-                        android:dropDownSelector="@drawable/icon_spinner_drop_down"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" />

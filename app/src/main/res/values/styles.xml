@@ -68,4 +68,9 @@
         <item name="android:textColor">@color/selector_tab_text_color</item>
     </style>
 
+    <style name="MySpinnerStyle">
+        <item name="android:background">@drawable/shape_spinner</item>
+        <item name="android:dropDownSelector">@drawable/icon_spinner_drop_down</item>
+    </style>
+
 </resources>

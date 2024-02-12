@@ -2,6 +2,8 @@ package com.umc.coumo.presentation.fragment.login
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
@@ -11,7 +13,7 @@ import com.umc.coumo.utils.binding.BindingFragment
 
 class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragment_sign_up2) {
 
-    private val viewmodel = SignUp2ViewModel()
+    private val viewmodel : SignUp2ViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

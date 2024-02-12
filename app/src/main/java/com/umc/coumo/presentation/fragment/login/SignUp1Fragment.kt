@@ -12,7 +12,7 @@ class SignUp1Fragment : BindingFragment<FragmentSignUp1Binding> (R.layout.fragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val checkboxes = listOf(binding.checkboxAgreeAge, binding.checkboxAgreeService, binding.checkboxAgreePrivacy, binding.checkboxAgreeMarketing)
+        val checkboxes = listOf(binding.checkboxAgreeService, binding.checkboxAgreePrivacy, binding.checkboxAgreeMarketing)
 
         binding.btnNextSignUp1.isEnabled = false
         clearChecked()
@@ -26,7 +26,6 @@ class SignUp1Fragment : BindingFragment<FragmentSignUp1Binding> (R.layout.fragme
         }
 
         binding.checkboxAgreeAll.setOnClickListener { onCheckedChanged(true) }
-        binding.checkboxAgreeAge.setOnClickListener { onCheckedChanged(false) }
         binding.checkboxAgreeService.setOnClickListener { onCheckedChanged(false) }
         binding.checkboxAgreePrivacy.setOnClickListener { onCheckedChanged(false) }
         binding.checkboxAgreeMarketing.setOnClickListener { onCheckedChanged(false) }
@@ -41,21 +40,18 @@ class SignUp1Fragment : BindingFragment<FragmentSignUp1Binding> (R.layout.fragme
     private fun clearChecked() {
         binding.checkboxAgreeAll.isChecked = false
         binding.checkboxAgreeMarketing.isChecked = false
-        binding.checkboxAgreeAge.isChecked = false
         binding.checkboxAgreePrivacy.isChecked = false
         binding.checkboxAgreeService.isChecked = false
     }
 
     private fun onCheckedChanged(isAll: Boolean) {
         if (isAll) {
-            binding.checkboxAgreeAge.isChecked = binding.checkboxAgreeAll.isChecked
             binding.checkboxAgreeMarketing.isChecked = binding.checkboxAgreeAll.isChecked
             binding.checkboxAgreePrivacy.isChecked = binding.checkboxAgreeAll.isChecked
             binding.checkboxAgreeService.isChecked = binding.checkboxAgreeAll.isChecked
         }
 
         if (binding.checkboxAgreePrivacy.isChecked &&
-            binding.checkboxAgreeAge.isChecked &&
             binding.checkboxAgreeService.isChecked &&
             binding.checkboxAgreeMarketing.isChecked) {
             binding.checkboxAgreeAll.isChecked = true

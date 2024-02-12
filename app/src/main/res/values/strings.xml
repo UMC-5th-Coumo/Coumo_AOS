@@ -54,4 +54,45 @@
     <string name="phone">전화번호</string>
 
     <string name="dialog_cancel">취소</string>
+    
+    <!-- 이용약관 -->
+    <string name="string_agree_service">
+        이용수칙1
+
+        이용수칙2
+
+        이용수칙3
+
+        이용수칙4
+
+        이용수칙5
+
+        이용수칙6
+    </string>
+    <string name="string_agree_privacy">
+        이용수칙1
+
+        이용수칙2
+
+        이용수칙3
+
+        이용수칙4
+
+        이용수칙5
+
+        이용수칙6
+    </string>
+    <string name="string_agree_marketing">
+        이용수칙1
+
+        이용수칙2
+
+        이용수칙3
+
+        이용수칙4
+
+        이용수칙5
+
+        이용수칙6
+    </string>
 </resources>

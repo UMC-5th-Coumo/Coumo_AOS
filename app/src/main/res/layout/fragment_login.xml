@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.umc.coumo.domain.viewmodel.LoginViewModel" />
 
     </data>
 
@@ -42,6 +45,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:autofillHints="username"
+            android:text="@{viewModel.id}"
             android:hint="@string/id"
             android:inputType="text"
             android:selectAllOnFocus="true"

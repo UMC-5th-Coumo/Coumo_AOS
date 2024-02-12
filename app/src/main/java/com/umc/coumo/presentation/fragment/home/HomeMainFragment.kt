@@ -46,7 +46,6 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
             } catch (e: IOException) {
                 Log.e("Location","Location change address IO Exception")
             }
-
         }
     }
 
