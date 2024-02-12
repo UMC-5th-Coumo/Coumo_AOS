@@ -19,6 +19,8 @@ class LoginViewModel @Inject constructor(
 
     private val _pw = MutableLiveData<String>("")
     val pw: LiveData<String> get() = _pw
+    private val _isNotValidateAccount = MutableLiveData(false)
+    val isNotValidateAccount: LiveData<Boolean> get() = _isNotValidateAccount
 
     //TODO(테스트 코드)
     fun postJoin(loginId: String, password: String) {
@@ -33,4 +35,6 @@ class LoginViewModel @Inject constructor(
             repository.postLogin(loginId, password)
         }
     }
+
+    fun setIsNotValidateAccount(bool: Boolean) { _isNotValidateAccount.value = bool }
 }

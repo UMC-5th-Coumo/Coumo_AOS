@@ -71,7 +71,7 @@
             android:id="@+id/tv_login_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="입력하신 정보는 일치하는 계정이 없습니다."
+            android:text="입력하신 정보와 일치하는 계정이 없습니다."
             android:textColor="@color/design_default_color_error"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"

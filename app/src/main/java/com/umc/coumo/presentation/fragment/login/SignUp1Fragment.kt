@@ -16,6 +16,8 @@ class SignUp1Fragment : BindingFragment<FragmentSignUp1Binding> (R.layout.fragme
 
         val checkboxes = listOf(binding.checkboxAgreeService, binding.checkboxAgreePrivacy, binding.checkboxAgreeMarketing)
 
+        binding.lifecycleOwner = this
+
         binding.btnNextSignUp1.isEnabled = false
         clearChecked()
 
