@@ -21,8 +21,9 @@ interface CoumoApi {
         @Query("latitude") latitude: Double
     ): Response<ResponseModel<List<ResponsePopularStoreModel>>>
 
-    @GET("/api/customer/store")
+    @GET("/api/customer/{customerId}/store")
     suspend fun getNearStoreList(
+        @Path("customerId") customerId: Int,
         @Query("category") category: String? = CategoryType.DEFAULT.api,
         @Query("longitude") longitude: Double,
         @Query("latitude") latitude: Double,
@@ -35,6 +36,7 @@ interface CoumoApi {
         @Path("storeId") storeId: Int
     ): Response<ResponseModel<ResponseStoreDataModel>>
 
+    //QR 생성 (적립)
     @Headers("Content-Type: image/png")
     @POST("/api/qr/customer/stamp/{customerId}/{storeId}")
     suspend fun postCustomerStamp(
@@ -42,9 +44,20 @@ interface CoumoApi {
         @Path("storeId") storeId: Int,
     ): String
 
+    //QR 생성 (사용)
     @POST("/api/qr/customer/payment/{customerId}/{storeId}")
     suspend fun postCustomerPayment(
         @Path("customerId") customerId: Int,
         @Path("storeId") storeId: Int
     ): Response<Any>
+
+    @GET("/api/notice/around/list/{pageId}")
+    suspend fun getCommunityList(
+        @Path("pageId") pageId: Int,
+        @Query("type") category: String? = CategoryType.DEFAULT.api,
+        @Query("longitude") longitude: Double,
+        @Query("latitude") latitude: Double,
+    )
+
+
 }

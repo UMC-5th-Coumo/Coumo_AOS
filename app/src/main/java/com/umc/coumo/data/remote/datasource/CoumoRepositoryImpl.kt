@@ -36,6 +36,7 @@ class CoumoRepositoryImpl @Inject constructor(
         page: Int?
     ): List<StoreCouponCountModel>? {
         val data = coumoApi.getNearStoreList(
+            App.prefs.getInt(CUSTOMER_ID, 1),
             category?.api, longitude, latitude, page)
         return mapToStoreCouponCountModelList(data.body()?.result)
     }

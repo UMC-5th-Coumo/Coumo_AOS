@@ -95,6 +95,8 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
     private fun setRecyclerView() {
         val storeInfoAdapter = StoreInfoAdapter()
 
+        viewModel.getPopularStoreList()
+
         binding.rvPopular.apply {
             adapter = storeInfoAdapter
             addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.item_between_horizontal)))
