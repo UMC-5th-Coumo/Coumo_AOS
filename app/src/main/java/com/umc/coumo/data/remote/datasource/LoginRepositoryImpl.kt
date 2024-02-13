@@ -36,10 +36,23 @@ class LoginRepositoryImpl @Inject constructor(
         //))
     }
 
-    override suspend fun postLogin(loginId: String, password: String){
-        //val data = loginApi.postLogin(RequestLoginModel(loginId, password))
-        //App.prefs.setString("accessToken",data.body()?.result?.token?:"")
-        //App.prefs.setInt("customerId",data.body()?.result?.customerId?:0)
+    override suspend fun postLogin(loginId: String, password: String): ResponseLoginModel? {
+        val data = loginApi.postLogin(RequestLoginModel(loginId, password))
+        val customerId = data.body()?.result?.customerId
+        val token = data.body()?.result?.token
+        App.prefs.setString("accessToken", token ?: "")
+        App.prefs.setInt("customerId", customerId ?: 0)
+        return mapToResponseLoginModel(data.body()?.result)
+    }
+
+    private fun mapToResponseLoginModel(response: ResponseLoginModel?): ResponseLoginModel? {
+        return if (response != null) {
+            ResponseLoginModel(
+                customerId = response.customerId.toInt(),
+                token = response.customerId.toString()
+            )
+        }
+        else null
     }
 
 }
