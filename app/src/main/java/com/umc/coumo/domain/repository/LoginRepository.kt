@@ -1,5 +1,9 @@
 package com.umc.coumo.domain.repository
 
+import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
+import com.umc.coumo.data.remote.model.response.ResponseJoinModel
+import com.umc.coumo.data.remote.model.response.ResponseLoginModel
+
 interface LoginRepository {
 
     suspend fun postJoin(
@@ -10,6 +14,10 @@ interface LoginRepository {
         gender: String,
         email: String,
         phone: String
-    )
-    suspend fun postLogin(loginId: String, password: String)
+    ): ResponseJoinModel?
+
+    suspend fun postLogin(loginId: String, password: String): ResponseLoginModel?
+    suspend fun postCheckDupId(loginId: String): ResponseCheckDupIdModel?
+    suspend fun postFindId(name: String, phone: String): Boolean
+    suspend fun postVerifyIdCode(phone: String, verificationCode: String): String?
 }

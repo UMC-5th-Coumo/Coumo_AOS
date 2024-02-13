@@ -57,14 +57,30 @@
             app:layout_constraintTop_toBottomOf="@id/divider_found_id"
             app:layout_constraintBottom_toTopOf="@id/btn_found_id_go_login">
 
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:layout_width="170dp"
-                android:layout_height="70dp"
-                android:src="@drawable/coupon"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_found_id_userprofile"
+                    android:layout_width="140dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/coupon" />
+
+                <TextView
+                    android:id="@+id/tv_found_id_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="23sp"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button

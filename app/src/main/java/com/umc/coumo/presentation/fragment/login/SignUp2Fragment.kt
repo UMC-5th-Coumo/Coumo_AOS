@@ -1,25 +1,30 @@
 package com.umc.coumo.presentation.fragment.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentSignUp2Binding
 import com.umc.coumo.domain.viewmodel.SignUp2ViewModel
+import com.umc.coumo.presentation.activity.MainActivity
 import com.umc.coumo.presentation.dialog.ConfirmDialog
 import com.umc.coumo.utils.binding.BindingFragment
 
 class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragment_sign_up2) {
 
-    private val viewmodel : SignUp2ViewModel by viewModels()
+    private val viewmodel : SignUp2ViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewmodel
+        viewmodel.clearVars()
         binding.lifecycleOwner = this
 
 
@@ -35,26 +40,30 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
             }
         }
 
-        binding.btnSignUp2LeftArrow.setOnClickListener {
-            onBackPressed()
-        }
+        binding.textboxSignUpBirthday.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                binding.tvSignUpBirthdayError.visibility = View.VISIBLE
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewmodel.setIsValidateBirthday(checkBirthDay(s.toString()))
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         binding.textboxSignUpName.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s.toString().length < 2)
                     viewmodel.setIsValidateName(false)
                 else
                     viewmodel.setIsValidateName(true)
             }
+            override fun afterTextChanged(s: Editable?) {}
         })
 
         binding.btnSignUpCheckDuplicate.setOnClickListener {
-            ConfirmDialog("사용 가능한 아이디 입니다").show(parentFragmentManager, null)
-            viewmodel.setIsValidateId(true)
-            binding.btnSignUpCheckDuplicate.isEnabled = false
-            binding.textboxSignUpId.isEnabled = false
+            binding.tvSignUpIdError.visibility = View.VISIBLE
+            viewmodel.postCheckDupId(binding.textboxSignUpId.text.toString())
         }
 
         binding.textboxSignUpPw.addTextChangedListener(object: TextWatcher {
@@ -64,9 +73,7 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 viewmodel.setIsValidatePassword(checkPassword(s.toString()))
             }
-            override fun afterTextChanged(s: Editable?) {
-
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
 
         binding.btnSignUpPhoneVerificationRequest.setOnClickListener {
@@ -93,6 +100,9 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
             }
         }
 
+        binding.btnSignUp2LeftArrow.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     fun checkPassword(str: String): Boolean {
@@ -107,6 +117,18 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
                 hasLowercase &&
                 hasDigit &&
                 hasSpecialChar
+    }
+
+    fun checkBirthDay(str: String): Boolean {
+        val parts = str.split(".")
+
+        if (str.length != 10) return false
+        if (parts.size != 3) return false
+        parts.forEach { if ( !(it.all { e -> e.isDigit() }) ) return false }
+        if (parts[0].length != 4 || parts[1].length != 2 || parts[2].length != 2) return false
+        if (parts[1].toInt() < 1 || parts[1].toInt() > 12) return false
+        if (parts[2].toInt() < 1 || parts[2].toInt() > 31) return false
+        return true
     }
 
     fun whatIsWrongMessage(): String {
@@ -125,11 +147,13 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
         else
             return "오류가 발생하였습니다. 관리자에게 문의해주세요."
     }
+
     fun finalCheck() {
         viewmodel.setIsValidateGender(true)
         viewmodel.setIsValidateName(binding.textboxSignUpName.text.length > 1)
-        viewmodel.setIsValidateBirthday(binding.textboxSignUpBirthday.text.length == 8)
-        viewmodel.setIsValidateRePassword(binding.textboxSignUpPw.text.toString() == binding.textboxSignUpPwRetype.text.toString())
+        viewmodel.setIsValidateRePassword(
+            binding.textboxSignUpPw.text.toString() == binding.textboxSignUpPwRetype.text.toString()
+        )
         viewmodel.setIsValidateEmail(binding.textboxSignUpEmail.text.isNotEmpty())
     }
 
