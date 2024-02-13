@@ -1,5 +1,6 @@
 package com.umc.coumo.domain.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,8 +25,8 @@ class CouponViewModel @Inject constructor(
     private val _currentCoupon = MutableLiveData<CouponModel>()
     val currentCoupon: LiveData<CouponModel> get() = _currentCoupon
 
-    private val _currentQR = MutableLiveData<String?>()
-    val currentQR: LiveData<String?> get() = _currentQR
+    private val _currentQR = MutableLiveData<Uri?>(Uri.parse("/api/qr/customer/stamp/{customerId}/{storeId}"))
+    val currentQR: LiveData<Uri?> get() = _currentQR
 
     fun changeAlign(align: CouponAlignType) {
         _align.value = align
@@ -43,7 +44,7 @@ class CouponViewModel @Inject constructor(
 
     fun postCustomerStamp(storeId: Int) {
         viewModelScope.launch {
-            _currentQR.value = repository.postStampCustomer(storeId)
+            repository.postStampCustomer(storeId)
         }
     }
 

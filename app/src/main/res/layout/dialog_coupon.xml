@@ -47,7 +47,7 @@
                     android:layout_height="200dp"
                     android:fontFamily="@font/modak_400"
                     android:text="QR uri"
-                    imageQR="@{coupon.currentQR}"
+                    imageUri="@{coupon.currentQR}"
                     android:textSize="22sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
