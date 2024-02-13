@@ -40,6 +40,11 @@
             android:exported="true">
 
         </activity>
+        <activity
+            android:name=".presentation.activity.MainOwnerActivity"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>
