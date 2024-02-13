@@ -41,7 +41,6 @@ class PhoneVerificationFragment: BindingFragment<FragmentPhoneVerificationBindin
                 binding.textboxPhoneVerificationPhoneNumber.text.toString(),
                 binding.textboxPhoneVerificationCode.text.toString()
                 )
-            ConfirmDialog(viewModel.isValidateUser.value.toString()).show(parentFragmentManager, null)
         }
 
         binding.textboxPhoneVerificationName.addTextChangedListener(object: TextWatcher{
@@ -86,9 +85,9 @@ class PhoneVerificationFragment: BindingFragment<FragmentPhoneVerificationBindin
                 binding.textboxPhoneVerificationName.text.toString(),
                 binding.textboxPhoneVerificationPhoneNumber.text.toString()
             )
+            ConfirmDialog("인증번호 전송을 요청했습니다.").show(parentFragmentManager, null)
             viewModel.trueAfterPressVerificationBtn()
             binding.textboxPhoneVerificationCode.isEnabled = true
-            ConfirmDialog(viewModel.isValidateUser.value.toString()).show(parentFragmentManager, null)
         }
         binding.btnPhoneVerificationLeftArrow.setOnClickListener {
             onBackPressed()
