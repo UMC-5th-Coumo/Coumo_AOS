@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentLoginBinding
@@ -33,13 +34,19 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
         binding.btnLogin.setOnClickListener {
             val loginId: String = binding.textboxLoginId.text.toString()
             val password: String = binding.textboxLoginPassword.text.toString()
-            if (loginId != "siuuu") binding.tvLoginError.visibility = View.VISIBLE
-            else {
-                viewModel.postLogin(loginId, password) //TODO(임시 코드)
+
+            viewModel.postLogin(loginId, password)
+            viewModel.trueAfterPressLoginBtn()
+        }
+
+        viewModel.loginResult.observe(viewLifecycleOwner, Observer { success ->
+            if (success) {
+                requireActivity().finish()
+
                 val intent = Intent(requireActivity(), MainActivity::class.java)
                 startActivity(intent)
             }
-        }
+        })
 
         binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUp1Fragment)

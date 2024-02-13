@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.umc.coumo.domain.viewmodel.LoginViewModel" />
@@ -45,7 +46,6 @@
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:autofillHints="username"
-            android:text="@{viewModel.id}"
             android:hint="@string/id"
             android:inputType="text"
             android:selectAllOnFocus="true"
@@ -78,7 +78,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textbox_login_password"
             android:layout_marginTop="10dp"
-            android:visibility="invisible" />
+            android:visibility="@{!viewModel.loginResult &amp;&amp; viewModel.afterPressLoginBtn ? View.VISIBLE : View.INVISIBLE}" />
 
         <Button
             android:id="@+id/btn_login"
