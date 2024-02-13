@@ -1,12 +1,9 @@
 package com.umc.coumo.presentation.dialog
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.umc.coumo.R
-import com.umc.coumo.databinding.DialogConfirmBinding
 import com.umc.coumo.databinding.DialogCouponBinding
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.viewmodel.CouponViewModel
@@ -17,6 +14,10 @@ class CouponDialog(val viewModel: CouponViewModel) : BindingDialogFragment<Dialo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.coupon = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         val coupon = viewModel.currentCoupon.value?:
             CouponModel(name = "가게 이름", stampCount = 0, stampMax = 10, stampImage = null)
         val stampAdapter = StampAdapter()
@@ -25,6 +26,14 @@ class CouponDialog(val viewModel: CouponViewModel) : BindingDialogFragment<Dialo
             layoutManager = GridLayoutManager(context,
                 coupon.stampMax/2
             )
+        }
+
+        binding.btnAdd.setOnClickListener {
+            viewModel.postCustomerStamp(1)
+        }
+
+        binding.btnUse.setOnClickListener {
+            viewModel.postCustomerPayment(1)
         }
 
         val result = MutableList(coupon.stampMax) { i -> i < coupon.stampCount }

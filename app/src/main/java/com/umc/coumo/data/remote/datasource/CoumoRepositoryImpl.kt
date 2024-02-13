@@ -20,6 +20,7 @@ class CoumoRepositoryImpl @Inject constructor(
     //API Injection
     private val coumoApi: CoumoApi
 ): CoumoRepository {
+
     override suspend fun getPopularStoreList(
         longitude: Double,
         latitude: Double
@@ -42,6 +43,14 @@ class CoumoRepositoryImpl @Inject constructor(
     override suspend fun getStoreData(storeId: Int): StoreInfoModel? {
         val data = coumoApi.getStoreData(App.prefs.getInt(CUSTOMER_ID,1),storeId)
         return mapToStoreInfoModel(data.body()?.result)
+    }
+
+    override suspend fun postStampCustomer(storeId: Int): String? {
+        return coumoApi.postCustomerStamp(1, storeId)
+    }
+
+    override suspend fun postPaymentCustomer(storeId: Int): Uri? {
+        TODO("Not yet implemented")
     }
 
     private fun mapToStoreInfoModel(response: ResponseStoreDataModel?): StoreInfoModel? {
