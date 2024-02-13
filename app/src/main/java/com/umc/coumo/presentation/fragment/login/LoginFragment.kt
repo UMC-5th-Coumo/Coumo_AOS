@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentLoginBinding
@@ -14,16 +15,38 @@ import com.umc.coumo.utils.binding.BindingFragment
 class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
     private val viewModel: LoginViewModel by activityViewModels()
-
+    var goSignUp: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 여기 try catch는 비효율적이라 다시 짜야할듯
+        try {
+            if (!goSignUp) {
+                goSignUp = requireArguments().getBoolean("goSignUp")
+                if (goSignUp) findNavController().navigate(R.id.action_loginFragment_to_signUp1Fragment)
+            }
+        } catch (e: Exception) {}
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
         binding.btnLogin.setOnClickListener {
-            viewModel.postLogin() //TODO(임시 코드)
-            val intent = Intent(requireActivity(), MainActivity::class.java)
-            startActivity(intent)
+            val loginId: String = binding.textboxLoginId.text.toString()
+            val password: String = binding.textboxLoginPassword.text.toString()
+
+            viewModel.postLogin(loginId, password)
+            viewModel.trueAfterPressLoginBtn()
         }
+
+        viewModel.loginResult.observe(viewLifecycleOwner, Observer { success ->
+            if (success) {
+                requireActivity().finish()
+
+                val intent = Intent(requireActivity(), MainActivity::class.java)
+                startActivity(intent)
+            }
+        })
 
         binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUp1Fragment)
@@ -31,14 +54,14 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
 
         binding.btnFindId.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("selected_btn", "id")
+            bundle.putString("selected_btn", "find_id")
 
             findNavController().navigate(R.id.action_loginFragment_to_phoneVerificationFragment, bundle)
         }
 
         binding.btnFindPw.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("selected_btn", "pw")
+            bundle.putString("selected_btn", "find_pw")
 
             findNavController().navigate(R.id.action_loginFragment_to_phoneVerificationFragment, bundle)
         }

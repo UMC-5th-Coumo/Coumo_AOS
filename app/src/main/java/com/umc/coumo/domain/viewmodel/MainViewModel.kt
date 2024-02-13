@@ -20,13 +20,13 @@ class MainViewModel @Inject constructor(
     //TODO(테스트 코드)
     fun postJoin() {
         viewModelScope.launch {
-            repository.postJoin()
+            //repository.postJoin()
         }
     }
     //TODO(테스트 코드)
     fun postLogin() {
         viewModelScope.launch {
-            repository.postLogin()
+            //repository.postLogin()
         }
     }
 

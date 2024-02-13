@@ -2,8 +2,13 @@ package com.umc.coumo.data.remote.datasource
 
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.LoginApi
+import com.umc.coumo.data.remote.model.request.RequestCheckDupIdModel
 import com.umc.coumo.data.remote.model.request.RequestJoinModel
 import com.umc.coumo.data.remote.model.request.RequestLoginModel
+import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
+import com.umc.coumo.data.remote.model.response.ResponseJoinModel
+import com.umc.coumo.data.remote.model.response.ResponseLoginModel
+import com.umc.coumo.data.remote.model.response.ResponseModel
 import com.umc.coumo.domain.repository.LoginRepository
 import javax.inject.Inject
 
@@ -13,14 +18,67 @@ class LoginRepositoryImpl @Inject constructor(
 ): LoginRepository {
 
 
-    override suspend fun postJoin() {
-        loginApi.postJoin(RequestJoinModel())
+    override suspend fun postJoin(
+        loginId: String,
+        password: String,
+        name: String,
+        birthday: String,
+        gender: String,
+        email: String,
+        phone: String
+    ): ResponseJoinModel? {
+        val data = loginApi.postJoin(RequestJoinModel(
+            loginId,
+            password,
+            name,
+            birthday,
+            gender,
+            email,
+            phone
+        ))
+        return mapToResponseJoinModel(data.body()?.result)
     }
 
-    override suspend fun postLogin(){
-        val data = loginApi.postLogin(RequestLoginModel())
-        App.prefs.setString("accessToken",data.body()?.result?.token?:"")
-        App.prefs.setInt("customerId",data.body()?.result?.customerId?:0)
+    override suspend fun postLogin(loginId: String, password: String): ResponseLoginModel? {
+        val data = loginApi.postLogin(RequestLoginModel(loginId, password))
+        val customerId = data.body()?.result?.customerId
+        val token = data.body()?.result?.token
+        App.prefs.setString("accessToken", token ?: "")
+        App.prefs.setInt("customerId", customerId ?: 0)
+        return mapToResponseLoginModel(data.body()?.result)
     }
 
+    override suspend fun postCheckDupId(loginId: String): ResponseCheckDupIdModel? {
+        val data = loginApi.postCheckDupId(RequestCheckDupIdModel(loginId))
+        return mapToResponseCheckDupIdModel(data.body()?.result)
+    }
+
+    private fun mapToResponseLoginModel(response: ResponseLoginModel?): ResponseLoginModel? {
+        return if (response != null) {
+            ResponseLoginModel(
+                customerId = response.customerId.toInt(),
+                token = response.customerId.toString()
+            )
+        }
+        else null
+    }
+
+    private fun mapToResponseJoinModel(response: ResponseJoinModel?): ResponseJoinModel? {
+        return if (response != null) {
+            ResponseJoinModel(
+                id = response.id.toInt(),
+                loginId = response.loginId.toString(),
+                name = response.name.toString(),
+                createAt = response.createAt.toString()
+            )
+        }
+        else null
+    }
+
+    private fun mapToResponseCheckDupIdModel(response: ResponseCheckDupIdModel?): ResponseCheckDupIdModel? {
+        return if (response != null) {
+            ResponseCheckDupIdModel(loginId = response.loginId.toString())
+        }
+        else null
+    }
 }

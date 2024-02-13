@@ -47,9 +47,21 @@
     <fragment
         android:id="@+id/resetPasswordFragment"
         android:name="com.umc.coumo.presentation.fragment.login.ResetPasswordFragment"
-        android:label="ResetPasswordFragment" />
+        android:label="ResetPasswordFragment">
+        <action
+            android:id="@+id/action_reset_to_home"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/phoneVerificationFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/foundIdFragment"
         android:name="com.umc.coumo.presentation.fragment.login.FoundIdFragment"
-        android:label="FoundIdFragment" />
+        android:label="FoundIdFragment" >
+        <action
+            android:id="@+id/action_find_to_home"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/phoneVerificationFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

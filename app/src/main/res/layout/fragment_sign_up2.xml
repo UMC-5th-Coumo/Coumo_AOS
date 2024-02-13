@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="viewModel"
             type="com.umc.coumo.domain.viewmodel.SignUp2ViewModel" />
@@ -58,6 +59,7 @@
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/textbox_sign_up_name"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:maxLines="1"
@@ -77,12 +79,24 @@
                     android:layout_marginTop="30dp" />
 
                 <EditText
+                    android:id="@+id/textbox_sign_up_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/edittext_border"
                     android:hint="ex) 20240101"
+                    android:inputType="date"
                     android:textSize="16sp"
                     android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_sign_up_birthday_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.isValidateBirthday ? @string/right_password_rule : @string/wrong_date_format}"
+                    android:textColor="@{viewModel.isValidateBirthday() ? @color/ok : @color/design_default_color_error}"
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -94,12 +108,12 @@
 
                 <Spinner
                     android:id="@+id/spinner_gender"
-                    android:layout_width="wrap_content"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:background="@drawable/background_spinner"
                     android:entries="@{viewModel.spinnerGenderItems}"
-                    android:selectedItemPosition="@={viewModel.selectedGenderPosition}"
-                    android:dropDownSelector="@drawable/icon_spinner_drop_down"/>
+                    android:selectedItemPosition="@={viewModel.selectedGenderPosition}"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -125,6 +139,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/btn_sign_up_check_duplicate"
+                        android:enabled="@{!viewModel.isValidateId}"
                         android:background="@drawable/edittext_border" />
 
                     <Button
@@ -136,10 +151,19 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:text="중복 확인하기"
+                        android:enabled="@{!viewModel.isValidateId}"
                         android:textSize="12sp"
                         android:layout_marginStart="10dp"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_sign_up_id_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.isValidateId ? @string/useful_id : @string/dup_id}"
+                    android:textColor="@{viewModel.isValidateId ? @color/ok : @color/design_default_color_error}"
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -155,6 +179,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/edittext_border"
                     android:hint="비밀번호를 입력하세요"
+                    android:maxLength="16"
                     android:textSize="16sp"
                     android:inputType="textPassword"
                     android:layout_marginTop="10dp"/>
@@ -163,10 +188,10 @@
                     android:id="@+id/tv_sign_up_pw_error"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="잘못된 형식입니다"
-                    android:textColor="@color/design_default_color_error"
+                    android:text="@{viewModel.isValidatePassword() ? @string/right_password_rule : @string/wrong_password_rule}"
+                    android:textColor="@{viewModel.isValidatePassword() ? @color/ok : @color/design_default_color_error}"
                     android:textSize="12sp"
-                    android:visibility="invisible"/>
+                    android:visibility="gone"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -182,6 +207,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/edittext_border"
                     android:hint="한 번 더 비밀번호를 입력하세요"
+                    android:maxLength="16"
                     android:textSize="16sp"
                     android:inputType="textPassword"
                     android:layout_marginTop="10dp"/>
@@ -226,11 +252,11 @@
                     
                     <Spinner
                         android:id="@+id/spinner_email"
-                        android:layout_width="wrap_content"
+                        android:layout_width="120dp"
                         android:layout_height="match_parent"
+                        android:background="@drawable/background_spinner"
                         android:entries="@{viewModel.spinnerEmailItems}"
-                        android:selectedItemPosition="@={viewModel.selectedEmailPostion}"
-                        android:dropDownSelector="@drawable/icon_spinner_drop_down"
+                        android:selectedItemPosition="@={viewModel.selectedEmailPosition}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" />
@@ -256,6 +282,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/edittext_border"
                         android:hint="- 없이 입력하세요"
+                        android:maxLength="14"
                         android:textSize="16sp"
                         android:inputType="phone"
                         app:layout_constraintStart_toStartOf="parent"
@@ -294,21 +321,23 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/edittext_border"
-                        android:hint="- 없이 입력하세요"
+                        android:hint="4자리 숫자를 입력하세요"
+                        android:maxLength="4"
                         android:textSize="16sp"
                         android:inputType="phone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/btn_sign_up_phone_verification_re_request"/>
+                        app:layout_constraintEnd_toStartOf="@id/btn_sign_up_phone_verification_check"/>
 
                     <Button
-                        android:id="@+id/btn_sign_up_phone_verification_re_request"
+                        android:id="@+id/btn_sign_up_phone_verification_check"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:textSize="12sp"
-                        android:text="인증번호 발송"
+                        android:text="인증번호 확인"
+                        android:enabled="false"
                         app:layout_constraintStart_toEndOf="@id/textbox_sign_up_verification_code"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"

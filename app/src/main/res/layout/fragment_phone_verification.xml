@@ -61,6 +61,7 @@
                 android:layout_marginTop="32dp"/>
 
             <EditText
+                android:id="@+id/textbox_phone_verification_name"
                 android:layout_width="148dp"
                 android:layout_height="40dp"
                 android:background="@drawable/edittext_border"
@@ -74,9 +75,10 @@
                 android:layout_height="wrap_content"
                 android:text="휴대전화 번호"
                 android:textSize="16sp"
-                android:layout_marginTop="32dp"/>
+                android:layout_marginTop="25dp"/>
 
             <EditText
+                android:id="@+id/textbox_phone_verification_phone_number"
                 android:layout_width="148dp"
                 android:layout_height="40dp"
                 android:background="@drawable/edittext_border"
@@ -84,6 +86,16 @@
                 android:inputType="phone|number"
                 android:hint="01012345678"
                 android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tv_phone_verification_not_found"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="입력하신 정보와 일치하는 아이디가 없습니다"
+                android:textColor="@color/design_default_color_error"
+                android:textSize="12sp"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -99,6 +111,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/textbox_phone_verification_code"
                     android:layout_width="130dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/edittext_border"
@@ -106,15 +119,28 @@
                     android:textSize="16sp"
                     android:maxLength="4"
                     android:maxLines="1"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:enabled="false"/>
 
                 <Button
+                    android:id="@+id/btn_phone_verification_request"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="인증번호 발송"
                     android:textSize="12sp"
-                    android:layout_marginStart="10dp"/>
+                    android:layout_marginStart="10dp"
+                    android:enabled="false"/>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_phone_verification_wrong_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인증번호가 일치하지 않습니다"
+                android:textColor="@color/design_default_color_error"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <Button
@@ -123,6 +149,7 @@
             android:layout_height="50dp"
             android:text="다음으로"
             android:textSize="16sp"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

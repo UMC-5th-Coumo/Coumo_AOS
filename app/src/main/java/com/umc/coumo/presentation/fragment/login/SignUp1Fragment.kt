@@ -1,7 +1,9 @@
 package com.umc.coumo.presentation.fragment.login
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentSignUp1Binding
@@ -12,7 +14,9 @@ class SignUp1Fragment : BindingFragment<FragmentSignUp1Binding> (R.layout.fragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val checkboxes = listOf(binding.checkboxAgreeAge, binding.checkboxAgreeService, binding.checkboxAgreePrivacy, binding.checkboxAgreeMarketing)
+        val checkboxes = listOf(binding.checkboxAgreeService, binding.checkboxAgreePrivacy, binding.checkboxAgreeMarketing)
+
+        binding.lifecycleOwner = this
 
         binding.btnNextSignUp1.isEnabled = false
         clearChecked()
@@ -26,11 +30,14 @@ class SignUp1Fragment : BindingFragment<FragmentSignUp1Binding> (R.layout.fragme
         }
 
         binding.checkboxAgreeAll.setOnClickListener { onCheckedChanged(true) }
-        binding.checkboxAgreeAge.setOnClickListener { onCheckedChanged(false) }
         binding.checkboxAgreeService.setOnClickListener { onCheckedChanged(false) }
         binding.checkboxAgreePrivacy.setOnClickListener { onCheckedChanged(false) }
         binding.checkboxAgreeMarketing.setOnClickListener { onCheckedChanged(false) }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        onCheckedChanged(false)
     }
 
     override fun onBackPressed() {
@@ -41,21 +48,18 @@ class SignUp1Fragment : BindingFragment<FragmentSignUp1Binding> (R.layout.fragme
     private fun clearChecked() {
         binding.checkboxAgreeAll.isChecked = false
         binding.checkboxAgreeMarketing.isChecked = false
-        binding.checkboxAgreeAge.isChecked = false
         binding.checkboxAgreePrivacy.isChecked = false
         binding.checkboxAgreeService.isChecked = false
     }
 
     private fun onCheckedChanged(isAll: Boolean) {
         if (isAll) {
-            binding.checkboxAgreeAge.isChecked = binding.checkboxAgreeAll.isChecked
             binding.checkboxAgreeMarketing.isChecked = binding.checkboxAgreeAll.isChecked
             binding.checkboxAgreePrivacy.isChecked = binding.checkboxAgreeAll.isChecked
             binding.checkboxAgreeService.isChecked = binding.checkboxAgreeAll.isChecked
         }
 
         if (binding.checkboxAgreePrivacy.isChecked &&
-            binding.checkboxAgreeAge.isChecked &&
             binding.checkboxAgreeService.isChecked &&
             binding.checkboxAgreeMarketing.isChecked) {
             binding.checkboxAgreeAll.isChecked = true
