@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -35,15 +36,40 @@
             app:layout_constraintBaseline_toBaselineOf="@id/tv_coupon_title"
             app:layout_constraintStart_toEndOf="@id/tv_coupon_title"/>
         
-        <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/iv_coupon"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/coupon"
-            app:layout_constraintTop_toBottomOf="@id/tv_coupon_title"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:background="@drawable/shape_rect_round_6"
+            android:paddingTop="28dp"
+            app:dynamicBackgroundColor="@{item.color}"
+            tools:backgroundTint="#FFDA26"
+            app:layout_constraintDimensionRatio="308:180"
+            app:layout_constraintTop_toBottomOf="@id/tv_coupon_title">
 
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.name}"
+                android:textSize="22sp"
+                android:fontFamily="@font/modak_400"
+                app:dynamicTextColor="@{item.fontColor}"
+                tools:text="COFFEE SHOP"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_stamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

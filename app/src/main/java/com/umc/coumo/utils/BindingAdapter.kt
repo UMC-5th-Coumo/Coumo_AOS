@@ -1,9 +1,13 @@
 package com.umc.coumo.utils
 
+import android.content.res.ColorStateList
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -72,6 +76,17 @@ fun setImageUri(imageView: ImageView, imageUri: Uri?) {
     }
 }
 
+@BindingAdapter("imageQR")
+fun setImageQR(imageView: ImageView, imageUri: String?) {
+    Log.d("TEST HTTP","$imageUri")
+    if (imageUri != null) {
+        imageView.setImageBitmap(BitmapFactory.decodeStream(imageUri.byteInputStream()))
+    } else {
+        imageView.setImageResource(R.drawable.default_image)
+        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+    }
+}
+
 @BindingAdapter("highlightText")
 fun TextView.setHighlightedText(fullText: String?) {
     fullText?.let {
@@ -91,4 +106,29 @@ fun TextView.setHighlightedText(fullText: String?) {
 
         text = spannableString
     }
+}
+
+@BindingAdapter("app:dynamicBackgroundColor")
+fun setDynamicBackgroundColor(view:View, color: String?) {
+    view.backgroundTintList = if (color != null && isValidColorCode(color)) {
+        val parsedColor = Color.parseColor(color)
+        ColorStateList.valueOf(parsedColor)
+    } else {
+        ColorStateList.valueOf(Color.parseColor("#FFDA26"))
+    }
+}
+
+@BindingAdapter("app:dynamicTextColor")
+fun TextView.setDynamicTextColor(color: String?) {
+    if (color != null && isValidColorCode(color)) {
+        val parseColor = Color.parseColor(color)
+        setTextColor(parseColor)
+    } else {
+        setTextColor(Color.parseColor("#535043"))
+    }
+}
+
+private fun isValidColorCode(color: String): Boolean {
+    val regex = "^#[0-9A-Fa-f]{6}$"
+    return color.matches(regex.toRegex())
 }

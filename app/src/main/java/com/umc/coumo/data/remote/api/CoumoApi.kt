@@ -7,6 +7,8 @@ import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
 import com.umc.coumo.domain.type.CategoryType
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -32,4 +34,17 @@ interface CoumoApi {
         @Path("customerId") customerId: Int,
         @Path("storeId") storeId: Int
     ): Response<ResponseModel<ResponseStoreDataModel>>
+
+    @Headers("Content-Type: image/png")
+    @POST("/api/qr/customer/stamp/{customerId}/{storeId}")
+    suspend fun postCustomerStamp(
+        @Path("customerId") customerId: Int,
+        @Path("storeId") storeId: Int,
+    ): String
+
+    @POST("/api/qr/customer/payment/{customerId}/{storeId}")
+    suspend fun postCustomerPayment(
+        @Path("customerId") customerId: Int,
+        @Path("storeId") storeId: Int
+    ): Response<Any>
 }

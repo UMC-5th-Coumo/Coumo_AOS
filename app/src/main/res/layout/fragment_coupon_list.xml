@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <!--
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/fab_main"
             android:layout_width="64dp"
@@ -26,7 +26,7 @@
             android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-
+         -->
 
         <ScrollView
             android:layout_width="match_parent"
