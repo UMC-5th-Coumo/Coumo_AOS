@@ -3,8 +3,10 @@ package com.umc.coumo.data.remote.datasource
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.LoginApi
 import com.umc.coumo.data.remote.model.request.RequestCheckDupIdModel
+import com.umc.coumo.data.remote.model.request.RequestFindIdModel
 import com.umc.coumo.data.remote.model.request.RequestJoinModel
 import com.umc.coumo.data.remote.model.request.RequestLoginModel
+import com.umc.coumo.data.remote.model.request.RequestVerifyIdCode
 import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
@@ -51,6 +53,17 @@ class LoginRepositoryImpl @Inject constructor(
     override suspend fun postCheckDupId(loginId: String): ResponseCheckDupIdModel? {
         val data = loginApi.postCheckDupId(RequestCheckDupIdModel(loginId))
         return mapToResponseCheckDupIdModel(data.body()?.result)
+    }
+
+    override suspend fun postFindId(name: String, phone: String): Boolean {
+        val data = loginApi.postFindId(RequestFindIdModel(name, phone))
+        return data.isSuccessful
+    }
+
+    override suspend fun postVerifyIdCode(phone: String, verificationCode: String): String? {
+        val data = loginApi.postVerifyIdCode(RequestVerifyIdCode(phone, verificationCode))
+        return if (data.isSuccessful) data.body()?.result.toString()
+        else null
     }
 
     private fun mapToResponseLoginModel(response: ResponseLoginModel?): ResponseLoginModel? {

@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.umc.coumo.domain.viewmodel.PhoneVerificationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +26,7 @@
             android:id="@+id/tv_find"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="아이디 찾기"
+            android:text="@{viewModel.isFindForId ? @string/find_id : @string/find_pw}"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/btn_phone_verification_left_arrow"
@@ -95,7 +99,7 @@
                 android:textColor="@color/design_default_color_error"
                 android:textSize="12sp"
                 android:layout_marginTop="30dp"
-                android:visibility="gone"/>
+                android:visibility="@{!viewModel.isValidateUser &amp;&amp; viewModel.afterPressNextBtn &amp;&amp; !viewModel.isFindForId ? View.VISIBLE : View.GONE}"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -115,9 +119,9 @@
                     android:layout_width="130dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/edittext_border"
-                    android:hint="4자리수 입력"
+                    android:hint="6자리수 입력"
                     android:textSize="16sp"
-                    android:maxLength="4"
+                    android:maxLength="6"
                     android:maxLines="1"
                     android:inputType="number"
                     android:enabled="false"/>
@@ -126,7 +130,7 @@
                     android:id="@+id/btn_phone_verification_request"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="인증번호 발송"
+                    android:text="@{viewModel.afterPressVerificationBtn ? @string/resend_code : @string/send_code}"
                     android:textSize="12sp"
                     android:layout_marginStart="10dp"
                     android:enabled="false"/>
@@ -140,7 +144,7 @@
                 android:textColor="@color/design_default_color_error"
                 android:textSize="12sp"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"/>
+                android:visibility="@{!viewModel.isValidateCode &amp;&amp; viewModel.isValidateUser &amp;&amp; viewModel.afterPressNextBtn ? View.VISIBLE : View.GONE}"/>
         </LinearLayout>
 
         <Button

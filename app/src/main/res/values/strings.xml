@@ -17,6 +17,14 @@
     <string name="wrong_date_format">올바르지 않은 날짜 형식입니다. Ex) 2024.01.01</string>
 
 
+    <!-- find account page -->
+    <string name="find_id">아이디 찾기</string>
+    <string name="find_pw">비밀번호 찾기</string>
+    <string name="send_code">인증번호 발송</string>
+    <string name="resend_code">인증번호 재발송</string>
+
+
+
     <string name="home">홈</string>
     <string name="coupon">내 쿠폰</string>
     <string name="community">동네 소식</string>
