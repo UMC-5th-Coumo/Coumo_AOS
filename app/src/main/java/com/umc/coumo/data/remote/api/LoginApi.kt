@@ -1,7 +1,9 @@
 package com.umc.coumo.data.remote.api
 
+import com.umc.coumo.data.remote.model.request.RequestCheckDupIdModel
 import com.umc.coumo.data.remote.model.request.RequestJoinModel
 import com.umc.coumo.data.remote.model.request.RequestLoginModel
+import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
 import com.umc.coumo.data.remote.model.response.ResponseModel
@@ -21,5 +23,10 @@ interface LoginApi {
     suspend fun postLogin(
         @Body params: RequestLoginModel
     ): Response<ResponseModel<ResponseLoginModel>>
+
+    @POST("/customer/join/check-login-id")
+    suspend fun postCheckDupId(
+        @Body params: RequestCheckDupIdModel
+    ): Response<ResponseModel<ResponseCheckDupIdModel>>
 
 }

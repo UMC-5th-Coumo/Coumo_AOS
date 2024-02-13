@@ -1,5 +1,6 @@
 package com.umc.coumo.domain.viewmodel
 
+import android.hardware.camera2.CameraExtensionSession.StillCaptureLatency
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,9 +30,17 @@ class LoginViewModel @Inject constructor(
     val afterPressLoginBtn: LiveData<Boolean> get() = _afterPressLoginBtn
 
     //TODO(테스트 코드)
-    fun postJoin(loginId: String, password: String) {
+    fun postJoin(
+        loginId: String,
+        password: String,
+        name: String,
+        birthday: String,
+        gender: String,
+        email: String,
+        phone: String
+    ) {
         viewModelScope.launch {
-            //repository.postJoin(loginId, password)
+            repository.postJoin(loginId, password, name, birthday, gender, email, phone)
         }
     }
 

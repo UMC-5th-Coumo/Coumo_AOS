@@ -3,11 +3,16 @@ package com.umc.coumo.domain.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.umc.coumo.domain.repository.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUp2ViewModel @Inject constructor() : ViewModel() {
+class SignUp2ViewModel @Inject constructor(
+    private val repository: LoginRepository
+) : ViewModel() {
 
     private val _isValidateName = MutableLiveData(false)
     val isValidateName: LiveData<Boolean> get() = _isValidateName
@@ -36,6 +41,9 @@ class SignUp2ViewModel @Inject constructor() : ViewModel() {
     private val _isWrong = MutableLiveData(false)
     val isWrong: LiveData<Boolean> get() = _isWrong
 
+    private val _isSignUpSuccess = MutableLiveData(false)
+    val isSignUpSuccess: LiveData<Boolean> get() = _isSignUpSuccess
+
     fun setIsValidateName(bool: Boolean) { _isValidateName.value = bool }
     fun setIsValidateBirthday(bool: Boolean) { _isValidateBirthday.value = bool }
     fun setIsValidateGender(bool: Boolean) { _isValidateGender.value = bool }
@@ -57,10 +65,45 @@ class SignUp2ViewModel @Inject constructor() : ViewModel() {
                 isValidatePhone.value!!)
     }
 
+    fun clearVars() {
+        _isWrong.value = false
+        _isValidateName.value = false
+        _isValidateBirthday.value = false
+        _isValidateId.value = false
+        _isValidatePassword.value = false
+        _isValidateRePassword.value = false
+        _isValidateGender.value = false
+        _isValidateEmail.value = false
+        _isValidatePhone.value = false
+        _isSignUpSuccess.value = false
+    }
+    fun postJoin(
+        loginId: String,
+        password: String,
+        name: String,
+        birthday: String,
+        gender: String,
+        email: String,
+        phone: String
+    ) {
+        viewModelScope.launch {
+            val response = repository.postJoin(loginId, password, name, birthday, gender, email, phone)
+            _isSignUpSuccess.value = (response != null)
+        }
+    }
+
+    fun postCheckDupId(loginId: String) {
+        viewModelScope.launch {
+            val response = repository.postCheckDupId(loginId)
+            _isValidateId.value = (response?.loginId.toString() == loginId)
+        }
+    }
+
 
     val spinnerGenderItems = listOf("남자", "여자")
     var selectedGenderPosition: Int = 0
-    val spinnerEmailItems = listOf("naver.com", "google.com")
-    var selectedEmailPostion: Int = 0
+    val spinnerEmailItems = listOf("naver.com", "google.com", "daum.net", "hanmail.net", "hanyang.ac.kr" )
+    var selectedEmailPosition: Int = 0
+
 
 }

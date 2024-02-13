@@ -71,17 +71,6 @@
                     android:layout_marginTop="10dp" />
 
                 <TextView
-                    android:id="@+id/tv_sign_up_name_error"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="입력해주세요"
-                    android:textColor="@color/design_default_color_error"
-                    android:textSize="12sp"
-                    android:visibility="@{!viewModel.isValidateName() &amp;&amp; viewModel.isWrong() ? View.VISIBLE : View.INVISIBLE}"/>
-
-
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="생년월일"
@@ -98,6 +87,16 @@
                     android:inputType="date"
                     android:textSize="16sp"
                     android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_sign_up_birthday_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.isValidateBirthday ? @string/right_password_rule : @string/wrong_date_format}"
+                    android:textColor="@{viewModel.isValidateBirthday() ? @color/ok : @color/design_default_color_error}"
+                    android:textSize="12sp"
+                    android:visibility="gone"/>
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -140,6 +139,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/btn_sign_up_check_duplicate"
+                        android:enabled="@{!viewModel.isValidateId}"
                         android:background="@drawable/edittext_border" />
 
                     <Button
@@ -151,6 +151,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:text="중복 확인하기"
+                        android:enabled="@{!viewModel.isValidateId}"
                         android:textSize="12sp"
                         android:layout_marginStart="10dp"/>
 
@@ -159,10 +160,10 @@
                     android:id="@+id/tv_sign_up_id_error"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="중복되는 아이디 입니다"
-                    android:textColor="@color/design_default_color_error"
+                    android:text="@{viewModel.isValidateId ? @string/useful_id : @string/dup_id}"
+                    android:textColor="@{viewModel.isValidateId ? @color/ok : @color/design_default_color_error}"
                     android:textSize="12sp"
-                    android:visibility="@{!viewModel.isValidateId() &amp;&amp; viewModel.isWrong() ? View.VISIBLE : View.INVISIBLE}"/>
+                    android:visibility="gone"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -190,7 +191,7 @@
                     android:text="@{viewModel.isValidatePassword() ? @string/right_password_rule : @string/wrong_password_rule}"
                     android:textColor="@{viewModel.isValidatePassword() ? @color/ok : @color/design_default_color_error}"
                     android:textSize="12sp"
-                    android:visibility="invisible"/>
+                    android:visibility="gone"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -255,7 +256,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/background_spinner"
                         android:entries="@{viewModel.spinnerEmailItems}"
-                        android:selectedItemPosition="@={viewModel.selectedEmailPostion}"
+                        android:selectedItemPosition="@={viewModel.selectedEmailPosition}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" />
@@ -281,7 +282,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/edittext_border"
                         android:hint="- 없이 입력하세요"
-                        android:maxLength="12"
+                        android:maxLength="14"
                         android:textSize="16sp"
                         android:inputType="phone"
                         app:layout_constraintStart_toStartOf="parent"

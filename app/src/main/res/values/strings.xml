@@ -12,6 +12,9 @@
     <string name="at">\@</string>
     <string name="wrong_password_rule">8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.</string>
     <string name="right_password_rule">올바른 형식입니다</string>
+    <string name="dup_id">중복되는 아이디입니다.</string>
+    <string name="useful_id">사용가능한 아이디입니다.</string>
+    <string name="wrong_date_format">올바르지 않은 날짜 형식입니다. Ex) 2024.01.01</string>
 
 
     <string name="home">홈</string>
