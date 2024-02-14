@@ -62,6 +62,7 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
         })
 
         binding.btnSignUpCheckDuplicate.setOnClickListener {
+
             binding.tvSignUpIdError.visibility = View.VISIBLE
             viewmodel.postCheckDupId(binding.textboxSignUpId.text.toString())
         }
@@ -77,10 +78,14 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
         })
 
         binding.btnSignUpPhoneVerificationRequest.setOnClickListener {
-            if (binding.textboxSignUpPhone.text.length == 11) {
-                ConfirmDialog("인증번호가 전송되었습니다.").show(parentFragmentManager, null)
+            if (binding.textboxSignUpPhone.text.length >= 10) {
+                viewmodel.setIsSuccessSendCode(null)
+                viewmodel.postJoinRequestVerification(
+                    binding.textboxSignUpName.text.toString(),
+                    binding.textboxSignUpPhone.text.toString()
+                )
                 binding.btnSignUpPhoneVerificationCheck.isEnabled = true
-                binding.btnSignUpPhoneVerificationRequest.text = "재발송"
+                binding.btnSignUpPhoneVerificationRequest.text = "인증번호 재발송"
             }
             else {
                 ConfirmDialog("전화번호 형식이 올바르지 않습니다.").show(parentFragmentManager, null)
@@ -88,17 +93,36 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
         }
 
         binding.btnSignUpPhoneVerificationCheck.setOnClickListener {
-            if (binding.textboxSignUpVerificationCode.text.length != 4)
-                ConfirmDialog("인증번호는 4자리 숫자입니다.").show(parentFragmentManager, null)
+            if (binding.textboxSignUpVerificationCode.text.length != 6)
+                ConfirmDialog("인증번호는 6자리 숫자입니다.").show(parentFragmentManager, null)
             else {
-                ConfirmDialog("인증이 완료되었습니다.")
+                viewmodel.setIsValidatePhone(null)
+                viewmodel.postJoinVerifyCode(
+                    binding.textboxSignUpPhone.text.toString(),
+                    binding.textboxSignUpVerificationCode.text.toString()
+                )
+            }
+        }
+
+        viewmodel.isSuccessSendCode.observe(viewLifecycleOwner, Observer { success ->
+            if (success == true) {
+                ConfirmDialog("인증번호를 전송했습니다.").show(parentFragmentManager, null)
+            } else if (success == false) {
+                ConfirmDialog("인증번호 전송에 실패했습니다.").show(parentFragmentManager, null)
+            }
+        })
+
+        viewmodel.isValidatePhone.observe(viewLifecycleOwner, Observer { success ->
+            if (success == true) {
+                ConfirmDialog("인증이 완료되었습니다.").show(parentFragmentManager, null)
                 binding.textboxSignUpPhone.isEnabled = false
                 binding.textboxSignUpVerificationCode.isEnabled = false
                 binding.btnSignUpPhoneVerificationCheck.isEnabled = false
                 binding.btnSignUpPhoneVerificationRequest.isEnabled = false
-                viewmodel.setIsValidatePhone(true)
+            } else if (success == false) {
+                ConfirmDialog("인증에 실패했습니다.").show(parentFragmentManager, null)
             }
-        }
+        })
 
         binding.btnSignUp2LeftArrow.setOnClickListener {
             onBackPressed()
@@ -149,7 +173,6 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
     }
 
     fun finalCheck() {
-        viewmodel.setIsValidateGender(true)
         viewmodel.setIsValidateName(binding.textboxSignUpName.text.length > 1)
         viewmodel.setIsValidateRePassword(
             binding.textboxSignUpPw.text.toString() == binding.textboxSignUpPwRetype.text.toString()

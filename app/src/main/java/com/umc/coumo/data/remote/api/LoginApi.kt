@@ -3,10 +3,13 @@ package com.umc.coumo.data.remote.api
 import com.umc.coumo.data.remote.model.request.RequestCheckDupIdModel
 import com.umc.coumo.data.remote.model.request.RequestFindIdModel
 import com.umc.coumo.data.remote.model.request.RequestJoinModel
+import com.umc.coumo.data.remote.model.request.RequestJoinRequestVerificationModel
+import com.umc.coumo.data.remote.model.request.RequestJoinVerifyCodeModel
 import com.umc.coumo.data.remote.model.request.RequestLoginModel
-import com.umc.coumo.data.remote.model.request.RequestVerifyIdCode
+import com.umc.coumo.data.remote.model.request.RequestVerifyIdCodeModel
 import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinModel
+import com.umc.coumo.data.remote.model.response.ResponseJoinVerifyCodeModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
 import com.umc.coumo.data.remote.model.response.ResponseModel
 import retrofit2.Response
@@ -20,6 +23,16 @@ interface LoginApi {
     suspend fun postJoin(
         @Body params: RequestJoinModel
     ): Response<ResponseModel<ResponseJoinModel>>
+
+    @POST("/customer/join/send-verification-code")
+    suspend fun postJoinRequestVerification(
+        @Body params: RequestJoinRequestVerificationModel
+    ): Response<ResponseModel<String>>
+
+    @POST("/customer/join/verify-code")
+    suspend fun postJoinVerifyCode(
+        @Body params: RequestJoinVerifyCodeModel
+    ): Response<ResponseModel<ResponseJoinVerifyCodeModel>>
 
     @POST("/customer/login")
     suspend fun postLogin(
@@ -38,7 +51,7 @@ interface LoginApi {
 
     @POST("/customer/verify-code")
     suspend fun postVerifyIdCode(
-        @Body params: RequestVerifyIdCode
+        @Body params: RequestVerifyIdCodeModel
     ): Response<ResponseModel<String>>
 
 }
