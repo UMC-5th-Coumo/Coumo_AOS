@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.umc.coumo.domain.repository.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,9 +21,6 @@ class SignUp2ViewModel @Inject constructor(
     private val _isValidateBirthday = MutableLiveData(false)
     val isValidateBirthday: LiveData<Boolean> get() = _isValidateBirthday
 
-    private val _isValidateGender = MutableLiveData(false)
-    val isValidateGender: LiveData<Boolean> get() = _isValidateGender
-
     private val _isValidateId = MutableLiveData(false)
     val isValidateId: LiveData<Boolean> get() = _isValidateId
 
@@ -35,34 +33,37 @@ class SignUp2ViewModel @Inject constructor(
     private val _isValidateEmail = MutableLiveData(false)
     val isValidateEmail: LiveData<Boolean> get() = _isValidateEmail
 
-    private val _isValidatePhone = MutableLiveData(false)
-    val isValidatePhone: LiveData<Boolean> get() = _isValidatePhone
+    private val _isValidatePhone = MutableLiveData<Boolean?>(null)
+    val isValidatePhone: LiveData<Boolean?> get() = _isValidatePhone
 
     private val _isWrong = MutableLiveData(false)
     val isWrong: LiveData<Boolean> get() = _isWrong
 
-    private val _isSignUpSuccess = MutableLiveData(false)
-    val isSignUpSuccess: LiveData<Boolean> get() = _isSignUpSuccess
+    private val _isSignUpSuccess = MutableLiveData<Boolean?>(null)
+    val isSignUpSuccess: LiveData<Boolean?> get() = _isSignUpSuccess
+
+    private val _isSuccessSendCode = MutableLiveData<Boolean?>(null)
+    val isSuccessSendCode: LiveData<Boolean?> get() = _isSuccessSendCode
 
     fun setIsValidateName(bool: Boolean) { _isValidateName.value = bool }
     fun setIsValidateBirthday(bool: Boolean) { _isValidateBirthday.value = bool }
-    fun setIsValidateGender(bool: Boolean) { _isValidateGender.value = bool }
     fun setIsValidateId(bool: Boolean) { _isValidateId.value = bool }
     fun setIsValidatePassword(bool: Boolean) { _isValidatePassword.value = bool }
     fun setIsValidateRePassword(bool: Boolean) { _isValidateRePassword.value = bool }
     fun setIsValidateEmail(bool: Boolean) { _isValidateEmail.value = bool }
-    fun setIsValidatePhone(bool: Boolean) { _isValidatePhone.value = bool }
+    fun setIsValidatePhone(bool: Boolean?) { _isValidatePhone.value = bool }
     fun setIsWrong(bool: Boolean) { _isWrong.value = bool }
+    fun setIsSuccessSendCode(bool: Boolean?) { _isSuccessSendCode.value = bool }
 
     fun isOkOnViewModel() : Boolean {
+
         return (isValidateName.value!! &&
                 isValidateBirthday.value!! &&
                 isValidateId.value!! &&
                 isValidatePassword.value!! &&
                 isValidateRePassword.value!! &&
-                isValidateGender.value!! &&
                 isValidateEmail.value!! &&
-                isValidatePhone.value!!)
+                isValidatePhone.value?:false)
     }
 
     fun clearVars() {
@@ -72,10 +73,10 @@ class SignUp2ViewModel @Inject constructor(
         _isValidateId.value = false
         _isValidatePassword.value = false
         _isValidateRePassword.value = false
-        _isValidateGender.value = false
         _isValidateEmail.value = false
-        _isValidatePhone.value = false
-        _isSignUpSuccess.value = false
+        _isValidatePhone.value = null
+        _isSignUpSuccess.value = null
+        _isSuccessSendCode.value = null
     }
     fun postJoin(
         loginId: String,
@@ -99,6 +100,17 @@ class SignUp2ViewModel @Inject constructor(
         }
     }
 
+    fun postJoinRequestVerification(name: String, phone: String) {
+        viewModelScope.launch {
+            _isSuccessSendCode.value = repository.postJoinRequestVerification(name, phone)
+        }
+    }
+
+    fun postJoinVerifyCode(phone: String, verificationCode: String) {
+        viewModelScope.launch {
+            _isValidatePhone.value = repository.postJoinVerifyCode(phone, verificationCode)
+        }
+    }
 
     val spinnerGenderItems = listOf("남자", "여자")
     var selectedGenderPosition: Int = 0
