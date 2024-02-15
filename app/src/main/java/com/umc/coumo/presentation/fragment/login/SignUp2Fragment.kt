@@ -152,6 +152,7 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
         if (parts[0].length != 4 || parts[1].length != 2 || parts[2].length != 2) return false
         if (parts[1].toInt() < 1 || parts[1].toInt() > 12) return false
         if (parts[2].toInt() < 1 || parts[2].toInt() > 31) return false
+        if (parts[0].toInt() < 1800 || parts[0].toInt() > 2024) return false
         return true
     }
 
