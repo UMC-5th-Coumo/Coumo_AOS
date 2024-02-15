@@ -53,6 +53,7 @@ class SignUp2ViewModel @Inject constructor(
     fun setIsValidateEmail(bool: Boolean) { _isValidateEmail.value = bool }
     fun setIsValidatePhone(bool: Boolean?) { _isValidatePhone.value = bool }
     fun setIsWrong(bool: Boolean) { _isWrong.value = bool }
+    fun setIsSignUpSuccess(bool: Boolean?) { _isSignUpSuccess.value = bool }
     fun setIsSuccessSendCode(bool: Boolean?) { _isSuccessSendCode.value = bool }
 
     fun isOkOnViewModel() : Boolean {

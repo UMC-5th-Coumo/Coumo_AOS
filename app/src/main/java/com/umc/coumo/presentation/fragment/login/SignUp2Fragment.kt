@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
+import com.umc.coumo.data.remote.model.request.RequestJoinModel
 import com.umc.coumo.databinding.FragmentSignUp2Binding
 import com.umc.coumo.domain.viewmodel.SignUp2ViewModel
 import com.umc.coumo.presentation.activity.MainActivity
@@ -30,15 +31,24 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
 
         binding.btnNextSignUp2.setOnClickListener {
             finalCheck()
+            viewmodel.setIsSignUpSuccess(null)
             if (viewmodel.isOkOnViewModel()) {
-                ConfirmDialog("회원가입이 완료되었습니다").show(parentFragmentManager, null)
-                findNavController().navigate(R.id.action_home)
+                joinRequest()
             }
             else {
                 viewmodel.setIsWrong(true)
                 ConfirmDialog(whatIsWrongMessage()).show(parentFragmentManager, null)
             }
         }
+
+        viewmodel.isSignUpSuccess.observe(viewLifecycleOwner, Observer { success ->
+            if (success == true) {
+                ConfirmDialog("회원가입을 성공하였습니다. 쿠모의 회원이 되신 것을 축하드립니다!").show(parentFragmentManager, null)
+                findNavController().navigate(R.id.action_home)
+            } else if (success == false) {
+                ConfirmDialog("회원가입 절차에서 오류가 발생하였습니다. 재시도를 하시거나, 관리자에게 문의해주세요.").show(parentFragmentManager, null)
+            }
+        })
 
         binding.textboxSignUpBirthday.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -179,6 +189,21 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
             binding.textboxSignUpPw.text.toString() == binding.textboxSignUpPwRetype.text.toString()
         )
         viewmodel.setIsValidateEmail(binding.textboxSignUpEmail.text.isNotEmpty())
+    }
+
+    private fun joinRequest() {
+        val gender: String = listOf("MALE", "FEMALE")[viewmodel.selectedGenderPosition]
+        val email: String = binding.textboxSignUpEmail.text.toString()+"@"+viewmodel.spinnerEmailItems[viewmodel.selectedEmailPosition]
+
+        viewmodel.postJoin(
+            binding.textboxSignUpId.text.toString(),
+            binding.textboxSignUpPw.text.toString(),
+            binding.textboxSignUpName.text.toString(),
+            binding.textboxSignUpBirthday.text.toString(),
+            gender,
+            email,
+            binding.textboxSignUpPhone.text.toString()
+        )
     }
 
     override fun onBackPressed() {
