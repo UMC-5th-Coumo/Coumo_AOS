@@ -45,7 +45,7 @@ interface LoginApi {
     ): Response<ResponseModel<ResponseCheckDupIdModel>>
 
     @POST("/customer/find-id")
-    suspend fun postFindId(
+    suspend fun postFindIdRequestCode(
         @Body params: RequestFindIdModel
     ): Response<ResponseModel<String>>
 

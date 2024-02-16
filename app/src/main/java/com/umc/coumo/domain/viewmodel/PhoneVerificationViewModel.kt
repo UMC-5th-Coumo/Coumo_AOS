@@ -14,24 +14,25 @@ class PhoneVerificationViewModel @Inject constructor(
     private val repository: LoginRepository
 ) : ViewModel() {
 
-    private val _isValidateUser = MutableLiveData(false)
+    private val _isValidateUser = MutableLiveData<Boolean>(false)
     val isValidateUser: LiveData<Boolean> get() = _isValidateUser
 
-    private val _isValidateCode = MutableLiveData(false)
+    private val _isValidateCode = MutableLiveData<Boolean>(false)
     val isValidateCode: LiveData<Boolean> get() = _isValidateCode
 
     private val _isFindForId = MutableLiveData<Boolean>(true)
     val isFindForId: LiveData<Boolean> get() = _isFindForId
     private val _afterPressVerificationBtn = MutableLiveData(false)
     val afterPressVerificationBtn: LiveData<Boolean> get() = _afterPressVerificationBtn
+
     private val _afterPressNextBtn = MutableLiveData(false)
     val afterPressNextBtn: LiveData<Boolean> get() = _afterPressNextBtn
 
     var foundId: String? = null
 
-    fun postFindId(name: String, phone: String) {
+    fun postFindIdRequestCode(name: String, phone: String) {
         viewModelScope.launch {
-            _isValidateUser.value = repository.postFindId(name, phone)
+            _isValidateUser.value = repository.postFindIdRequestCode(name, phone)
         }
     }
     fun postVerifyIdCode(phone: String, verificationCode: String) {

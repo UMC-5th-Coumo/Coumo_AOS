@@ -5,7 +5,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
@@ -13,7 +12,6 @@ import com.umc.coumo.databinding.FragmentPhoneVerificationBinding
 import com.umc.coumo.domain.viewmodel.PhoneVerificationViewModel
 import com.umc.coumo.presentation.dialog.ConfirmDialog
 import com.umc.coumo.utils.binding.BindingFragment
-import kotlin.properties.Delegates
 
 class PhoneVerificationFragment: BindingFragment<FragmentPhoneVerificationBinding> (R.layout.fragment_phone_verification) {
 
@@ -81,7 +79,7 @@ class PhoneVerificationFragment: BindingFragment<FragmentPhoneVerificationBindin
         })
 
         binding.btnPhoneVerificationRequest.setOnClickListener {
-            viewModel.postFindId(
+            viewModel.postFindIdRequestCode(
                 binding.textboxPhoneVerificationName.text.toString(),
                 binding.textboxPhoneVerificationPhoneNumber.text.toString()
             )

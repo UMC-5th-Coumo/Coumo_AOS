@@ -14,7 +14,6 @@ import com.umc.coumo.data.remote.model.response.ResponseJoinModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
 import com.umc.coumo.domain.repository.LoginRepository
 import javax.inject.Inject
-import kotlin.math.log
 
 class LoginRepositoryImpl @Inject constructor(
     //API Injection
@@ -67,8 +66,8 @@ class LoginRepositoryImpl @Inject constructor(
         return mapToResponseCheckDupIdModel(data.body()?.result)
     }
 
-    override suspend fun postFindId(name: String, phone: String): Boolean {
-        val data = loginApi.postFindId(RequestFindIdModel(name, phone))
+    override suspend fun postFindIdRequestCode(name: String, phone: String): Boolean {
+        val data = loginApi.postFindIdRequestCode(RequestFindIdModel(name, phone))
         return data.isSuccessful
     }
 
