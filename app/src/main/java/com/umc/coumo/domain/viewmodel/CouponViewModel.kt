@@ -25,11 +25,12 @@ class CouponViewModel @Inject constructor(
     private val _currentCoupon = MutableLiveData<CouponModel>()
     val currentCoupon: LiveData<CouponModel> get() = _currentCoupon
 
-    private val _currentQR = MutableLiveData<Uri?>(Uri.parse("/api/qr/customer/stamp/{customerId}/{storeId}"))
+    private val _currentQR = MutableLiveData<Uri?>(Uri.parse("https://dev.coumo.shop/api/qr/customer/stamp/1/1"))
     val currentQR: LiveData<Uri?> get() = _currentQR
 
     fun changeAlign(align: CouponAlignType) {
         _align.value = align
+        getCouponList()
     }
 
     fun testData() {
@@ -54,4 +55,15 @@ class CouponViewModel @Inject constructor(
         }
     }
 
+    fun getCouponList() {
+        viewModelScope.launch {
+            repository.getCouponList(align.value?:CouponAlignType.MOST)
+        }
+    }
+
+    fun getCouponStore(storeId: Int) {
+        viewModelScope.launch {
+            repository.getCouponStore(storeId)
+        }
+    }
 }

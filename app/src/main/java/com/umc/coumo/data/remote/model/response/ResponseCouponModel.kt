@@ -6,3 +6,7 @@ data class ResponseCouponModel(
     val stampType: String,
     val color: String,
 )
+
+data class ResponseStampModel(
+    val stampType: String
+)

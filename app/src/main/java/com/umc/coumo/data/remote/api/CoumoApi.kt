@@ -38,7 +38,7 @@ interface CoumoApi {
 
     //QR 생성 (적립)
     @Headers("Content-Type: image/png")
-    @POST("/api/qr/customer/stamp/{customerId}/{storeId}")
+    @GET("/api/qr/customer/stamp/{customerId}/{storeId}")
     suspend fun postCustomerStamp(
         @Path("customerId") customerId: Int,
         @Path("storeId") storeId: Int,
@@ -59,5 +59,18 @@ interface CoumoApi {
         @Query("latitude") latitude: Double,
     )
 
+    //내 쿠폰 보기 (필터)
+    @GET("/api/coupon/{customerId}/list")
+    suspend fun getCouponList(
+        @Path("customerId") customerId: Int,
+        @Query("filter") filter: String
+    ): Response<ResponseModel<Any>>
+
+    //가게의 내 쿠폰 보기
+    @GET("/api/coupon/{storeId}/{customerId}")
+    suspend fun getCouponStore(
+        @Path("storeId") storeId: Int,
+        @Path("customerId") customerId: Int,
+    ): Response<ResponseModel<Any>>
 
 }

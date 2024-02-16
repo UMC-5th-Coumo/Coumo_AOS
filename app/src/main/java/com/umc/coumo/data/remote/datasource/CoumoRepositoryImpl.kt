@@ -1,6 +1,7 @@
 package com.umc.coumo.data.remote.datasource
 
 import android.net.Uri
+import android.util.Log
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.CoumoApi
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
@@ -13,6 +14,7 @@ import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.model.StoreInfoModel
 import com.umc.coumo.domain.repository.CoumoRepository
 import com.umc.coumo.domain.type.CategoryType
+import com.umc.coumo.domain.type.CouponAlignType
 import com.umc.coumo.utils.Constants.CUSTOMER_ID
 import javax.inject.Inject
 
@@ -47,11 +49,23 @@ class CoumoRepositoryImpl @Inject constructor(
     }
 
     override suspend fun postStampCustomer(storeId: Int): String? {
-        return coumoApi.postCustomerStamp(1, storeId)
+        return null
     }
 
     override suspend fun postPaymentCustomer(storeId: Int): Uri? {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun getCouponList(filter: CouponAlignType): List<CouponModel> {
+        val data = coumoApi.getCouponList(App.prefs.getInt(CUSTOMER_ID,1),filter.api)
+        Log.d("TEST http list", "${data.body()}")
+        return emptyList()
+    }
+
+    override suspend fun getCouponStore(storeId: Int): CouponModel {
+        val data = coumoApi.getCouponStore(App.prefs.getInt(CUSTOMER_ID,1),storeId)
+        Log.d("TEST http store", "${data.body()}")
+        return CouponModel("",0, stampImage = null)
     }
 
     private fun mapToStoreInfoModel(response: ResponseStoreDataModel?): StoreInfoModel? {
