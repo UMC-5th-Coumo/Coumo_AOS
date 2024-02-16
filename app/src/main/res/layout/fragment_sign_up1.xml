@@ -203,6 +203,7 @@
                     android:layout_marginHorizontal="50dp"
                     android:layout_marginBottom="30dp"
                     android:layout_marginTop="20dp"
+                    android:background="@drawable/shape_login_next_btn_radius"
                     android:text="다음으로" />
 
             </LinearLayout>
