@@ -36,17 +36,16 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
                 joinRequest()
             }
             else {
-                viewmodel.setIsWrong(true)
                 ConfirmDialog(whatIsWrongMessage()).show(parentFragmentManager, null)
             }
         }
 
         viewmodel.isSignUpSuccess.observe(viewLifecycleOwner, Observer { success ->
             if (success == true) {
-                ConfirmDialog("회원가입을 성공하였습니다. 쿠모의 회원이 되신 것을 축하드립니다!").show(parentFragmentManager, null)
+                ConfirmDialog("회원가입을 성공하였습니다.\n쿠모의 회원이 되신 것을 축하드립니다!").show(parentFragmentManager, null)
                 findNavController().navigate(R.id.action_home)
             } else if (success == false) {
-                ConfirmDialog("회원가입 절차에서 오류가 발생하였습니다. 재시도를 하시거나, 관리자에게 문의해주세요.").show(parentFragmentManager, null)
+                ConfirmDialog("회원가입 절차에서 오류가 발생하였습니다.\n재시도를 하시거나, 관리자에게 문의해주세요.").show(parentFragmentManager, null)
             }
         })
 
@@ -177,7 +176,7 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
             return "비밀번호가 일치하지 않습니다."
         else if (!viewmodel.isValidateEmail.value!!)
             return "이메일을 다시 입력해주세요."
-        else if (!viewmodel.isValidatePhone.value!!)
+        else if (!(viewmodel.isValidatePhone.value?:false))
             return "휴대폰 본인인증을 완료해주세요."
         else
             return "오류가 발생하였습니다. 관리자에게 문의해주세요."
