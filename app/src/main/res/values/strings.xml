@@ -17,6 +17,14 @@
     <string name="wrong_date_format">올바르지 않은 날짜 형식입니다. Ex) 2024.01.01</string>
 
 
+    <!-- find account page -->
+    <string name="find_id">아이디 찾기</string>
+    <string name="find_pw">비밀번호 찾기</string>
+    <string name="send_code">인증번호 발송</string>
+    <string name="resend_code">인증번호 재발송</string>
+
+
+
     <string name="home">홈</string>
     <string name="coupon">내 쿠폰</string>
     <string name="community">동네 소식</string>
@@ -62,42 +70,27 @@
     
     <!-- 이용약관 -->
     <string name="string_agree_service">
-        이용수칙1
-
-        이용수칙2
-
-        이용수칙3
-
-        이용수칙4
-
-        이용수칙5
-
+        이용수칙1\n\n
+        이용수칙2\n\n
+        이용수칙3\n\n
+        이용수칙4\n\n
+        이용수칙5\n\n
         이용수칙6
     </string>
     <string name="string_agree_privacy">
-        이용수칙1
-
-        이용수칙2
-
-        이용수칙3
-
-        이용수칙4
-
-        이용수칙5
-
-        이용수칙6
+        이용수칙1\n\n
+        이용수칙2\n\n
+        이용수칙3\n\n
+        이용수칙4\n\n
+        이용수칙5\n\n
+        이용수칙6\n\n
     </string>
     <string name="string_agree_marketing">
-        이용수칙1
-
-        이용수칙2
-
-        이용수칙3
-
-        이용수칙4
-
-        이용수칙5
-
+        이용수칙1\n\n
+        이용수칙2\n\n
+        이용수칙3\n\n
+        이용수칙4\n\n
+        이용수칙5\n\n
         이용수칙6
     </string>
 </resources>

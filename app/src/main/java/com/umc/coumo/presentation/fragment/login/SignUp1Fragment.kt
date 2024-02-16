@@ -4,18 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentSignUp1Binding
+import com.umc.coumo.domain.viewmodel.SignUp1ViewModel
 import com.umc.coumo.utils.binding.BindingFragment
 
 class SignUp1Fragment : BindingFragment<FragmentSignUp1Binding> (R.layout.fragment_sign_up1) {
+
+    private val viewModel: SignUp1ViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val checkboxes = listOf(binding.checkboxAgreeService, binding.checkboxAgreePrivacy, binding.checkboxAgreeMarketing)
 
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         binding.btnNextSignUp1.isEnabled = false

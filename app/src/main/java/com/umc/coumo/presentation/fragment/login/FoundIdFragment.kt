@@ -17,9 +17,7 @@ class FoundIdFragment : BindingFragment<FragmentFoundIdBinding>(R.layout.fragmen
         binding.tvFoundIdTitle.text = if (isSuccess) "아이디를 찾았어요!" else "아이디를 찾기 못했어요!"
         binding.tvFoundIdUnderTitle.text = if (isSuccess) "고객님의 쿠모 아이디를 찾았습니다" else "혹시 쿠모의 회원이 아니신가요?"
         binding.btnFoundIdGoLogin.text = if (isSuccess) "로그인하러 가기" else "회원가입하러 가기"
-
-        binding.btnFoundIdGoLogin.setOnClickListener {
-        }
+        binding.tvFoundIdUsername.text = if (isSuccess) text else "존재하지 않는 사용자 입니다"
 
         binding.btnFoundIdGoLogin.setOnClickListener {
             bundle.putBoolean("goSignUp", !isSuccess)

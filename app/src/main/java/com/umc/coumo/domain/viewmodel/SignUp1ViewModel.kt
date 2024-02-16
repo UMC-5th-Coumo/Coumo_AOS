@@ -15,15 +15,9 @@ class SignUp1ViewModel @Inject constructor(): ViewModel() {
     private val _isExpandedMarketing = MutableLiveData(false)
     val isExpandedMarketing: LiveData<Boolean> get() = _isExpandedMarketing
 
-    fun changeIsExpandedService() {
-        _isExpandedService.value = !_isExpandedService.value!!
-    }
-    fun changeIsExpandedPrivacy() {
-        _isExpandedPrivacy.value = !_isExpandedPrivacy.value!!
-    }
-    fun changeIsExpandedMarketing() {
-        _isExpandedMarketing.value = !_isExpandedMarketing.value!!
-    }
+    fun changeIsExpandedService() { _isExpandedService.value = !_isExpandedService.value!! }
+    fun changeIsExpandedPrivacy() { _isExpandedPrivacy.value = !_isExpandedPrivacy.value!! }
+    fun changeIsExpandedMarketing() { _isExpandedMarketing.value = !_isExpandedMarketing.value!! }
 
 
 }

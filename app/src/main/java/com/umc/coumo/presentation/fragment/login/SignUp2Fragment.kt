@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
+import com.umc.coumo.data.remote.model.request.RequestJoinModel
 import com.umc.coumo.databinding.FragmentSignUp2Binding
 import com.umc.coumo.domain.viewmodel.SignUp2ViewModel
 import com.umc.coumo.presentation.activity.MainActivity
@@ -30,15 +31,24 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
 
         binding.btnNextSignUp2.setOnClickListener {
             finalCheck()
+            viewmodel.setIsSignUpSuccess(null)
             if (viewmodel.isOkOnViewModel()) {
-                ConfirmDialog("회원가입이 완료되었습니다").show(parentFragmentManager, null)
-                findNavController().navigate(R.id.action_home)
+                joinRequest()
             }
             else {
                 viewmodel.setIsWrong(true)
                 ConfirmDialog(whatIsWrongMessage()).show(parentFragmentManager, null)
             }
         }
+
+        viewmodel.isSignUpSuccess.observe(viewLifecycleOwner, Observer { success ->
+            if (success == true) {
+                ConfirmDialog("회원가입을 성공하였습니다. 쿠모의 회원이 되신 것을 축하드립니다!").show(parentFragmentManager, null)
+                findNavController().navigate(R.id.action_home)
+            } else if (success == false) {
+                ConfirmDialog("회원가입 절차에서 오류가 발생하였습니다. 재시도를 하시거나, 관리자에게 문의해주세요.").show(parentFragmentManager, null)
+            }
+        })
 
         binding.textboxSignUpBirthday.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -62,6 +72,7 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
         })
 
         binding.btnSignUpCheckDuplicate.setOnClickListener {
+
             binding.tvSignUpIdError.visibility = View.VISIBLE
             viewmodel.postCheckDupId(binding.textboxSignUpId.text.toString())
         }
@@ -77,10 +88,14 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
         })
 
         binding.btnSignUpPhoneVerificationRequest.setOnClickListener {
-            if (binding.textboxSignUpPhone.text.length == 11) {
-                ConfirmDialog("인증번호가 전송되었습니다.").show(parentFragmentManager, null)
+            if (binding.textboxSignUpPhone.text.length >= 10) {
+                viewmodel.setIsSuccessSendCode(null)
+                viewmodel.postJoinRequestVerification(
+                    binding.textboxSignUpName.text.toString(),
+                    binding.textboxSignUpPhone.text.toString()
+                )
                 binding.btnSignUpPhoneVerificationCheck.isEnabled = true
-                binding.btnSignUpPhoneVerificationRequest.text = "재발송"
+                binding.btnSignUpPhoneVerificationRequest.text = "인증번호 재발송"
             }
             else {
                 ConfirmDialog("전화번호 형식이 올바르지 않습니다.").show(parentFragmentManager, null)
@@ -88,17 +103,36 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
         }
 
         binding.btnSignUpPhoneVerificationCheck.setOnClickListener {
-            if (binding.textboxSignUpVerificationCode.text.length != 4)
-                ConfirmDialog("인증번호는 4자리 숫자입니다.").show(parentFragmentManager, null)
+            if (binding.textboxSignUpVerificationCode.text.length != 6)
+                ConfirmDialog("인증번호는 6자리 숫자입니다.").show(parentFragmentManager, null)
             else {
-                ConfirmDialog("인증이 완료되었습니다.")
+                viewmodel.setIsValidatePhone(null)
+                viewmodel.postJoinVerifyCode(
+                    binding.textboxSignUpPhone.text.toString(),
+                    binding.textboxSignUpVerificationCode.text.toString()
+                )
+            }
+        }
+
+        viewmodel.isSuccessSendCode.observe(viewLifecycleOwner, Observer { success ->
+            if (success == true) {
+                ConfirmDialog("인증번호를 전송했습니다.").show(parentFragmentManager, null)
+            } else if (success == false) {
+                ConfirmDialog("인증번호 전송에 실패했습니다.").show(parentFragmentManager, null)
+            }
+        })
+
+        viewmodel.isValidatePhone.observe(viewLifecycleOwner, Observer { success ->
+            if (success == true) {
+                ConfirmDialog("인증이 완료되었습니다.").show(parentFragmentManager, null)
                 binding.textboxSignUpPhone.isEnabled = false
                 binding.textboxSignUpVerificationCode.isEnabled = false
                 binding.btnSignUpPhoneVerificationCheck.isEnabled = false
                 binding.btnSignUpPhoneVerificationRequest.isEnabled = false
-                viewmodel.setIsValidatePhone(true)
+            } else if (success == false) {
+                ConfirmDialog("인증에 실패했습니다.").show(parentFragmentManager, null)
             }
-        }
+        })
 
         binding.btnSignUp2LeftArrow.setOnClickListener {
             onBackPressed()
@@ -128,6 +162,7 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
         if (parts[0].length != 4 || parts[1].length != 2 || parts[2].length != 2) return false
         if (parts[1].toInt() < 1 || parts[1].toInt() > 12) return false
         if (parts[2].toInt() < 1 || parts[2].toInt() > 31) return false
+        if (parts[0].toInt() < 1800 || parts[0].toInt() > 2024) return false
         return true
     }
 
@@ -149,12 +184,26 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
     }
 
     fun finalCheck() {
-        viewmodel.setIsValidateGender(true)
         viewmodel.setIsValidateName(binding.textboxSignUpName.text.length > 1)
         viewmodel.setIsValidateRePassword(
             binding.textboxSignUpPw.text.toString() == binding.textboxSignUpPwRetype.text.toString()
         )
         viewmodel.setIsValidateEmail(binding.textboxSignUpEmail.text.isNotEmpty())
+    }
+
+    private fun joinRequest() {
+        val gender: String = listOf("MALE", "FEMALE")[viewmodel.selectedGenderPosition]
+        val email: String = binding.textboxSignUpEmail.text.toString()+"@"+viewmodel.spinnerEmailItems[viewmodel.selectedEmailPosition]
+
+        viewmodel.postJoin(
+            binding.textboxSignUpId.text.toString(),
+            binding.textboxSignUpPw.text.toString(),
+            binding.textboxSignUpName.text.toString(),
+            binding.textboxSignUpBirthday.text.toString(),
+            gender,
+            email,
+            binding.textboxSignUpPhone.text.toString()
+        )
     }
 
     override fun onBackPressed() {
