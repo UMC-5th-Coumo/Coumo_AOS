@@ -1,13 +1,16 @@
 package com.umc.coumo.domain.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.umc.coumo.App.Companion.prefs
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.repository.CoumoRepository
 import com.umc.coumo.domain.type.CouponAlignType
+import com.umc.coumo.utils.Constants.CUSTOMER_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,7 +28,7 @@ class CouponViewModel @Inject constructor(
     private val _currentCoupon = MutableLiveData<CouponModel>()
     val currentCoupon: LiveData<CouponModel> get() = _currentCoupon
 
-    private val _currentQR = MutableLiveData<Uri?>(Uri.parse("https://dev.coumo.shop/api/qr/customer/stamp/1/1"))
+    private val _currentQR = MutableLiveData<Uri?>()
     val currentQR: LiveData<Uri?> get() = _currentQR
 
     fun changeAlign(align: CouponAlignType) {
@@ -43,18 +46,6 @@ class CouponViewModel @Inject constructor(
         _couponList.value = list
     }
 
-    fun postCustomerStamp(storeId: Int) {
-        viewModelScope.launch {
-            repository.postStampCustomer(storeId)
-        }
-    }
-
-    fun postCustomerPayment(storeId: Int) {
-        viewModelScope.launch {
-            //_currentQR.value = repository.postPaymentCustomer(storeId)
-        }
-    }
-
     fun getCouponList() {
         viewModelScope.launch {
             repository.getCouponList(align.value?:CouponAlignType.MOST)
@@ -65,5 +56,14 @@ class CouponViewModel @Inject constructor(
         viewModelScope.launch {
             repository.getCouponStore(storeId)
         }
+    }
+
+    fun getStampQR(storeId: Int) {
+        _currentQR.value = Uri.parse("https://dev.coumo.shop/api/qr/customer/stamp/${prefs.getInt(CUSTOMER_ID,1)}/${storeId}")
+    }
+
+    fun getPaymentQR(storeId: Int) {
+        Log.d("TEST http","${prefs.getInt(CUSTOMER_ID,1)}")
+        _currentQR.value = Uri.parse("https://dev.coumo.shop/api/qr/customer/payment/${prefs.getInt(CUSTOMER_ID,1)}/${storeId}")
     }
 }

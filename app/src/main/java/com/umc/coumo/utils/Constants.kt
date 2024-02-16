@@ -4,6 +4,7 @@ object Constants {
     val BASE_URL: String
         get() = "https://dev.coumo.shop"
 
-    val CUSTOMER_ID = "customerId"
-    val ACCESS_TOKEN = "accessToken"
+    const val CUSTOMER_ID = "customerId"
+    const val ACCESS_TOKEN = "accessToken"
+    const val OWNER_ID = "ownerId"
 }

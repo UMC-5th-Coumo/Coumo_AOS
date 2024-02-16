@@ -1,5 +1,6 @@
 package com.umc.coumo.data.remote.api
 
+import com.umc.coumo.data.remote.model.request.RequestOwnerQRModel
 import com.umc.coumo.data.remote.model.response.ResponseModel
 import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
@@ -7,8 +8,8 @@ import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
 import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
 import com.umc.coumo.domain.type.CategoryType
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -43,22 +44,6 @@ interface CoumoApi {
         @Path("customerId") customerId: Int,
     ): Response<ResponseModel<ResponseMyPageModel>>
 
-
-    //QR 생성 (적립)
-    @Headers("Content-Type: image/png")
-    @GET("/api/qr/customer/stamp/{customerId}/{storeId}")
-    suspend fun postCustomerStamp(
-        @Path("customerId") customerId: Int,
-        @Path("storeId") storeId: Int,
-    ): String
-
-    //QR 생성 (사용)
-    @POST("/api/qr/customer/payment/{customerId}/{storeId}")
-    suspend fun postCustomerPayment(
-        @Path("customerId") customerId: Int,
-        @Path("storeId") storeId: Int
-    ): Response<Any>
-
     @GET("/api/notice/around/list/{pageId}")
     suspend fun getCommunityList(
         @Path("pageId") pageId: Int,
@@ -80,5 +65,15 @@ interface CoumoApi {
         @Path("storeId") storeId: Int,
         @Path("customerId") customerId: Int,
     ): Response<ResponseModel<Any>>
+
+    @POST("/api/qr/owner/stamp")
+    suspend fun postOwnerStamp(
+        @Body body: RequestOwnerQRModel
+    ): Response<Any>
+
+    @POST("/api/qr/owner/payment")
+    suspend fun postOwnerPayment(
+        @Body body: RequestOwnerQRModel
+    ): Response<Any>
 
 }

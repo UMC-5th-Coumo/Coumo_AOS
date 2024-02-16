@@ -7,6 +7,14 @@ data class ResponseCouponModel(
     val color: String,
 )
 
+data class ResponseCoupon2Model(
+    val couponColor: String,
+    val fontColor: String,
+    val storeName: String,
+    val stampImage: String
+)
+
 data class ResponseStampModel(
-    val stampType: String
+    val stampCurrent: Int,
+    val stampMax: Int,
 )

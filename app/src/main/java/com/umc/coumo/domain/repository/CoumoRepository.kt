@@ -1,6 +1,5 @@
 package com.umc.coumo.domain.repository
 
-import android.net.Uri
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MyPageModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
@@ -25,14 +24,6 @@ interface CoumoRepository {
 
     suspend fun getMyPage(): MyPageModel?
 
-    suspend fun postStampCustomer(
-        storeId: Int
-    ): String?
-
-    suspend fun postPaymentCustomer(
-        storeId: Int
-    ): Uri?
-
     suspend fun getCouponList(
         filter: CouponAlignType,
     ): List<CouponModel>
@@ -40,4 +31,16 @@ interface CoumoRepository {
     suspend fun getCouponStore(
         storeId: Int,
     ): CouponModel
+
+    suspend fun postOwnerStamp(
+        storeId: Int,
+        customerId: Int,
+        stampCnt: Int,
+    ): Boolean
+
+    suspend fun postOwnerPayment(
+        storeId: Int,
+        customerId: Int,
+        stampCnt: Int,
+    ): Boolean
 }

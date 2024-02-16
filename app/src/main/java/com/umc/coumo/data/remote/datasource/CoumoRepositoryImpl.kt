@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.CoumoApi
+import com.umc.coumo.data.remote.model.request.RequestOwnerQRModel
 import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
@@ -18,6 +19,7 @@ import com.umc.coumo.domain.repository.CoumoRepository
 import com.umc.coumo.domain.type.CategoryType
 import com.umc.coumo.domain.type.CouponAlignType
 import com.umc.coumo.utils.Constants.CUSTOMER_ID
+import com.umc.coumo.utils.Constants.OWNER_ID
 import javax.inject.Inject
 
 class CoumoRepositoryImpl @Inject constructor(
@@ -55,14 +57,6 @@ class CoumoRepositoryImpl @Inject constructor(
         return mapToMyPageModel(data.body()?.result)
     }
 
-    override suspend fun postStampCustomer(storeId: Int): String? {
-        return null
-    }
-
-    override suspend fun postPaymentCustomer(storeId: Int): Uri? {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun getCouponList(filter: CouponAlignType): List<CouponModel> {
         val data = coumoApi.getCouponList(App.prefs.getInt(CUSTOMER_ID,1),filter.api)
         Log.d("TEST http list", "${data.body()}")
@@ -73,6 +67,34 @@ class CoumoRepositoryImpl @Inject constructor(
         val data = coumoApi.getCouponStore(App.prefs.getInt(CUSTOMER_ID,1),storeId)
         Log.d("TEST http store", "${data.body()}")
         return CouponModel("",0, stampImage = null)
+    }
+
+    override suspend fun postOwnerStamp(
+        storeId: Int,
+        customerId: Int,
+        stampCnt: Int
+    ): Boolean {
+        val data = coumoApi.postOwnerStamp(RequestOwnerQRModel(
+            storeId = storeId,
+            customerId = customerId,
+            ownerId = App.prefs.getInt(OWNER_ID,1),
+            stampCnt = stampCnt
+        ))
+        return data.isSuccessful
+    }
+
+    override suspend fun postOwnerPayment(
+        storeId: Int,
+        customerId: Int,
+        stampCnt: Int
+    ): Boolean {
+        val data = coumoApi.postOwnerPayment(RequestOwnerQRModel(
+            storeId = storeId,
+            customerId = customerId,
+            ownerId = App.prefs.getInt(OWNER_ID,1),
+            stampCnt = stampCnt
+        ))
+        return data.isSuccessful
     }
 
     private fun mapToMyPageModel(response: ResponseMyPageModel?): MyPageModel? {

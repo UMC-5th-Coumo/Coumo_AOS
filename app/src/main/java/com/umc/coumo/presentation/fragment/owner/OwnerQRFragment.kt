@@ -1,18 +1,21 @@
 package com.umc.coumo.presentation.fragment.owner
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentOwnerQrBinding
-import com.umc.coumo.domain.viewmodel.CouponViewModel
+import com.umc.coumo.domain.viewmodel.OwnerViewModel
 import com.umc.coumo.utils.binding.BindingFragment
+import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 class OwnerQRFragment: BindingFragment<FragmentOwnerQrBinding>(R.layout.fragment_owner_qr) {
+
+    private val viewModel: OwnerViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,10 +51,36 @@ class OwnerQRFragment: BindingFragment<FragmentOwnerQrBinding>(R.layout.fragment
     private fun setCamera() {
         binding.viewFinder.apply {
             decodeSingle() { result ->
-                Toast.makeText(requireContext(),"$result", Toast.LENGTH_SHORT).show()
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(result.result.toString())
-                startActivity(intent)
+                val jsonObject = JSONObject(result.result.text)
+                if (arguments?.getString("OwnerType")=="Stamp") {
+                    lifecycleScope.launch {
+                        if (viewModel.postStampOwner(
+                                jsonObject.getInt("storeId"),
+                                jsonObject.getInt("customerId"),
+                                1)
+                            ) {
+                            Toast.makeText(requireContext(), "적립 성공", Toast.LENGTH_SHORT).show()
+                            findNavController().popBackStack()
+                        }
+                        else
+                            Toast.makeText(requireContext(),"적립 실패", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else {
+                    lifecycleScope.launch {
+                        if (viewModel.postPaymentOwner(
+                                jsonObject.getInt("storeId"),
+                                jsonObject.getInt("customerId"),
+                                1
+                            )
+                        ) {
+                            Toast.makeText(requireContext(), "사용 성공", Toast.LENGTH_SHORT).show()
+                            findNavController().popBackStack()
+                        }
+                        else
+                            Toast.makeText(requireContext(), "사용 실패", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }

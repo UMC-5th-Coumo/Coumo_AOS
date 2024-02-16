@@ -29,11 +29,11 @@ class CouponDialog(val viewModel: CouponViewModel) : BindingDialogFragment<Dialo
         }
 
         binding.btnAdd.setOnClickListener {
-            viewModel.postCustomerStamp(1)
+            viewModel.getStampQR(1)
         }
 
         binding.btnUse.setOnClickListener {
-            viewModel.postCustomerPayment(1)
+            viewModel.getPaymentQR(1)
         }
 
         val result = MutableList(coupon.stampMax) { i -> i < coupon.stampCount }
