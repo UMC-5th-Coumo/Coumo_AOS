@@ -4,11 +4,13 @@ import android.net.Uri
 import android.util.Log
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.CoumoApi
+import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
 import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MenuModel
+import com.umc.coumo.domain.model.MyPageModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.model.StoreInfoModel
@@ -48,6 +50,11 @@ class CoumoRepositoryImpl @Inject constructor(
         return mapToStoreInfoModel(data.body()?.result)
     }
 
+    override suspend fun getMyPage(): MyPageModel? {
+        val data = coumoApi.getMyPageData(App.prefs.getInt(CUSTOMER_ID,1))
+        return mapToMyPageModel(data.body()?.result)
+    }
+
     override suspend fun postStampCustomer(storeId: Int): String? {
         return null
     }
@@ -66,6 +73,17 @@ class CoumoRepositoryImpl @Inject constructor(
         val data = coumoApi.getCouponStore(App.prefs.getInt(CUSTOMER_ID,1),storeId)
         Log.d("TEST http store", "${data.body()}")
         return CouponModel("",0, stampImage = null)
+    }
+
+    private fun mapToMyPageModel(response: ResponseMyPageModel?): MyPageModel? {
+        return if (response != null) {
+            MyPageModel(
+                name = response.name,
+                birthday = response.birthday,
+                gender = if (response.gender == "MALE") "남성" else "여성",
+                phone = insertHyphens(response.phone)
+            )
+        } else null
     }
 
     private fun mapToStoreInfoModel(response: ResponseStoreDataModel?): StoreInfoModel? {
@@ -128,5 +146,12 @@ class CoumoRepositoryImpl @Inject constructor(
         } else {
             null
         }
+    }
+
+    private fun insertHyphens(input: String): String {
+        val modifiedString = StringBuilder(input)
+        modifiedString.insert(3, "-")
+        modifiedString.insert(8, "-")
+        return modifiedString.toString()
     }
 }

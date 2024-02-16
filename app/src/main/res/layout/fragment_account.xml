@@ -18,7 +18,7 @@
             android:id="@+id/tv_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="안녕하세요 김다빈님!"
+            android:text="@{@string/account_hello(viewModel.accountData.name)}"
             android:textSize="24sp"
             android:textColor="@color/font_text"
             android:fontFamily="@font/pretendard_700"
@@ -109,26 +109,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/ProfileContent"
-                        android:text="김다빈"/>
+                        android:text="@{viewModel.accountData.name}"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/ProfileContent"
-                        android:text="2001.01.01"/>
+                        android:text="@{viewModel.accountData.birthday}"/>
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/ProfileContent"
-                        android:text="여성"/>
+                        android:text="@{viewModel.accountData.gender}"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/ProfileContent"
-                        android:text="010-1234-5678"/>
+                        android:text="@{viewModel.accountData.phone}"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.appcompat.widget.LinearLayoutCompat>

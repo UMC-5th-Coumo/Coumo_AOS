@@ -1,6 +1,7 @@
 package com.umc.coumo.data.remote.api
 
 import com.umc.coumo.data.remote.model.response.ResponseModel
+import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
 import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
@@ -35,6 +36,13 @@ interface CoumoApi {
         @Path("customerId") customerId: Int,
         @Path("storeId") storeId: Int
     ): Response<ResponseModel<ResponseStoreDataModel>>
+
+    //마이 페이지
+    @GET("/customer/mypage/{customerId}/profile")
+    suspend fun getMyPageData(
+        @Path("customerId") customerId: Int,
+    ): Response<ResponseModel<ResponseMyPageModel>>
+
 
     //QR 생성 (적립)
     @Headers("Content-Type: image/png")

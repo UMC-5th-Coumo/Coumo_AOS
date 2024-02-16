@@ -2,6 +2,7 @@ package com.umc.coumo.domain.repository
 
 import android.net.Uri
 import com.umc.coumo.domain.model.CouponModel
+import com.umc.coumo.domain.model.MyPageModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.model.StoreInfoModel
@@ -21,6 +22,8 @@ interface CoumoRepository {
     suspend fun getStoreData(
         storeId: Int
     ): StoreInfoModel?
+
+    suspend fun getMyPage(): MyPageModel?
 
     suspend fun postStampCustomer(
         storeId: Int
