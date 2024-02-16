@@ -4,9 +4,11 @@
     <!-- login page -->
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>
-    <string name="login_btn">로그인하기</string>
+    <string name="login_as_customer">일반 고객 로그인</string>
+    <string name="login_as_owner">사장님 로그인</string>
     <string name="register">회원가입</string>
     <string name="find_id_pw">아이디/비밀번호 찾기</string>
+    <string name="impossible_find_owner_in_app">사장님 회원가입 및 아이디/비밀번호 찾기는 WEB에서만 가능합니다</string>
 
     <!-- sign up page -->
     <string name="at">\@</string>

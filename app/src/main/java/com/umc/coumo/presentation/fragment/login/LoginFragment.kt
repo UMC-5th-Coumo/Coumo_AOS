@@ -10,6 +10,7 @@ import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentLoginBinding
 import com.umc.coumo.domain.viewmodel.LoginViewModel
 import com.umc.coumo.presentation.activity.MainActivity
+import com.umc.coumo.presentation.activity.MainOwnerActivity
 import com.umc.coumo.utils.binding.BindingFragment
 
 class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_login) {
@@ -27,6 +28,10 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
                 if (goSignUp) findNavController().navigate(R.id.action_loginFragment_to_signUp1Fragment)
             }
         } catch (e: Exception) {}
+        try {
+            viewModel.setLoginAs(requireArguments().getString("login_as").toString())
+        } catch (e: Exception) {}
+
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -42,8 +47,11 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
         viewModel.loginResult.observe(viewLifecycleOwner, Observer { success ->
             if (success) {
                 requireActivity().finish()
+                lateinit var intent: Intent
 
-                val intent = Intent(requireActivity(), MainActivity::class.java)
+                intent = if (viewModel.loginAsCustomer) Intent(requireActivity(), MainActivity::class.java)
+                else Intent(requireActivity(), MainOwnerActivity::class.java)
+
                 startActivity(intent)
             }
         })

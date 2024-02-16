@@ -21,6 +21,7 @@ class FoundIdFragment : BindingFragment<FragmentFoundIdBinding>(R.layout.fragmen
 
         binding.btnFoundIdGoLogin.setOnClickListener {
             bundle.putBoolean("goSignUp", !isSuccess)
+            bundle.putString("login_as", "customer")
             findNavController().navigate(R.id.action_find_to_home, bundle)
         }
 
