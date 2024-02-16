@@ -27,6 +27,8 @@
 
     <string name="account_hello">안녕하세요 %s님!</string>
 
+    <string name="post_date">%s에 작성됨</string>
+
     <string name="home">홈</string>
     <string name="coupon">내 쿠폰</string>
     <string name="community">동네 소식</string>
