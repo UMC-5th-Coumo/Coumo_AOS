@@ -14,7 +14,6 @@ import com.umc.coumo.data.remote.model.response.ResponseJoinModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
 import com.umc.coumo.domain.repository.LoginRepository
 import javax.inject.Inject
-import kotlin.math.log
 
 class LoginRepositoryImpl @Inject constructor(
     //API Injection
@@ -67,8 +66,8 @@ class LoginRepositoryImpl @Inject constructor(
         return mapToResponseCheckDupIdModel(data.body()?.result)
     }
 
-    override suspend fun postFindId(name: String, phone: String): Boolean {
-        val data = loginApi.postFindId(RequestFindIdModel(name, phone))
+    override suspend fun postFindIdRequestCode(name: String, phone: String): Boolean {
+        val data = loginApi.postFindIdRequestCode(RequestFindIdModel(name, phone))
         return data.isSuccessful
     }
 
@@ -81,8 +80,8 @@ class LoginRepositoryImpl @Inject constructor(
     private fun mapToResponseLoginModel(response: ResponseLoginModel?): ResponseLoginModel? {
         return if (response != null) {
             ResponseLoginModel(
-                customerId = response.customerId.toInt(),
-                token = response.customerId.toString()
+                customerId = response.customerId,
+                token = response.token
             )
         }
         else null
@@ -91,10 +90,10 @@ class LoginRepositoryImpl @Inject constructor(
     private fun mapToResponseJoinModel(response: ResponseJoinModel?): ResponseJoinModel? {
         return if (response != null) {
             ResponseJoinModel(
-                id = response.id.toInt(),
-                loginId = response.loginId.toString(),
-                name = response.name.toString(),
-                createAt = response.createAt.toString()
+                id = response.id,
+                loginId = response.loginId,
+                name = response.name,
+                createAt = response.createAt?:""
             )
         }
         else null

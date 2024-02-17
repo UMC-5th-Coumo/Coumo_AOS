@@ -18,7 +18,7 @@ interface LoginRepository {
 
     suspend fun postLogin(loginId: String, password: String): ResponseLoginModel?
     suspend fun postCheckDupId(loginId: String): ResponseCheckDupIdModel?
-    suspend fun postFindId(name: String, phone: String): Boolean
+    suspend fun postFindIdRequestCode(name: String, phone: String): Boolean
     suspend fun postVerifyIdCode(phone: String, verificationCode: String): String?
     suspend fun postJoinRequestVerification(name: String, phone: String): Boolean
     suspend fun postJoinVerifyCode(phone: String, verificationCode: String): Boolean

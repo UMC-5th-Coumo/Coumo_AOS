@@ -36,9 +36,6 @@ class SignUp2ViewModel @Inject constructor(
     private val _isValidatePhone = MutableLiveData<Boolean?>(null)
     val isValidatePhone: LiveData<Boolean?> get() = _isValidatePhone
 
-    private val _isWrong = MutableLiveData(false)
-    val isWrong: LiveData<Boolean> get() = _isWrong
-
     private val _isSignUpSuccess = MutableLiveData<Boolean?>(null)
     val isSignUpSuccess: LiveData<Boolean?> get() = _isSignUpSuccess
 
@@ -52,12 +49,10 @@ class SignUp2ViewModel @Inject constructor(
     fun setIsValidateRePassword(bool: Boolean) { _isValidateRePassword.value = bool }
     fun setIsValidateEmail(bool: Boolean) { _isValidateEmail.value = bool }
     fun setIsValidatePhone(bool: Boolean?) { _isValidatePhone.value = bool }
-    fun setIsWrong(bool: Boolean) { _isWrong.value = bool }
     fun setIsSignUpSuccess(bool: Boolean?) { _isSignUpSuccess.value = bool }
     fun setIsSuccessSendCode(bool: Boolean?) { _isSuccessSendCode.value = bool }
 
     fun isOkOnViewModel() : Boolean {
-
         return (isValidateName.value!! &&
                 isValidateBirthday.value!! &&
                 isValidateId.value!! &&
@@ -68,7 +63,6 @@ class SignUp2ViewModel @Inject constructor(
     }
 
     fun clearVars() {
-        _isWrong.value = false
         _isValidateName.value = false
         _isValidateBirthday.value = false
         _isValidateId.value = false

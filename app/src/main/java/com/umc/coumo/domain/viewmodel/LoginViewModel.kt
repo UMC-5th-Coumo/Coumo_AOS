@@ -29,6 +29,10 @@ class LoginViewModel @Inject constructor(
     private val _afterPressLoginBtn = MutableLiveData<Boolean>(false)
     val afterPressLoginBtn: LiveData<Boolean> get() = _afterPressLoginBtn
 
+    private val _loginAs = MutableLiveData<String>("")
+    val loginAs: LiveData<String> get() = _loginAs
+
+    val loginAsCustomer: Boolean get() = (_loginAs.value.toString() == "customer")
 
     //TODO(테스트 코드)
     fun postLogin(loginId: String, password: String) {
@@ -40,4 +44,5 @@ class LoginViewModel @Inject constructor(
     fun trueAfterPressLoginBtn() { _afterPressLoginBtn.value = true }
     fun setLoginResult(bool : Boolean) { _loginResult.value = bool }
     fun setIsNotValidateAccount(bool: Boolean) { _isNotValidateAccount.value = bool }
+    fun setLoginAs(s: String) { _loginAs.value = s }
 }
