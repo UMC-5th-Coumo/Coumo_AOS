@@ -52,6 +52,9 @@ class HomeViewModel @Inject constructor(
     private val _timeDropDown = MutableLiveData<Boolean>(false)
     val timeDropDown: LiveData<Boolean> get() = _timeDropDown
 
+    private val _currentPage = MutableLiveData<Int>(0)
+    val currentPage: LiveData<Int> get() = _currentPage
+
     fun setCurrentLocation(longitude: Double, latitude: Double ) {
         _currentLocation.value = LocationLatLng(longitude, latitude)
     }
@@ -101,10 +104,19 @@ class HomeViewModel @Inject constructor(
                     getCouponStore(storeId)
                     _timeDropDown.value = false
                 } else {
-                    listOf<StoreInfoModel>() //값을 못 받아 왔을 때, 빈 값 처리
+                    _storeData.value = it //값을 못 받아 왔을 때, 빈 값 처리
                 }
             }
         }
+    }
+
+    fun resetPage() {
+        _currentPage.value = 0
+        Log.d("HTTP 페이지", "페이지 초기화")
+    }
+
+    fun addPage() {
+        _currentPage.value = _currentPage.value?.plus(1)
     }
 
 }

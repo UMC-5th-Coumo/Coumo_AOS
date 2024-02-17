@@ -44,29 +44,29 @@ class CoumoRepositoryImpl @Inject constructor(
         page: Int?
     ): List<StoreCouponCountModel>? {
         val data = coumoApi.getNearStoreList(
-            App.prefs.getInt(CUSTOMER_ID, 1),
+            App.prefs.getInt(CUSTOMER_ID, 0),
             category?.api, longitude, latitude, page)
         return mapToStoreCouponCountModelList(data.body()?.result)
     }
 
     override suspend fun getStoreData(storeId: Int): StoreInfoModel? {
-        val data = coumoApi.getStoreData(App.prefs.getInt(CUSTOMER_ID,1),storeId)
+        val data = coumoApi.getStoreData(App.prefs.getInt(CUSTOMER_ID,0),storeId)
         return mapToStoreInfoModel(data.body()?.result)
     }
 
     override suspend fun getMyPage(): MyPageModel? {
-        val data = coumoApi.getMyPageData(App.prefs.getInt(CUSTOMER_ID,1))
+        val data = coumoApi.getMyPageData(App.prefs.getInt(CUSTOMER_ID,0))
         return mapToMyPageModel(data.body()?.result)
     }
 
     override suspend fun getCouponList(filter: CouponAlignType): List<CouponModel> {
-        val data = coumoApi.getCouponList(App.prefs.getInt(CUSTOMER_ID,1),filter.api)
+        val data = coumoApi.getCouponList(App.prefs.getInt(CUSTOMER_ID,0),filter.api)
         Log.d("TEST http list", "${data.body()}")
         return emptyList()
     }
 
     override suspend fun getCouponStore(storeId: Int): CouponModel? {
-        val data = coumoApi.getCouponStore(App.prefs.getInt(CUSTOMER_ID,1),storeId)
+        val data = coumoApi.getCouponStore(App.prefs.getInt(CUSTOMER_ID,0),storeId)
         Log.d("TEST http store", "${data.body()}")
         return CouponModel("",0, stampImage = null)
     }

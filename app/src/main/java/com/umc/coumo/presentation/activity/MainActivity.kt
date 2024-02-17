@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import com.umc.coumo.R
 import com.umc.coumo.databinding.ActivityMainBinding
 import com.umc.coumo.domain.type.TabType
+import com.umc.coumo.domain.viewmodel.AccountViewModel
 import com.umc.coumo.domain.viewmodel.HomeViewModel
 import com.umc.coumo.domain.viewmodel.MainViewModel
 import com.umc.coumo.presentation.adapter.MainFragmentAdapter
@@ -22,6 +23,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
     private val viewModel: MainViewModel by viewModels()
     private val homeViewModel: HomeViewModel by viewModels()
+    private val profile : AccountViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,8 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         setNaviButton()
         setObserver()
         setLocationPermission()
+
+        profile.getMyPage()
     }
 
     fun setLocationPermission() {
