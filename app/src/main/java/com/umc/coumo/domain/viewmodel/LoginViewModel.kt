@@ -34,12 +34,21 @@ class LoginViewModel @Inject constructor(
 
     val loginAsCustomer: Boolean get() = (_loginAs.value.toString() == "customer")
 
-    //TODO(테스트 코드)
+
     fun postLogin(loginId: String, password: String) {
         viewModelScope.launch {
             val response = repository.postLogin(loginId, password)
-            _loginResult.value = (response != null) || (loginId == "siuuu")        }
+            _loginResult.value = (response != null)
+        }
     }
+
+    fun postLoginAsOwner(loginId: String, password: String) {
+        viewModelScope.launch {
+            val response = repository.postLoginAsOwner(loginId, password)
+            _loginResult.value = (response != null)
+        }
+    }
+
 
     fun trueAfterPressLoginBtn() { _afterPressLoginBtn.value = true }
     fun setLoginResult(bool : Boolean) { _loginResult.value = bool }

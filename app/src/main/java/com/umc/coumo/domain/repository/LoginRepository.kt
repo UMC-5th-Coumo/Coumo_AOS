@@ -2,6 +2,7 @@ package com.umc.coumo.domain.repository
 
 import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinModel
+import com.umc.coumo.data.remote.model.response.ResponseLoginAsOwnerModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
 
 interface LoginRepository {
@@ -22,4 +23,5 @@ interface LoginRepository {
     suspend fun postVerifyIdCode(phone: String, verificationCode: String): String?
     suspend fun postJoinRequestVerification(name: String, phone: String): Boolean
     suspend fun postJoinVerifyCode(phone: String, verificationCode: String): Boolean
+    suspend fun postLoginAsOwner(loginId: String, password: String): ResponseLoginAsOwnerModel?
 }

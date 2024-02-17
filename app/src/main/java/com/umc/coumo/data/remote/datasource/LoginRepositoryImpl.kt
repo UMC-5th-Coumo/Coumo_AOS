@@ -11,8 +11,10 @@ import com.umc.coumo.data.remote.model.request.RequestLoginModel
 import com.umc.coumo.data.remote.model.request.RequestVerifyIdCodeModel
 import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinModel
+import com.umc.coumo.data.remote.model.response.ResponseLoginAsOwnerModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
 import com.umc.coumo.domain.repository.LoginRepository
+import retrofit2.Response
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor(
@@ -77,6 +79,12 @@ class LoginRepositoryImpl @Inject constructor(
         else null
     }
 
+    override suspend fun postLoginAsOwner(loginId: String, password: String): ResponseLoginAsOwnerModel? {
+        val data = loginApi.postLoginAsOwner(RequestLoginModel(loginId, password))
+        App.prefs.setInt("ownerId", data.body()?.result?.ownerId ?: 0)
+        return mapToResponseLoginAsOwner(data.body()?.result)
+    }
+
     private fun mapToResponseLoginModel(response: ResponseLoginModel?): ResponseLoginModel? {
         return if (response != null) {
             ResponseLoginModel(
@@ -102,6 +110,19 @@ class LoginRepositoryImpl @Inject constructor(
     private fun mapToResponseCheckDupIdModel(response: ResponseCheckDupIdModel?): ResponseCheckDupIdModel? {
         return if (response != null) {
             ResponseCheckDupIdModel(loginId = response.loginId.toString())
+        }
+        else null
+    }
+
+    private fun mapToResponseLoginAsOwner(response: ResponseLoginAsOwnerModel?): ResponseLoginAsOwnerModel? {
+        return if (response != null) {
+            ResponseLoginAsOwnerModel(
+                ownerId = response.ownerId,
+                storeId = response.storeId,
+                token = response.token,
+                createAt = response.createAt?:"",
+                write = response.write
+            )
         }
         else null
     }
