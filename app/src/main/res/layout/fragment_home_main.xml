@@ -136,6 +136,18 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <TextView
+                        android:id="@+id/tv_cafe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="카페/디저트"
+                        android:textSize="12sp"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_cafe"
+                        app:layout_constraintEnd_toEndOf="@id/iv_cafe"
+                        app:layout_constraintTop_toBottomOf="@id/iv_cafe"/>
+
+
                     <androidx.constraintlayout.utils.widget.ImageFilterView
                         android:id="@+id/iv_entertainment"
                         android:layout_width="68dp"
@@ -145,6 +157,17 @@
                         app:layout_constraintEnd_toStartOf="@id/iv_food"
                         app:layout_constraintStart_toEndOf="@id/iv_cafe"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_entertainment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="리테일"
+                        android:textSize="12sp"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_entertainment"
+                        app:layout_constraintEnd_toEndOf="@id/iv_entertainment"
+                        app:layout_constraintTop_toBottomOf="@id/iv_entertainment"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterView
                         android:id="@+id/iv_food"
@@ -156,6 +179,17 @@
                         app:layout_constraintStart_toEndOf="@id/iv_entertainment"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <TextView
+                        android:id="@+id/tv_food"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="요식업"
+                        android:textSize="12sp"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_food"
+                        app:layout_constraintEnd_toEndOf="@id/iv_food"
+                        app:layout_constraintTop_toBottomOf="@id/iv_food"/>
+
                     <androidx.constraintlayout.utils.widget.ImageFilterView
                         android:id="@+id/iv_retail"
                         android:layout_width="68dp"
@@ -166,7 +200,18 @@
                         app:layout_constraintEnd_toStartOf="@id/iv_beauty"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/iv_cafe" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_cafe" />
+
+                    <TextView
+                        android:id="@+id/tv_retail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="리테일"
+                        android:textSize="12sp"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_retail"
+                        app:layout_constraintEnd_toEndOf="@id/iv_retail"
+                        app:layout_constraintTop_toBottomOf="@id/iv_retail"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterView
                         android:id="@+id/iv_beauty"
@@ -177,7 +222,18 @@
                         android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toStartOf="@id/iv_class"
                         app:layout_constraintStart_toEndOf="@id/iv_retail"
-                        app:layout_constraintTop_toBottomOf="@id/iv_entertainment" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_entertainment" />
+
+                    <TextView
+                        android:id="@+id/tv_beauty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="뷰티/살롱"
+                        android:textSize="12sp"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_beauty"
+                        app:layout_constraintEnd_toEndOf="@id/iv_beauty"
+                        app:layout_constraintTop_toBottomOf="@id/iv_beauty"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterView
                         android:id="@+id/iv_class"
@@ -188,7 +244,18 @@
                         android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_beauty"
-                        app:layout_constraintTop_toBottomOf="@id/iv_food" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_food" />
+
+                    <TextView
+                        android:id="@+id/tv_class"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="학원/클래스"
+                        android:textSize="12sp"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintStart_toStartOf="@id/iv_class"
+                        app:layout_constraintEnd_toEndOf="@id/iv_class"
+                        app:layout_constraintTop_toBottomOf="@id/iv_class"/>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
