@@ -151,12 +151,14 @@ fun TextView.setTimeTableText(time: RunTimeModel?) {
 
 @SuppressLint("SetTextI18n")
 @BindingAdapter("currentTimeTableText")
-fun TextView.setTimeTableText(runTimes: List<RunTimeModel>) {
-    val today = LocalDate.now().dayOfWeek.toString()
-    val time = runTimes.filter { it.day == today }
-    text = if (time.first().startTime != "none" && time.first().endTime != "none") {
-        "${time.first().day} : ${time.first().startTime} ~ ${time.first().endTime}"
-    } else {
-        "${time.first().day} : 휴무일"
+fun TextView.setTimeTableText(runTimes: List<RunTimeModel>?) {
+    if (runTimes != null) {
+        val today = LocalDate.now().dayOfWeek.toString()
+        val time = runTimes.filter { it.day == today }
+        text = if (time.first().startTime != "none" && time.first().endTime != "none") {
+            "${time.first().day} : ${time.first().startTime} ~ ${time.first().endTime}"
+        } else {
+            "${time.first().day} : 휴무일"
+        }
     }
 }

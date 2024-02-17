@@ -131,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:src="@drawable/image_cafe"
-                        app:layout_constraintEnd_toStartOf="@id/iv_entertainment"
+                        app:layout_constraintEnd_toStartOf="@id/iv_retail"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -149,7 +149,7 @@
 
 
                     <androidx.constraintlayout.utils.widget.ImageFilterView
-                        android:id="@+id/iv_entertainment"
+                        android:id="@+id/iv_retail"
                         android:layout_width="68dp"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
@@ -159,15 +159,15 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tv_entertainment"
+                        android:id="@+id/tv_retail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="리테일"
                         android:textSize="12sp"
                         android:layout_marginTop="3dp"
-                        app:layout_constraintStart_toStartOf="@id/iv_entertainment"
-                        app:layout_constraintEnd_toEndOf="@id/iv_entertainment"
-                        app:layout_constraintTop_toBottomOf="@id/iv_entertainment"/>
+                        app:layout_constraintStart_toStartOf="@id/iv_retail"
+                        app:layout_constraintEnd_toEndOf="@id/iv_retail"
+                        app:layout_constraintTop_toBottomOf="@id/iv_retail"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterView
                         android:id="@+id/iv_food"
@@ -176,7 +176,7 @@
                         android:adjustViewBounds="true"
                         android:src="@drawable/image_food"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/iv_entertainment"
+                        app:layout_constraintStart_toEndOf="@id/iv_retail"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -191,7 +191,7 @@
                         app:layout_constraintTop_toBottomOf="@id/iv_food"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterView
-                        android:id="@+id/iv_retail"
+                        android:id="@+id/iv_entertainment"
                         android:layout_width="68dp"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
@@ -203,15 +203,15 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_cafe" />
 
                     <TextView
-                        android:id="@+id/tv_retail"
+                        android:id="@+id/tv_entertainment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="리테일"
+                        android:text="오락/스포츠"
                         android:textSize="12sp"
                         android:layout_marginTop="3dp"
-                        app:layout_constraintStart_toStartOf="@id/iv_retail"
-                        app:layout_constraintEnd_toEndOf="@id/iv_retail"
-                        app:layout_constraintTop_toBottomOf="@id/iv_retail"/>
+                        app:layout_constraintStart_toStartOf="@id/iv_entertainment"
+                        app:layout_constraintEnd_toEndOf="@id/iv_entertainment"
+                        app:layout_constraintTop_toBottomOf="@id/iv_entertainment"/>
 
                     <androidx.constraintlayout.utils.widget.ImageFilterView
                         android:id="@+id/iv_beauty"
@@ -221,8 +221,8 @@
                         android:src="@drawable/image_beauty"
                         android:layout_marginTop="10dp"
                         app:layout_constraintEnd_toStartOf="@id/iv_class"
-                        app:layout_constraintStart_toEndOf="@id/iv_retail"
-                        app:layout_constraintTop_toBottomOf="@id/tv_entertainment" />
+                        app:layout_constraintStart_toEndOf="@id/iv_entertainment"
+                        app:layout_constraintTop_toBottomOf="@id/tv_retail" />
 
                     <TextView
                         android:id="@+id/tv_beauty"

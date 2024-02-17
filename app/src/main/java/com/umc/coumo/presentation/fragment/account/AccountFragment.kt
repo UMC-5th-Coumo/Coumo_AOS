@@ -11,6 +11,7 @@ import com.umc.coumo.databinding.FragmentAccountBinding
 import com.umc.coumo.domain.type.AccountAction
 import com.umc.coumo.domain.viewmodel.AccountViewModel
 import com.umc.coumo.presentation.dialog.AccountBottomSheetDialog
+import com.umc.coumo.utils.Constants.CUSTOMER_ID
 import com.umc.coumo.utils.binding.BindingFragment
 
 class AccountFragment: BindingFragment<FragmentAccountBinding>(R.layout.fragment_account) {
@@ -35,6 +36,7 @@ class AccountFragment: BindingFragment<FragmentAccountBinding>(R.layout.fragment
         binding.btnLogout.setOnClickListener {
             val dialog = AccountBottomSheetDialog(AccountAction.LOGOUT) {
                 App.prefs.setString("accessToken","") //Token 없애기
+                App.prefs.setString(CUSTOMER_ID,"") //Token 없애기
                 requireActivity().finish()
             }
             dialog.show(parentFragmentManager, null)
