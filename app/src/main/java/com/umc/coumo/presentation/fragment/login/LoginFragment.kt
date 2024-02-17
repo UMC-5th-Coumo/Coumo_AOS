@@ -40,16 +40,16 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
             val loginId: String = binding.textboxLoginId.text.toString()
             val password: String = binding.textboxLoginPassword.text.toString()
 
-            viewModel.postLogin(loginId, password)
+            if (viewModel.loginAsCustomer) viewModel.postLogin(loginId, password)
+            else viewModel.postLoginAsOwner(loginId, password)
             viewModel.trueAfterPressLoginBtn()
         }
 
         viewModel.loginResult.observe(viewLifecycleOwner, Observer { success ->
             if (success) {
                 requireActivity().finish()
-                lateinit var intent: Intent
 
-                intent = if (viewModel.loginAsCustomer) Intent(requireActivity(), MainActivity::class.java)
+                val intent = if (viewModel.loginAsCustomer) Intent(requireActivity(), MainActivity::class.java)
                 else Intent(requireActivity(), MainOwnerActivity::class.java)
 
                 startActivity(intent)

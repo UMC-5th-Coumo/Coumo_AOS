@@ -10,6 +10,7 @@ import com.umc.coumo.data.remote.model.request.RequestVerifyIdCodeModel
 import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinVerifyCodeModel
+import com.umc.coumo.data.remote.model.response.ResponseLoginAsOwnerModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
 import com.umc.coumo.data.remote.model.response.ResponseModel
 import retrofit2.Response
@@ -53,5 +54,10 @@ interface LoginApi {
     suspend fun postVerifyIdCode(
         @Body params: RequestVerifyIdCodeModel
     ): Response<ResponseModel<String>>
+
+    @POST("/owner/login")
+    suspend fun postLoginAsOwner(
+        @Body params: RequestLoginModel
+    ): Response<ResponseModel<ResponseLoginAsOwnerModel>>
 
 }
