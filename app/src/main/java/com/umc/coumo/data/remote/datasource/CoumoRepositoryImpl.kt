@@ -79,7 +79,7 @@ class CoumoRepositoryImpl @Inject constructor(
         val data = coumoApi.postOwnerStamp(RequestOwnerQRModel(
             storeId = storeId,
             customerId = customerId,
-            ownerId = App.prefs.getInt(OWNER_ID,1),
+            ownerId = App.prefs.getInt(OWNER_ID,35),
             stampCnt = stampCnt
         ))
         return data.isSuccessful
@@ -93,7 +93,7 @@ class CoumoRepositoryImpl @Inject constructor(
         val data = coumoApi.postOwnerPayment(RequestOwnerQRModel(
             storeId = storeId,
             customerId = customerId,
-            ownerId = App.prefs.getInt(OWNER_ID,1),
+            ownerId = App.prefs.getInt(OWNER_ID,35),
             stampCnt = stampCnt
         ))
         return data.isSuccessful
