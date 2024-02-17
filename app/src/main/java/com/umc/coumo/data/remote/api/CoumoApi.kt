@@ -1,13 +1,15 @@
 package com.umc.coumo.data.remote.api
 
+import com.umc.coumo.data.remote.model.request.RequestOwnerQRModel
 import com.umc.coumo.data.remote.model.response.ResponseModel
+import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
 import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
 import com.umc.coumo.domain.type.CategoryType
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -21,8 +23,9 @@ interface CoumoApi {
         @Query("latitude") latitude: Double
     ): Response<ResponseModel<List<ResponsePopularStoreModel>>>
 
-    @GET("/api/customer/store")
+    @GET("/api/customer/{customerId}/store")
     suspend fun getNearStoreList(
+        @Path("customerId") customerId: Int,
         @Query("category") category: String? = CategoryType.DEFAULT.api,
         @Query("longitude") longitude: Double,
         @Query("latitude") latitude: Double,
@@ -35,16 +38,42 @@ interface CoumoApi {
         @Path("storeId") storeId: Int
     ): Response<ResponseModel<ResponseStoreDataModel>>
 
-    @Headers("Content-Type: image/png")
-    @POST("/api/qr/customer/stamp/{customerId}/{storeId}")
-    suspend fun postCustomerStamp(
+    //마이 페이지
+    @GET("/customer/mypage/{customerId}/profile")
+    suspend fun getMyPageData(
         @Path("customerId") customerId: Int,
-        @Path("storeId") storeId: Int,
-    ): String
+    ): Response<ResponseModel<ResponseMyPageModel>>
 
-    @POST("/api/qr/customer/payment/{customerId}/{storeId}")
-    suspend fun postCustomerPayment(
+    @GET("/api/notice/around/list/{pageId}")
+    suspend fun getCommunityList(
+        @Path("pageId") pageId: Int,
+        @Query("type") category: String? = CategoryType.DEFAULT.api,
+        @Query("longitude") longitude: Double,
+        @Query("latitude") latitude: Double,
+    )
+
+    //내 쿠폰 보기 (필터)
+    @GET("/api/coupon/{customerId}/list")
+    suspend fun getCouponList(
         @Path("customerId") customerId: Int,
-        @Path("storeId") storeId: Int
+        @Query("filter") filter: String
+    ): Response<ResponseModel<Any>>
+
+    //가게의 내 쿠폰 보기
+    @GET("/api/coupon/{storeId}/{customerId}")
+    suspend fun getCouponStore(
+        @Path("storeId") storeId: Int,
+        @Path("customerId") customerId: Int,
+    ): Response<ResponseModel<Any>>
+
+    @POST("/api/qr/owner/stamp")
+    suspend fun postOwnerStamp(
+        @Body body: RequestOwnerQRModel
     ): Response<Any>
+
+    @POST("/api/qr/owner/payment")
+    suspend fun postOwnerPayment(
+        @Body body: RequestOwnerQRModel
+    ): Response<Any>
+
 }

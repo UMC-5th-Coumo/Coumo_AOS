@@ -32,7 +32,7 @@ class CommunityFragment: BindingFragment<FragmentCommunityBinding>(R.layout.frag
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
                 when (type) {
                     CommunityTabType.ALL -> {showFragment(CommunityAllFragment())}
-                    CommunityTabType.NEW_MENU -> {showFragment(CommunityFilterFragment())}
+                    CommunityTabType.NEW_PRODUCT -> {showFragment(CommunityFilterFragment())}
                     CommunityTabType.NO_SHOW -> {showFragment(CommunityFilterFragment())}
                     CommunityTabType.EVENT -> {showFragment(CommunityFilterFragment())}
                     else -> {}

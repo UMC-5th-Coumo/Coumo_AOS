@@ -2,7 +2,6 @@ package com.umc.coumo.presentation.fragment.coupon
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -50,11 +49,8 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
         }*/
     }
 
-
     private fun setRecyclerView () {
         val couponListAdapter = CouponListAdapter(requireContext())
-
-        viewModel.testData()
 
         binding.rvCoupon.apply {
             adapter = couponListAdapter

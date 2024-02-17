@@ -17,16 +17,13 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         autoLogin()
-
-
     }
 
     //TODO(테스트 코드: 임시로 토큰이 10자 이하면 토큰이 없다고 판단)
     private fun autoLogin() {
         if (App.prefs.getString("accessToken","").length > 10 ) {
-            //moveToMain()
+            moveToMain()
         }
     }
 

@@ -33,8 +33,7 @@
                 android:layout_width="308dp"
                 android:layout_height="180dp"
                 android:background="@drawable/shape_rect_round_6"
-                android:paddingTop="28dp"
-                app:dynamicBackgroundColor="@{coupon.currentCoupon.color}"
+                app:dynamicBackgroundColor="@{coupon.currentCoupon.couponColor}"
                 app:layout_constraintDimensionRatio="308:180"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,15 +42,13 @@
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/tv_qr"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:fontFamily="@font/modak_400"
-                    android:text="QR uri"
-                    imageUri="@{coupon.currentQR}"
-                    android:textSize="22sp"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    imageQR="@{coupon.currentQR}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,17 +58,17 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_rect_round_6"
                 android:paddingTop="28dp"
-                app:dynamicBackgroundColor="@{coupon.currentCoupon.color}"
+                app:dynamicBackgroundColor="@{coupon.currentCoupon.couponColor}"
                 tools:backgroundTint="#FFDA26">
 
                 <TextView
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/modak_400"
-                    android:text="COFFEE SHOP"
+                    android:fontFamily="@font/montserrat_alternates_bold"
+                    android:text="@{coupon.currentCoupon.name}"
                     android:textSize="22sp"
-                    app:dynamicTextColor="@{coupon.currentCoupon.fontColor}}"
+                    app:dynamicTextColor="@{coupon.currentCoupon.fontColor}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -93,7 +90,7 @@
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/shape_rect_side_round"
             android:backgroundTint="@color/sub"
             android:paddingHorizontal="28dp"
@@ -104,14 +101,13 @@
             app:layout_constraintEnd_toStartOf="@+id/btn_use"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/section_coupon"/>
 
         <TextView
             android:id="@+id/btn_use"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/shape_rect_side_round"
             android:backgroundTint="@color/sub"
             android:paddingHorizontal="28dp"
@@ -122,7 +118,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_add"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/section_coupon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

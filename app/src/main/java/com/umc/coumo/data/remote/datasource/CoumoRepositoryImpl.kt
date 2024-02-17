@@ -1,19 +1,25 @@
 package com.umc.coumo.data.remote.datasource
 
 import android.net.Uri
+import android.util.Log
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.CoumoApi
+import com.umc.coumo.data.remote.model.request.RequestOwnerQRModel
+import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
 import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MenuModel
+import com.umc.coumo.domain.model.MyPageModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.model.StoreInfoModel
 import com.umc.coumo.domain.repository.CoumoRepository
 import com.umc.coumo.domain.type.CategoryType
+import com.umc.coumo.domain.type.CouponAlignType
 import com.umc.coumo.utils.Constants.CUSTOMER_ID
+import com.umc.coumo.utils.Constants.OWNER_ID
 import javax.inject.Inject
 
 class CoumoRepositoryImpl @Inject constructor(
@@ -36,6 +42,7 @@ class CoumoRepositoryImpl @Inject constructor(
         page: Int?
     ): List<StoreCouponCountModel>? {
         val data = coumoApi.getNearStoreList(
+            App.prefs.getInt(CUSTOMER_ID, 1),
             category?.api, longitude, latitude, page)
         return mapToStoreCouponCountModelList(data.body()?.result)
     }
@@ -45,12 +52,60 @@ class CoumoRepositoryImpl @Inject constructor(
         return mapToStoreInfoModel(data.body()?.result)
     }
 
-    override suspend fun postStampCustomer(storeId: Int): String? {
-        return coumoApi.postCustomerStamp(1, storeId)
+    override suspend fun getMyPage(): MyPageModel? {
+        val data = coumoApi.getMyPageData(App.prefs.getInt(CUSTOMER_ID,1))
+        return mapToMyPageModel(data.body()?.result)
     }
 
-    override suspend fun postPaymentCustomer(storeId: Int): Uri? {
-        TODO("Not yet implemented")
+    override suspend fun getCouponList(filter: CouponAlignType): List<CouponModel> {
+        val data = coumoApi.getCouponList(App.prefs.getInt(CUSTOMER_ID,1),filter.api)
+        Log.d("TEST http list", "${data.body()}")
+        return emptyList()
+    }
+
+    override suspend fun getCouponStore(storeId: Int): CouponModel? {
+        val data = coumoApi.getCouponStore(App.prefs.getInt(CUSTOMER_ID,1),storeId)
+        Log.d("TEST http store", "${data.body()}")
+        return CouponModel("",0, stampImage = null)
+    }
+
+    override suspend fun postOwnerStamp(
+        storeId: Int,
+        customerId: Int,
+        stampCnt: Int
+    ): Boolean {
+        val data = coumoApi.postOwnerStamp(RequestOwnerQRModel(
+            storeId = storeId,
+            customerId = customerId,
+            ownerId = App.prefs.getInt(OWNER_ID,1),
+            stampCnt = stampCnt
+        ))
+        return data.isSuccessful
+    }
+
+    override suspend fun postOwnerPayment(
+        storeId: Int,
+        customerId: Int,
+        stampCnt: Int
+    ): Boolean {
+        val data = coumoApi.postOwnerPayment(RequestOwnerQRModel(
+            storeId = storeId,
+            customerId = customerId,
+            ownerId = App.prefs.getInt(OWNER_ID,1),
+            stampCnt = stampCnt
+        ))
+        return data.isSuccessful
+    }
+
+    private fun mapToMyPageModel(response: ResponseMyPageModel?): MyPageModel? {
+        return if (response != null) {
+            MyPageModel(
+                name = response.name,
+                birthday = response.birthday,
+                gender = if (response.gender == "MALE") "남성" else "여성",
+                phone = insertHyphens(response.phone)
+            )
+        } else null
     }
 
     private fun mapToStoreInfoModel(response: ResponseStoreDataModel?): StoreInfoModel? {
@@ -67,7 +122,8 @@ class CoumoRepositoryImpl @Inject constructor(
                 coupon = CouponModel(
                     name = response.coupon.title,
                     stampCount = response.coupon.cnt,
-                    color = response.coupon.color,
+                    couponColor = response.coupon.couponColor,
+                    fontColor = response.coupon.fontColor,
                     stampMax = 10,
                     stampImage = imageNullCheck(response.coupon.stampType)
                 ),
@@ -113,5 +169,12 @@ class CoumoRepositoryImpl @Inject constructor(
         } else {
             null
         }
+    }
+
+    private fun insertHyphens(input: String): String {
+        val modifiedString = StringBuilder(input)
+        modifiedString.insert(3, "-")
+        modifiedString.insert(8, "-")
+        return modifiedString.toString()
     }
 }

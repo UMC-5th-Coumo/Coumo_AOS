@@ -1,13 +1,11 @@
 package com.umc.coumo.utils
 
 import android.content.res.ColorStateList
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -77,13 +75,14 @@ fun setImageUri(imageView: ImageView, imageUri: Uri?) {
 }
 
 @BindingAdapter("imageQR")
-fun setImageQR(imageView: ImageView, imageUri: String?) {
-    Log.d("TEST HTTP","$imageUri")
+fun setImageQR(imageView: ImageView, imageUri: Uri?) {
     if (imageUri != null) {
-        imageView.setImageBitmap(BitmapFactory.decodeStream(imageUri.byteInputStream()))
+        Glide.with(imageView)
+            .load(imageUri)
+            .fitCenter().centerCrop()
+            .into(imageView)
     } else {
-        imageView.setImageResource(R.drawable.default_image)
-        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+
     }
 }
 
