@@ -73,4 +73,11 @@
         <item name="android:dropDownSelector">@drawable/icon_spinner_drop_down</item>
     </style>
 
+    <style name="timeTableStyle">
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/font_text</item>
+        <item name="android:fontFamily">@font/pretendard_600</item>
+    </style>
+
 </resources>

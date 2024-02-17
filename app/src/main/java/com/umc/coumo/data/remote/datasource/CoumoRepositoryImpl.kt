@@ -12,6 +12,7 @@ import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MenuModel
 import com.umc.coumo.domain.model.MyPageModel
+import com.umc.coumo.domain.model.RunTimeModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.model.StoreInfoModel
@@ -20,6 +21,7 @@ import com.umc.coumo.domain.type.CategoryType
 import com.umc.coumo.domain.type.CouponAlignType
 import com.umc.coumo.utils.Constants.CUSTOMER_ID
 import com.umc.coumo.utils.Constants.OWNER_ID
+import java.time.LocalDate
 import javax.inject.Inject
 
 class CoumoRepositoryImpl @Inject constructor(
@@ -119,6 +121,14 @@ class CoumoRepositoryImpl @Inject constructor(
                 image = response.images.map {
                     Uri.parse(it)
                 },
+                telephone = insertHyphens2(response.telephone),
+                time = response.time.map {
+                    RunTimeModel(
+                        day = it.day,
+                        startTime = it.startTime,
+                        endTime = it.endTime
+                    )
+                },
                 coupon = CouponModel(
                     name = response.coupon.title,
                     stampCount = response.coupon.cnt,
@@ -137,9 +147,12 @@ class CoumoRepositoryImpl @Inject constructor(
                 }
             )
         } else null
-
     }
 
+    private fun todayRunTime(runTime: RunTimeModel) {
+
+        val today = LocalDate.now().dayOfWeek.toString()
+    }
     private fun mapToStoreCouponCountModelList(responseList: List<ResponseNearStoreModel>?): List<StoreCouponCountModel>? {
         return responseList?.map { response ->
             StoreCouponCountModel(
@@ -175,6 +188,13 @@ class CoumoRepositoryImpl @Inject constructor(
         val modifiedString = StringBuilder(input)
         modifiedString.insert(3, "-")
         modifiedString.insert(8, "-")
+        return modifiedString.toString()
+    }
+
+    private fun insertHyphens2(input: String): String {
+        val modifiedString = StringBuilder(input)
+        modifiedString.insert(2, "-")
+        modifiedString.insert(7, "-")
         return modifiedString.toString()
     }
 }

@@ -49,6 +49,9 @@ class HomeViewModel @Inject constructor(
     private val _currentAddress = MutableLiveData<String>()
     val currentAddress: LiveData<String> get() = _currentAddress
 
+    private val _timeDropDown = MutableLiveData<Boolean>(false)
+    val timeDropDown: LiveData<Boolean> get() = _timeDropDown
+
     fun setCurrentLocation(longitude: Double, latitude: Double ) {
         _currentLocation.value = LocationLatLng(longitude, latitude)
     }
@@ -85,6 +88,10 @@ class HomeViewModel @Inject constructor(
         getNearStoreList(category)
     }
 
+    fun changeRunTime() {
+        _timeDropDown.value = !_timeDropDown.value!!
+    }
+
     fun loadStoreData(storeId: Int) {
         viewModelScope.launch {
             repository.getStoreData(storeId).let {
@@ -92,6 +99,7 @@ class HomeViewModel @Inject constructor(
                     _storeData.value = it
                     _currentStoreId.value = storeId
                     getCouponStore(storeId)
+                    _timeDropDown.value = false
                 } else {
                     listOf<StoreInfoModel>() //값을 못 받아 왔을 때, 빈 값 처리
                 }
