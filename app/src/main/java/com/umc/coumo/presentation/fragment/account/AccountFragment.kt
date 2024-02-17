@@ -23,6 +23,8 @@ class AccountFragment: BindingFragment<FragmentAccountBinding>(R.layout.fragment
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        viewModel.getMyPage()
+
         binding.sectionServiceCenter.setOnClickListener {
             val dialIntent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse("tel:" + "1577-9999")
