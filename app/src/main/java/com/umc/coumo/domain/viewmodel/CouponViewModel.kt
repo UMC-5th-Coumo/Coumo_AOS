@@ -1,7 +1,6 @@
 package com.umc.coumo.domain.viewmodel
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -64,7 +63,6 @@ class CouponViewModel @Inject constructor(
     }
 
     fun getPaymentQR() {
-        Log.d("TEST http","${prefs.getInt(CUSTOMER_ID,1)}")
         _currentQR.value = Uri.parse("https://dev.coumo.shop/api/qr/customer/payment/${prefs.getInt(CUSTOMER_ID,0)}/${currentStoreId.value}")
     }
 }

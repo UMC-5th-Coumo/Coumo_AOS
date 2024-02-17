@@ -1,5 +1,6 @@
 package com.umc.coumo.utils
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
@@ -15,6 +16,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.umc.coumo.R
+import com.umc.coumo.domain.model.RunTimeModel
+import java.time.LocalDate
 
 @BindingAdapter("app:selectedNaviMargin")
 fun setSelectedMargin(view: View, isSelected: Boolean) {
@@ -130,4 +133,30 @@ fun TextView.setDynamicTextColor(color: String?) {
 private fun isValidColorCode(color: String): Boolean {
     val regex = "^#[0-9A-Fa-f]{6}$"
     return color.matches(regex.toRegex())
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("timeTableText")
+fun TextView.setTimeTableText(time: RunTimeModel?) {
+    if (time == null) {
+        visibility = View.GONE
+    } else {
+        text = if (time.startTime != "none" && time.endTime != "none") {
+            "${time.day} : ${time.startTime} ~ ${time.endTime}"
+        } else {
+            "${time.day} : 휴무"
+        }
+    }
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("currentTimeTableText")
+fun TextView.setTimeTableText(runTimes: List<RunTimeModel>) {
+    val today = LocalDate.now().dayOfWeek.toString()
+    val time = runTimes.filter { it.day == today }
+    text = if (time.first().startTime != "none" && time.first().endTime != "none") {
+        "${time.first().day} : ${time.first().startTime} ~ ${time.first().endTime}"
+    } else {
+        "${time.first().day} : 휴무일"
+    }
 }
