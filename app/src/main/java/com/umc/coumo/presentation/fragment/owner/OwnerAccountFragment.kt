@@ -11,6 +11,7 @@ import com.umc.coumo.databinding.FragmentOwnerAccountBinding
 import com.umc.coumo.domain.type.AccountAction
 import com.umc.coumo.presentation.dialog.AccountBottomSheetDialog
 import com.umc.coumo.utils.Constants.ACCESS_TOKEN
+import com.umc.coumo.utils.Constants.OWNER_ID
 import com.umc.coumo.utils.binding.BindingFragment
 
 class OwnerAccountFragment: BindingFragment<FragmentOwnerAccountBinding>(R.layout.fragment_owner_account) {
@@ -29,7 +30,8 @@ class OwnerAccountFragment: BindingFragment<FragmentOwnerAccountBinding>(R.layou
 
         binding.btnLogout.setOnClickListener {
             val dialog = AccountBottomSheetDialog(AccountAction.LOGOUT) {
-                App.prefs.setString(ACCESS_TOKEN,"") //Token 없애기
+                App.prefs.setString(ACCESS_TOKEN,"")
+                App.prefs.setString(OWNER_ID,"")//Token 없애기
                 requireActivity().finish()
             }
             dialog.show(parentFragmentManager, null)
