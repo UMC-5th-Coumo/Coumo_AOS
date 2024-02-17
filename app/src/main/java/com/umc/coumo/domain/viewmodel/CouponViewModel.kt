@@ -31,6 +31,9 @@ class CouponViewModel @Inject constructor(
     private val _currentQR = MutableLiveData<Uri?>()
     val currentQR: LiveData<Uri?> get() = _currentQR
 
+    private val _currentStoreId = MutableLiveData<Int>()
+    val currentStoreId: LiveData<Int> get() = _currentStoreId
+
     fun changeAlign(align: CouponAlignType) {
         _align.value = align
         getCouponList()
@@ -46,18 +49,22 @@ class CouponViewModel @Inject constructor(
         }
     }
 
+    fun setCurrentStoreId(storeId: Int) {
+        _currentStoreId.value = storeId
+    }
+
     fun getCouponStore(storeId: Int) {
         viewModelScope.launch {
             repository.getCouponStore(storeId)
         }
     }
 
-    fun getStampQR(storeId: Int) {
-        _currentQR.value = Uri.parse("https://dev.coumo.shop/api/qr/customer/stamp/${prefs.getInt(CUSTOMER_ID,1)}/${storeId}")
+    fun getStampQR() {
+        _currentQR.value = Uri.parse("https://dev.coumo.shop/api/qr/customer/stamp/${prefs.getInt(CUSTOMER_ID,0)}/${currentStoreId.value}")
     }
 
-    fun getPaymentQR(storeId: Int) {
+    fun getPaymentQR() {
         Log.d("TEST http","${prefs.getInt(CUSTOMER_ID,1)}")
-        _currentQR.value = Uri.parse("https://dev.coumo.shop/api/qr/customer/payment/${prefs.getInt(CUSTOMER_ID,1)}/${storeId}")
+        _currentQR.value = Uri.parse("https://dev.coumo.shop/api/qr/customer/payment/${prefs.getInt(CUSTOMER_ID,0)}/${currentStoreId.value}")
     }
 }

@@ -7,8 +7,6 @@ import com.umc.coumo.App
 import com.umc.coumo.R
 import com.umc.coumo.databinding.ActivityLoginBinding
 import com.umc.coumo.domain.viewmodel.LoginViewModel
-import com.umc.coumo.utils.Constants.ACCESS_TOKEN
-import com.umc.coumo.utils.Constants.CUSTOMER_ID
 import com.umc.coumo.utils.binding.BindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,11 +17,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.prefs.setString(ACCESS_TOKEN, "asdasdsdasdasdasdasd")
-        App.prefs.setInt(CUSTOMER_ID,1)
         autoLogin()
-
-
     }
 
     //TODO(테스트 코드: 임시로 토큰이 10자 이하면 토큰이 없다고 판단)

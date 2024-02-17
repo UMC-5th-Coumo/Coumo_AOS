@@ -63,7 +63,7 @@ class CoumoRepositoryImpl @Inject constructor(
         return emptyList()
     }
 
-    override suspend fun getCouponStore(storeId: Int): CouponModel {
+    override suspend fun getCouponStore(storeId: Int): CouponModel? {
         val data = coumoApi.getCouponStore(App.prefs.getInt(CUSTOMER_ID,1),storeId)
         Log.d("TEST http store", "${data.body()}")
         return CouponModel("",0, stampImage = null)

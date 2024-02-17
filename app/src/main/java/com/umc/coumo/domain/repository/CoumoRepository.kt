@@ -30,7 +30,7 @@ interface CoumoRepository {
 
     suspend fun getCouponStore(
         storeId: Int,
-    ): CouponModel
+    ): CouponModel?
 
     suspend fun postOwnerStamp(
         storeId: Int,

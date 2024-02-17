@@ -28,6 +28,9 @@ class HomeViewModel @Inject constructor(
     private val _storeData = MutableLiveData<StoreInfoModel>()
     val storeData: LiveData<StoreInfoModel> get() = _storeData
 
+    private val _currentStoreId = MutableLiveData<Int>()
+    val currentStoreId: LiveData<Int> get() = _currentStoreId
+
     //카테고리
     private val _category = MutableLiveData<CategoryType>(CategoryType.CAFE)
     val category: LiveData<CategoryType> get() = _category
@@ -67,6 +70,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun getCouponStore(storeId: Int) {
+        viewModelScope.launch {
+            repository.getCouponStore(storeId)
+        }
+    }
 
     fun changeTab(tab: DetailTabType) {
         _currentTab.value = tab
@@ -82,6 +90,8 @@ class HomeViewModel @Inject constructor(
             repository.getStoreData(storeId).let {
                 if (it != null) {
                     _storeData.value = it
+                    _currentStoreId.value = storeId
+                    getCouponStore(storeId)
                 } else {
                     listOf<StoreInfoModel>() //값을 못 받아 왔을 때, 빈 값 처리
                 }

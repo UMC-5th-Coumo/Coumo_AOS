@@ -1,6 +1,7 @@
 package com.umc.coumo.presentation.fragment.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,7 +31,6 @@ class HomeDetailCouponFragment: BindingFragmentNoneBackPress<FragmentHomeDetailC
             homeViewModel.changePageIndex(TabType.COUPON)
         }
 
-
         val stampAdapter = StampAdapter()
         binding.rvStamp.apply {
             adapter = stampAdapter
@@ -45,8 +45,9 @@ class HomeDetailCouponFragment: BindingFragmentNoneBackPress<FragmentHomeDetailC
         stampAdapter.submitList(result)
 
         binding.itemCoupon.setOnClickListener {
-
             viewModel.storeData.value?.coupon?.let { couponViewModel.setCurrentCoupon(it) }
+            Log.d("TEST http","${viewModel.currentStoreId.value}")
+            couponViewModel.setCurrentStoreId(viewModel.currentStoreId.value?:0)
             val dialog = CouponDialog(couponViewModel)
             dialog.show(parentFragmentManager, null)
         }
