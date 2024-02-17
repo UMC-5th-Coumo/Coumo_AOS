@@ -52,10 +52,10 @@ class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fr
     private fun setStoreImage() {
         val imageAdapter = ImageViewPagerAdapter(requireContext())
 
-/*        binding.vpStoreImage.apply {
+        binding.vpStoreImage.apply {
             adapter = imageAdapter
             offscreenPageLimit = 1
-        }*/
+        }
 
         viewModel.storeData.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
