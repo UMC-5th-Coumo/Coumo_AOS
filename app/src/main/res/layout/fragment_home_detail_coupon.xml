@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="item"
+            type="com.umc.coumo.domain.viewmodel.HomeViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -15,27 +18,50 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/horizontal_padding">
 
-            <TextView
-                android:id="@+id/tv_coupon_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="해당 가게에서 4개 모았어요!"
-                android:textSize="16sp"
-                android:textColor="@color/font_text"
-                android:fontFamily="@font/pretendard_700"
-                android:layout_marginTop="28dp"
-                android:lineSpacingExtra="6dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:id="@+id/iv_coupon"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_coupon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/coupon"
-                android:layout_marginTop="16dp"
-                android:adjustViewBounds="true"
-                app:layout_constraintTop_toBottomOf="@id/tv_coupon_count"/>
+                android:layout_marginBottom="32dp"
+                android:paddingTop="32dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/shape_rect_round_6"
+                    android:paddingTop="28dp"
+                    app:dynamicBackgroundColor="@{item.storeData.coupon.couponColor}"
+                    tools:backgroundTint="#78d5d7"
+                    app:layout_constraintDimensionRatio="308:180"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.storeData.coupon.name}"
+                        android:textSize="26sp"
+                        android:fontFamily="@font/montserrat_alternates_bold"
+                        app:dynamicTextColor="@{item.storeData.coupon.fontColor}"
+                        tools:text="COFFEE 가 SHOP"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_stamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_title"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tv_coupon_collection"
@@ -50,7 +76,7 @@
                 android:textSize="16sp"
                 android:textColor="@color/font_white"
                 android:fontFamily="@font/pretendard_600"
-                app:layout_constraintTop_toBottomOf="@id/iv_coupon"/>
+                app:layout_constraintTop_toBottomOf="@id/item_coupon"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

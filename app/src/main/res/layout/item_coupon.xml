@@ -42,7 +42,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/shape_rect_round_6"
             android:paddingTop="28dp"
-            app:dynamicBackgroundColor="@{item.color}"
+            app:dynamicBackgroundColor="@{item.couponColor}"
             tools:backgroundTint="#FFDA26"
             app:layout_constraintDimensionRatio="308:180"
             app:layout_constraintTop_toBottomOf="@id/tv_coupon_title">

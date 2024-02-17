@@ -33,7 +33,7 @@
                 android:layout_width="308dp"
                 android:layout_height="180dp"
                 android:background="@drawable/shape_rect_round_6"
-                app:dynamicBackgroundColor="@{coupon.currentCoupon.color}"
+                app:dynamicBackgroundColor="@{coupon.currentCoupon.couponColor}"
                 app:layout_constraintDimensionRatio="308:180"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_rect_round_6"
                 android:paddingTop="28dp"
-                app:dynamicBackgroundColor="@{coupon.currentCoupon.color}"
+                app:dynamicBackgroundColor="@{coupon.currentCoupon.couponColor}"
                 tools:backgroundTint="#FFDA26">
 
                 <TextView
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_alternates_bold"
-                    android:text="COFFEE SHOP"
+                    android:text="@{coupon.currentCoupon.name}"
                     android:textSize="22sp"
                     app:dynamicTextColor="@{coupon.currentCoupon.fontColor}"
                     app:layout_constraintEnd_toEndOf="parent"

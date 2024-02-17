@@ -25,7 +25,7 @@ class CouponViewModel @Inject constructor(
     private val _couponList = MutableLiveData<List<CouponModel>>()
     val couponList: LiveData<List<CouponModel>> get() = _couponList
 
-    private val _currentCoupon = MutableLiveData<CouponModel>()
+    private val _currentCoupon = MutableLiveData<CouponModel>(CouponModel(name = "", stampCount = 0, stampMax = 10, stampImage = null))
     val currentCoupon: LiveData<CouponModel> get() = _currentCoupon
 
     private val _currentQR = MutableLiveData<Uri?>()
@@ -36,14 +36,8 @@ class CouponViewModel @Inject constructor(
         getCouponList()
     }
 
-    fun testData() {
-        val list = listOf(
-            CouponModel(name = "왕십리 청춘카페", stampCount = 1, color = "?", stampMax = 10, stampImage = null),
-            CouponModel(name = "왕십리 청춘카페2", stampCount = 8, color = "?", stampMax = 8, stampImage = null),
-            CouponModel(name = "왕십리 청춘카페3", stampCount = 3, color = "?", stampMax = 12, stampImage = null),
-            CouponModel(name = "왕십리 청춘카페4", stampCount = 7, color = "?", stampMax = 10, stampImage = null),
-        )
-        _couponList.value = list
+    fun setCurrentCoupon(couponModel: CouponModel) {
+        _currentCoupon.value = couponModel
     }
 
     fun getCouponList() {

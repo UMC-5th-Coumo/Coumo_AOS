@@ -122,7 +122,8 @@ class CoumoRepositoryImpl @Inject constructor(
                 coupon = CouponModel(
                     name = response.coupon.title,
                     stampCount = response.coupon.cnt,
-                    color = response.coupon.color,
+                    couponColor = response.coupon.couponColor,
+                    fontColor = response.coupon.fontColor,
                     stampMax = 10,
                     stampImage = imageNullCheck(response.coupon.stampType)
                 ),

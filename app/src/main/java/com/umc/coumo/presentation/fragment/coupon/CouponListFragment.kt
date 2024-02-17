@@ -52,8 +52,6 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
     private fun setRecyclerView () {
         val couponListAdapter = CouponListAdapter(requireContext())
 
-        viewModel.testData()
-
         binding.rvCoupon.apply {
             adapter = couponListAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
