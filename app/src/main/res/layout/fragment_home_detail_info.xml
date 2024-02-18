@@ -39,13 +39,13 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_time"
                     currentTimeTableText="@{viewModel.storeData.time}"
-                    android:visibility="@{viewModel.timeDropDown ? View.GONE : View.VISIBLE}"
                     android:textSize="14sp"
                     android:textColor="@color/font_text"
                     android:fontFamily="@font/pretendard_700"
                     android:layout_marginStart="6dp"
                     app:layout_constraintStart_toEndOf="@id/iv_time"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_time"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_time"/>
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/iv_dropdown"
@@ -55,7 +55,8 @@
                     android:layout_marginStart="6dp"
                     android:onClick="@{() -> viewModel.changeRunTime()}"
                     app:layout_constraintStart_toEndOf="@id/tv_time"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_time"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_time"/>
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/iv_call"
@@ -154,7 +155,7 @@
                 android:textColor="#161515"
                 android:fontFamily="@font/pretendard_400"
                 android:layout_marginHorizontal="@dimen/horizontal_padding"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:lineSpacingExtra="6dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
