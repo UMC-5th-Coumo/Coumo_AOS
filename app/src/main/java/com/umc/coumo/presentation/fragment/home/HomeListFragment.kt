@@ -33,7 +33,7 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
 
 
         binding.btnRefresh.setOnClickListener {
-            viewModel.loadStoreData(1)
+            viewModel.loadStoreData(138)
             findNavController().navigate(R.id.action_homeListFragment_to_homeDetailFragment, null)
         }
 

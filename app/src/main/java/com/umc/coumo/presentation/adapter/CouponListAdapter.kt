@@ -1,7 +1,6 @@
 package com.umc.coumo.presentation.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
@@ -50,13 +49,13 @@ class CouponListAdapter(
             stampAdapter.submitList(result)
 
             itemView.setOnClickListener {
-                listener?.onItemClick(item.name)
+                listener?.onItemClick(item.id)
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(id:String)
+        fun onItemClick(id:Int)
     }
 
     private var listener: OnItemClickListener? = null

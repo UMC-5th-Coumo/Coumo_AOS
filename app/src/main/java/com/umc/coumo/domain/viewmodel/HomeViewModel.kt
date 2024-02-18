@@ -104,7 +104,8 @@ class HomeViewModel @Inject constructor(
                     getCouponStore(storeId)
                     _timeDropDown.value = false
                 } else {
-                    _storeData.value = it //값을 못 받아 왔을 때, 빈 값 처리
+
+                      //값을 못 받아 왔을 때, 빈 값 처리
                 }
             }
         }

@@ -44,17 +44,19 @@
                     android:fontFamily="@font/pretendard_700"
                     android:layout_marginStart="6dp"
                     app:layout_constraintStart_toEndOf="@id/iv_time"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_time"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_time"/>
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/iv_dropdown"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@{viewModel.timeDropDown ? @drawable/icon_dropdown : @drawable/icon_dropup}"
+                    android:src="@{viewModel.timeDropDown ? @drawable/icon_dropup : @drawable/icon_dropdown}"
                     android:layout_marginStart="6dp"
                     android:onClick="@{() -> viewModel.changeRunTime()}"
                     app:layout_constraintStart_toEndOf="@id/tv_time"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_time"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_time"/>
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/iv_call"
@@ -82,7 +84,7 @@
                     android:id="@+id/time_table"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginStart="6dp"
                     android:orientation="vertical"
                     android:visibility="@{viewModel.timeDropDown ? View.VISIBLE : View.GONE}"
@@ -153,7 +155,7 @@
                 android:textColor="#161515"
                 android:fontFamily="@font/pretendard_400"
                 android:layout_marginHorizontal="@dimen/horizontal_padding"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:lineSpacingExtra="6dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout

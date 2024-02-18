@@ -33,6 +33,10 @@ class CouponViewModel @Inject constructor(
     private val _currentStoreId = MutableLiveData<Int>()
     val currentStoreId: LiveData<Int> get() = _currentStoreId
 
+    init {
+        getCouponList()
+    }
+
     fun changeAlign(align: CouponAlignType) {
         _align.value = align
         getCouponList()
@@ -44,7 +48,7 @@ class CouponViewModel @Inject constructor(
 
     fun getCouponList() {
         viewModelScope.launch {
-            repository.getCouponList(align.value?:CouponAlignType.MOST)
+            _couponList.value = repository.getCouponList(align.value?:CouponAlignType.MOST)
         }
     }
 

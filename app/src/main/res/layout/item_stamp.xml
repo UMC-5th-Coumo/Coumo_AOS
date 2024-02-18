@@ -29,7 +29,7 @@
             android:src="@drawable/icon_stamp_dessert"
             android:scaleType="centerCrop"
             android:clipToOutline="true"
-            android:visibility="@{item ? View.VISIBLE : View.INVISIBLE}"/>
+            android:alpha="@{item ? 1f: 0.2f}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
