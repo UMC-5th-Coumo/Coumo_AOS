@@ -15,7 +15,7 @@ class CouponListAdapter(
 ): ListAdapter<CouponModel, RecyclerView.ViewHolder>(
     ItemDiffCallback<CouponModel>(
         onContentsTheSame = {old, new -> old == new},
-        onItemsTheSame = {old, new -> old.name == new.name}
+        onItemsTheSame = {old, new -> old.id == new.id}
     )
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

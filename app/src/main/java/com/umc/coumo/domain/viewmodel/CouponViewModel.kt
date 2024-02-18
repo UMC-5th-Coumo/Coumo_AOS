@@ -46,6 +46,12 @@ class CouponViewModel @Inject constructor(
         _currentCoupon.value = couponModel
     }
 
+    fun setCurrentCouponById(id: Int) {
+        _currentCoupon.value = _couponList.value?.filter { couponModel ->
+            couponModel.id == id
+        }?.first()
+    }
+
     fun getCouponList() {
         viewModelScope.launch {
             _couponList.value = repository.getCouponList(align.value?:CouponAlignType.MOST)
