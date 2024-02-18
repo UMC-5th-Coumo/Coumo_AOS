@@ -99,10 +99,10 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             repository.getStoreData(storeId).let {
                 if (it != null) {
-                    _storeData.value = it
                     _currentStoreId.value = storeId
                     getCouponStore(storeId)
                     _timeDropDown.value = false
+                    _storeData.value = it
                 } else {
 
                       //값을 못 받아 왔을 때, 빈 값 처리

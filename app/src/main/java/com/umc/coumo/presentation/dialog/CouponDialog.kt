@@ -17,6 +17,7 @@ class CouponDialog(val viewModel: CouponViewModel) : BindingDialogFragment<Dialo
 
         binding.coupon = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.executePendingBindings()
 
         val coupon = viewModel.currentCoupon.value?:
             CouponModel(name = "가게 이름", stampCount = 0, stampMax = 10, stampImage = null)

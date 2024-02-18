@@ -32,6 +32,7 @@ class HomeDetailInfoFragment: BindingFragmentNoneBackPress<FragmentHomeDetailInf
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.executePendingBindings()
 
         setRecyclerView()
     }

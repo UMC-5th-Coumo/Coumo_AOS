@@ -26,6 +26,7 @@ class HomeDetailCouponFragment: BindingFragmentNoneBackPress<FragmentHomeDetailC
 
         binding.item = viewModel
         binding.lifecycleOwner
+        binding.executePendingBindings()
 
         binding.tvCouponCollection.setOnClickListener {
             homeViewModel.changePageIndex(TabType.COUPON)
