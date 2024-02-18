@@ -88,19 +88,22 @@ class HomeViewModel @Inject constructor(
         _timeDropDown.value = !_timeDropDown.value!!
     }
 
-    fun loadStoreData(storeId: Int) {
-        viewModelScope.launch {
-            repository.getStoreData(storeId).let {
-                if (it != null) {
-                    _currentStoreId.value = storeId
-                    _timeDropDown.value = false
-                    _storeData.value = it
-                } else {
-                    _storeData.value = null
-                      //값을 못 받아 왔을 때, 빈 값 처리
-                }
+    suspend fun loadStoreData(storeId: Int): Boolean {
+
+        _storeData.value = null
+
+        repository.getStoreData(storeId).let {
+            if (it != null) {
+                _currentStoreId.value = storeId
+                _timeDropDown.value = false
+                _storeData.value = it
+            } else {
+                _storeData.value = null
+                  //값을 못 받아 왔을 때, 빈 값 처리
             }
         }
+
+        return _storeData.value != null
     }
 
     fun resetPage() {
