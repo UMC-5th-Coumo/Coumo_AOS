@@ -29,12 +29,6 @@ class CommunityAllFragment: BindingFragment<FragmentCommunityAllBinding>(R.layou
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
-        binding.rvAll2.apply {
-            adapter = storeInfoAdapter
-            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.item_between_horizontal)))
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        }
-
         val list = listOf<StoreInfoItemModel>(
             StoreInfoItemModel(1, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
                     "아메리카노 2000원 이벤트를 진행 중입니다."),

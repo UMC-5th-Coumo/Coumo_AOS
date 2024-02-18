@@ -1,6 +1,7 @@
 package com.umc.coumo.data.remote.api
 
 import com.umc.coumo.data.remote.model.request.RequestOwnerQRModel
+import com.umc.coumo.data.remote.model.response.ResponseCommunityModel
 import com.umc.coumo.data.remote.model.response.ResponseModel
 import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
@@ -76,4 +77,10 @@ interface CoumoApi {
         @Body body: RequestOwnerQRModel
     ): Response<Any>
 
+    @GET("/api/notice/around/list")
+    suspend fun getCommunityAll(
+        @Query("longitude") longitude: Double,
+        @Query("latitude") latitude: Double,
+        @Query("pageId") pageId: Int
+    ): Response<ResponseModel<List<ResponseCommunityModel>>>
 }

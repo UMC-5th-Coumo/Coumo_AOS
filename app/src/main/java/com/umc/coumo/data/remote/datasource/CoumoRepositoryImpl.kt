@@ -5,6 +5,7 @@ import android.util.Log
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.CoumoApi
 import com.umc.coumo.data.remote.model.request.RequestOwnerQRModel
+import com.umc.coumo.data.remote.model.response.ResponseCommunityModel
 import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
@@ -12,6 +13,7 @@ import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MenuModel
 import com.umc.coumo.domain.model.MyPageModel
+import com.umc.coumo.domain.model.PostModel
 import com.umc.coumo.domain.model.RunTimeModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
@@ -99,6 +101,18 @@ class CoumoRepositoryImpl @Inject constructor(
         return data.isSuccessful
     }
 
+    override suspend fun getCommunityAll(
+        longitude: Double,
+        latitude: Double,
+        pageId: Int
+    ): List<PostModel>? {
+        val data = coumoApi.getCommunityAll(
+            longitude = longitude,
+            latitude = latitude,
+            pageId = pageId)
+        return mapToPostModelList(data.body()?.result)
+    }
+
     private fun mapToMyPageModel(response: ResponseMyPageModel?): MyPageModel? {
         return if (response != null) {
             MyPageModel(
@@ -172,6 +186,20 @@ class CoumoRepositoryImpl @Inject constructor(
                 name = response.name,
                 address = response.location,
                 description = response.description,
+            )
+        }
+    }
+
+    private fun mapToPostModelList(responseList: List<ResponseCommunityModel>?): List<PostModel>? {
+        return responseList?.map { response ->
+            PostModel(
+                title = response.title,
+                contents = response.noticeContent,
+                date = response.createAt,
+                storeName = response.storeName,
+                imageUri = response.noticeImage.map {
+                    Uri.parse(it)
+                }
             )
         }
     }

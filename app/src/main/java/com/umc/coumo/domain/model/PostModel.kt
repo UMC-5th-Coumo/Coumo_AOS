@@ -7,5 +7,5 @@ data class PostModel(
     val contents: String,
     val date: String,
     val storeName: String,
-    val imageUri: List<Uri>?
+    val imageUri: List<Uri?>?
 )
