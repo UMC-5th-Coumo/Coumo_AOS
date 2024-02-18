@@ -35,7 +35,7 @@ class HomeMenuFragment: BindingFragment<FragmentHomeMenuBinding>(R.layout.fragme
 
         viewModel.storeData.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                menuAdapter.submitList(it.menuList)
+                menuAdapter.submitList(it?.menuList)
             }
         }
     }

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -19,6 +20,7 @@ import com.umc.coumo.presentation.adapter.BannerPagerAdapter
 import com.umc.coumo.presentation.adapter.StoreInfoAdapter
 import com.umc.coumo.utils.ItemSpacingDecoration
 import com.umc.coumo.utils.binding.BindingFragment
+import kotlinx.coroutines.launch
 import java.io.IOException
 
 class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragment_home_main) {
@@ -111,10 +113,13 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
 
         storeInfoAdapter.setOnItemClickListener(object : StoreInfoAdapter.OnItemClickListener{
             override fun onItemClick(id: Int) {
-                viewModel.loadStoreData(id)
-                findNavController().navigate(
-                    R.id.action_homeMainFragment_to_homeDetailFragment,
-                )
+                lifecycleScope.launch {
+                    if (viewModel.loadStoreData(id))
+                    findNavController().navigate(
+                        R.id.action_homeMainFragment_to_homeDetailFragment,
+                    )
+                }
+
             }
 
         })

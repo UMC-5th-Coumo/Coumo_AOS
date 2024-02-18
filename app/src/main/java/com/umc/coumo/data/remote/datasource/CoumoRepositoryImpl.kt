@@ -5,6 +5,7 @@ import android.util.Log
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.CoumoApi
 import com.umc.coumo.data.remote.model.request.RequestOwnerQRModel
+import com.umc.coumo.data.remote.model.response.ResponseCouponModelX
 import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
@@ -21,7 +22,6 @@ import com.umc.coumo.domain.type.CategoryType
 import com.umc.coumo.domain.type.CouponAlignType
 import com.umc.coumo.utils.Constants.CUSTOMER_ID
 import com.umc.coumo.utils.Constants.OWNER_ID
-import java.time.LocalDate
 import javax.inject.Inject
 
 class CoumoRepositoryImpl @Inject constructor(
@@ -59,16 +59,9 @@ class CoumoRepositoryImpl @Inject constructor(
         return mapToMyPageModel(data.body()?.result)
     }
 
-    override suspend fun getCouponList(filter: CouponAlignType): List<CouponModel> {
+    override suspend fun getCouponList(filter: CouponAlignType): List<CouponModel>? {
         val data = coumoApi.getCouponList(App.prefs.getInt(CUSTOMER_ID,0),filter.api)
-        Log.d("TEST http list", "${data.body()}")
-        return emptyList()
-    }
-
-    override suspend fun getCouponStore(storeId: Int): CouponModel? {
-        val data = coumoApi.getCouponStore(App.prefs.getInt(CUSTOMER_ID,0),storeId)
-        Log.d("TEST http store", "${data.body()}")
-        return CouponModel(0,"",0, stampImage = null)
+        return if (data.isSuccessful) mapToListCouponModel(data.body()?.result) else null
     }
 
     override suspend fun postOwnerStamp(
@@ -110,6 +103,25 @@ class CoumoRepositoryImpl @Inject constructor(
         } else null
     }
 
+    private fun mapToListCouponModel(responseList: ResponseCouponModelX?): List<CouponModel>? {
+        return responseList?.map { response ->
+            CouponModel(
+                id = response.storeCouponDTO.storeId,
+                name = response.storeCouponDTO.storeName,
+                stampCount = response.customerStoreStampDTO.stampCurrent,
+                stampMax = when (response.customerStoreStampDTO.stampMax) {
+                    "TEN" -> 10
+                    "EIGHT" -> 8
+                    "TWELVE" -> 12
+                    else -> 10
+                },
+                couponColor = response.storeCouponDTO.couponColor,
+                fontColor = response.storeCouponDTO.fontColor,
+                stampImage = Uri.parse(response.storeCouponDTO.stampImage),
+            )
+        }
+    }
+
     private fun mapToStoreInfoModel(response: ResponseStoreDataModel?): StoreInfoModel? {
         return if (response != null) {
             StoreInfoModel(
@@ -149,10 +161,6 @@ class CoumoRepositoryImpl @Inject constructor(
         } else null
     }
 
-    private fun todayRunTime(runTime: RunTimeModel) {
-
-        val today = LocalDate.now().dayOfWeek.toString()
-    }
     private fun mapToStoreCouponCountModelList(responseList: List<ResponseNearStoreModel>?): List<StoreCouponCountModel>? {
         return responseList?.map { response ->
             StoreCouponCountModel(

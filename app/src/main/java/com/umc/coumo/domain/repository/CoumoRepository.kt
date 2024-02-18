@@ -26,11 +26,7 @@ interface CoumoRepository {
 
     suspend fun getCouponList(
         filter: CouponAlignType,
-    ): List<CouponModel>
-
-    suspend fun getCouponStore(
-        storeId: Int,
-    ): CouponModel?
+    ): List<CouponModel>?
 
     suspend fun postOwnerStamp(
         storeId: Int,

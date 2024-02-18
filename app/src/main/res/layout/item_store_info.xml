@@ -58,6 +58,8 @@
                 android:fontFamily="@font/pretendard_400"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="4dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="@{item.address}"
                 android:textColor="@color/font_button_main"
                 android:textSize="10sp"

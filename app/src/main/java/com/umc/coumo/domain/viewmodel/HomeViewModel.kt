@@ -25,8 +25,8 @@ class HomeViewModel @Inject constructor(
     private val _currentTab = MutableLiveData(DetailTabType.INFO)
     val currentTab: LiveData<DetailTabType> get() = _currentTab
 
-    private val _storeData = MutableLiveData<StoreInfoModel>()
-    val storeData: LiveData<StoreInfoModel> get() = _storeData
+    private val _storeData = MutableLiveData<StoreInfoModel?>()
+    val storeData: LiveData<StoreInfoModel?> get() = _storeData
 
     private val _currentStoreId = MutableLiveData<Int>()
     val currentStoreId: LiveData<Int> get() = _currentStoreId
@@ -61,7 +61,6 @@ class HomeViewModel @Inject constructor(
 
     fun setCurrentAddress(address: List<Address>?) {
         _currentAddress.value = address?.get(0)?.let { it.adminArea + " "+ it.subLocality + " "+ it.thoroughfare }
-        Log.d("TEST Address","${address?.get(0)}")
     }
 
     fun getPopularStoreList() {
@@ -73,12 +72,6 @@ class HomeViewModel @Inject constructor(
     private fun getNearStoreList(category: CategoryType?) {
         viewModelScope.launch {
             _nearStoreList.value = repository.getNearStoreList(category = category,longitude = _currentLocation.value?.longitude!!, latitude = _currentLocation.value?.latitude!!)
-        }
-    }
-
-    private fun getCouponStore(storeId: Int) {
-        viewModelScope.launch {
-            repository.getCouponStore(storeId)
         }
     }
 
@@ -95,20 +88,22 @@ class HomeViewModel @Inject constructor(
         _timeDropDown.value = !_timeDropDown.value!!
     }
 
-    fun loadStoreData(storeId: Int) {
-        viewModelScope.launch {
-            repository.getStoreData(storeId).let {
-                if (it != null) {
-                    _storeData.value = it
-                    _currentStoreId.value = storeId
-                    getCouponStore(storeId)
-                    _timeDropDown.value = false
-                } else {
+    suspend fun loadStoreData(storeId: Int): Boolean {
 
-                      //값을 못 받아 왔을 때, 빈 값 처리
-                }
+        _storeData.value = null
+
+        repository.getStoreData(storeId).let {
+            if (it != null) {
+                _currentStoreId.value = storeId
+                _timeDropDown.value = false
+                _storeData.value = it
+            } else {
+                _storeData.value = null
+                  //값을 못 받아 왔을 때, 빈 값 처리
             }
         }
+
+        return _storeData.value != null
     }
 
     fun resetPage() {
