@@ -71,5 +71,4 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
         }
     }
 
-
 }

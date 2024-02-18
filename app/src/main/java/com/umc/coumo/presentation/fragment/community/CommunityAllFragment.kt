@@ -2,6 +2,7 @@ package com.umc.coumo.presentation.fragment.community
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.coumo.R
@@ -50,5 +51,14 @@ class CommunityAllFragment: BindingFragment<FragmentCommunityAllBinding>(R.layou
         storeInfoAdapter.submitList(list)
     }
 
-
+    private var backPressedTime: Long = 0
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            requireActivity().finish()
+        } else {
+            Toast.makeText(requireContext(), "한번 더 뒤로가기 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+        }
+        backPressedTime = System.currentTimeMillis()
+    }
 }
