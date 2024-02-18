@@ -23,6 +23,8 @@ class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fr
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.executePendingBindings()
+
         setViewPager()
         setStoreImage()
         setButton()
@@ -59,7 +61,7 @@ class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fr
 
         viewModel.storeData.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                imageAdapter.submitList(it.image)
+                imageAdapter.submitList(it?.image)
             }
         }
     }

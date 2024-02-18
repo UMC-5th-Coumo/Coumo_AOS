@@ -1,5 +1,6 @@
 package com.umc.coumo.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -33,6 +34,7 @@ class StampAdapter(): ListAdapter<Boolean, RecyclerView.ViewHolder>(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Boolean) {
             binding.item = item
+            Log.d("TEST HTTP COUPON","$item")
         }
     }
 }

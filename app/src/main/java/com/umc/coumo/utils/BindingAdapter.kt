@@ -7,6 +7,7 @@ import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -152,6 +153,7 @@ fun TextView.setTimeTableText(time: RunTimeModel?) {
 @SuppressLint("SetTextI18n")
 @BindingAdapter("currentTimeTableText")
 fun TextView.setTimeTableText(runTimes: List<RunTimeModel>?) {
+    Log.d("TEST http Time","$runTimes")
     if (runTimes != null) {
         val today = LocalDate.now().dayOfWeek.toString()
         val time = runTimes.filter { it.day == today }

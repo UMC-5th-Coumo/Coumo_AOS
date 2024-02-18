@@ -44,7 +44,7 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
 
         storeCouponAdapter.setOnItemClickListener(object : StoreCouponCountAdapter.OnItemClickListener {
             override fun onItemClick(id: Int) {
-                viewModel.loadStoreData(id) // TODO(추후 id를 활용한 데이터 요청 으로 변경)
+                viewModel.loadStoreData(id)
                 findNavController().navigate(R.id.action_homeListFragment_to_homeDetailFragment, null)
             }
         })

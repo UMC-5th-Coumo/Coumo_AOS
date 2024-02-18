@@ -64,12 +64,6 @@ class CoumoRepositoryImpl @Inject constructor(
         return if (data.isSuccessful) mapToListCouponModel(data.body()?.result) else null
     }
 
-    override suspend fun getCouponStore(storeId: Int): CouponModel? {
-        val data = coumoApi.getCouponStore(App.prefs.getInt(CUSTOMER_ID,0),storeId)
-        Log.d("TEST http store", "${data.body()}")
-        return if (data.isSuccessful) CouponModel(0,"",0, stampImage = null) else null
-    }
-
     override suspend fun postOwnerStamp(
         storeId: Int,
         customerId: Int,

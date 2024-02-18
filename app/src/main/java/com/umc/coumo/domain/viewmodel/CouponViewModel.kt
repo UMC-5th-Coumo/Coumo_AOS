@@ -62,12 +62,6 @@ class CouponViewModel @Inject constructor(
         _currentStoreId.value = storeId
     }
 
-    fun getCouponStore(storeId: Int) {
-        viewModelScope.launch {
-            repository.getCouponStore(storeId)
-        }
-    }
-
     fun getStampQR() {
         _currentQR.value = Uri.parse("https://dev.coumo.shop/api/qr/customer/stamp/${prefs.getInt(CUSTOMER_ID,0)}/${currentStoreId.value}")
     }
