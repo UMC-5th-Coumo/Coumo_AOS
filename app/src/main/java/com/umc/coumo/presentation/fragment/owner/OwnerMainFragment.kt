@@ -3,6 +3,7 @@ package com.umc.coumo.presentation.fragment.owner
 import android.Manifest
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentOwnerMainBinding
@@ -37,5 +38,16 @@ class OwnerMainFragment: BindingFragment<FragmentOwnerMainBinding>(R.layout.frag
                 findNavController().navigate(R.id.action_ownerMainFragment_to_ownerQRFragment, bundle)
             }
         }
+    }
+
+    private var backPressedTime: Long = 0
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            requireActivity().finish()
+        } else {
+            Toast.makeText(requireContext(), "한번 더 뒤로가기 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+        }
+        backPressedTime = System.currentTimeMillis()
     }
 }

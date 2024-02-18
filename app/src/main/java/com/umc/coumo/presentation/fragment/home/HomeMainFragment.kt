@@ -5,6 +5,7 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -148,5 +149,15 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
 
     private fun getLocation(location: Location) {
         viewModel.setCurrentLocation(location.longitude,location.latitude)
+    }
+    private var backPressedTime: Long = 0
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            requireActivity().finish()
+        } else {
+            Toast.makeText(requireContext(), "한번 더 뒤로가기 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+        }
+        backPressedTime = System.currentTimeMillis()
     }
 }
