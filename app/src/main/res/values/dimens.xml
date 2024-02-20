@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="zero_size">0dp</dimen>
+    <dimen name="thirty_two_size">32dp</dimen>
+
     <dimen name="bottom_navi_icon_size">24dp</dimen>
     <dimen name="bottom_navi_icon_background_size">40dp</dimen>
 

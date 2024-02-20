@@ -7,25 +7,30 @@
         <import type="android.view.View"/>
         <variable
             name="item"
-            type="com.umc.coumo.domain.model.PostModel" />
+            type="com.umc.coumo.domain.model.PostItemModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:paddingVertical="24dp"
+        android:paddingBottom="24dp"
         android:layout_marginHorizontal="8dp">
         
         <View
+            android:id="@+id/divider_item_post"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#DDDDDD"
             app:layout_constraintTop_toTopOf="parent"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_content_item_post"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="@id/divider_item_post"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_post">
 
@@ -122,11 +127,11 @@
             android:layout_width="76dp"
             android:layout_height="76dp"
             android:clipToOutline="true"
-            imageUri="@{item.imageUri[0]}"
-            android:visibility="@{item.imageUri.size() > 0 ? View.VISIBLE : View.GONE}"
+            android:src="@drawable/image_beauty"
+            android:visibility="@{item.imageUri.size() >= 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="@id/const_content_item_post"
+            app:layout_constraintBottom_toBottomOf="@id/const_content_item_post"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
