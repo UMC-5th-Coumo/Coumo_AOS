@@ -75,7 +75,7 @@ class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun postVerifyIdCode(phone: String, verificationCode: String): String? {
         val data = loginApi.postVerifyIdCode(RequestVerifyIdCodeModel(phone, verificationCode))
-        return data.body()?.result
+        return data.body()?.result?.loginId
     }
 
     override suspend fun postLoginAsOwner(loginId: String, password: String): ResponseLoginAsOwnerModel? {

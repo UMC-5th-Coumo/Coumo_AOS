@@ -9,5 +9,7 @@ class ResetPasswordViewModel @Inject constructor(): ViewModel() {
     private val _isValidatePassword = MutableLiveData(false)
     val isValidatePassword: LiveData<Boolean> get() = _isValidatePassword
 
+
+
     fun setIsValidatePassword(bool: Boolean) { _isValidatePassword.value = bool }
 }

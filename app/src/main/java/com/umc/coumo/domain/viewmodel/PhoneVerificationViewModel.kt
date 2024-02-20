@@ -30,7 +30,6 @@ class PhoneVerificationViewModel @Inject constructor(
         _isValidateUser.value = null
         viewModelScope.launch {
             _isValidateUser.value = repository.postFindIdRequestCode(name, phone)
-            Log.d("http", _isValidateUser.value.toString())
         }
     }
     fun postVerifyIdCode(phone: String, verificationCode: String) {
