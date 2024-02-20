@@ -5,6 +5,7 @@ import android.net.Uri
 data class PostModel(
     val id: Int,
     val title: String,
+    val type: String,
     val contents: String,
     val date: String,
     val storeName: String,

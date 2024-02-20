@@ -149,6 +149,16 @@ fun TextView.setTimeTableText(time: RunTimeModel?) {
     }
 }
 
+@BindingAdapter("communityChipText")
+fun TextView.setCommunityChipText(communityType : String) {
+    when (communityType) {
+        "EVENT" -> setText(R.string.event)
+        "NEW_PRODUCT" -> setText(R.string.new_menu)
+        "NO_SHOW" -> setText(R.string.no_show)
+        else -> {}
+    }
+}
+
 @SuppressLint("SetTextI18n")
 @BindingAdapter("currentTimeTableText")
 fun TextView.setTimeTableText(runTimes: List<RunTimeModel>?) {

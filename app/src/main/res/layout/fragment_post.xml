@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -10,17 +11,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="32dp">
 
         <TextView
             android:id="@+id/chip_new_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_menu"
+            communityChipText="@{viewModel.post.type}"
             style="@style/ChipTextStyle"
             android:background="@drawable/selector_chip_background"
             android:textColor="@color/selector_chip_text_color"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="26dp"
+            selected="@{true}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,17 +31,19 @@
             android:id="@+id/section_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="26dp"
+            app:layout_constraintTop_toBottomOf="@id/chip_new_menu"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
                 android:text="@{viewModel.post.storeName}"
-                android:textSize="11.2sp"
-                android:fontFamily="@font/pretendard_400"
-                android:textColor="#B7B7B7"
+                android:textSize="20sp"
+                android:fontFamily="@font/pretendard_700"
+                android:textColor="#512F8F"
+                tools:text="가게 이름"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -56,12 +61,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.post.title}"
-            android:textSize="11.2sp"
-            android:fontFamily="@font/pretendard_400"
-            android:textColor="#B7B7B7"
+            android:textSize="16sp"
+            android:fontFamily="@font/pretendard_700"
+            android:textColor="#512F8F"
             android:layout_marginTop="24dp"
+            android:layout_marginStart="26dp"
+            tools:text="그릭 요거트 전문점, 팀메리 타임세일 진행!"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/rv_image"/>
 
         <TextView
             android:id="@+id/tv_content"
@@ -72,6 +79,7 @@
             android:fontFamily="@font/pretendard_400"
             android:textColor="#242029"
             android:layout_marginTop="16dp"
+            android:layout_marginStart="26dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"/>
 
@@ -84,6 +92,11 @@
             android:fontFamily="@font/pretendard_400"
             android:textColor="#512F8F"
             android:layout_marginTop="16dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:background="@drawable/shape_rect_side_round"
+            android:backgroundTint="#DFDFDF"
+            android:layout_marginStart="26dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -205,6 +205,7 @@ class CoumoRepositoryImpl @Inject constructor(
                 contents = response.noticeContent,
                 date = convertDateTimeToFormat(response.createdAt),
                 storeName = response.storeName,
+                type = response.noticeType,
                 imageUri = response.noticeImages?.map {
                     Uri.parse(it)
                 }
