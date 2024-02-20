@@ -24,6 +24,7 @@
             android:fontFamily="@font/pretendard_700"
             android:layout_marginTop="40dp"
             android:layout_marginStart="26dp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -36,6 +37,7 @@
             android:paddingVertical="16dp"
             android:background="@drawable/shape_rec_round_8"
             android:backgroundTint="@color/sub"
+            android:visibility="gone"
             android:onClick="@{() -> viewModel.changeIsExpanded()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_account">
