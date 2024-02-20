@@ -1,7 +1,7 @@
 package com.umc.coumo.data.remote.api
 
 import com.umc.coumo.data.remote.model.request.RequestOwnerQRModel
-import com.umc.coumo.data.remote.model.response.ResponseCommunityModel
+import com.umc.coumo.data.remote.model.response.ResponseCouponModelX
 import com.umc.coumo.data.remote.model.response.ResponseModel
 import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
@@ -58,7 +58,7 @@ interface CoumoApi {
     suspend fun getCouponList(
         @Path("customerId") customerId: Int,
         @Query("filter") filter: String
-    ): Response<ResponseModel<Any>>
+    ): Response<ResponseModel<ResponseCouponModelX>>
 
     //가게의 내 쿠폰 보기
     @GET("/api/coupon/{storeId}/{customerId}")
@@ -77,11 +77,4 @@ interface CoumoApi {
         @Body body: RequestOwnerQRModel
     ): Response<Any>
 
-    @GET("/api/notice/around/list")
-    suspend fun getCommunityAll(
-        @Query("type") type: String,
-        @Query("longitude") longitude: Double,
-        @Query("latitude") latitude: Double,
-        @Query("pageId") pageId: Int
-    ): Response<ResponseModel<List<ResponseCommunityModel>>>
 }

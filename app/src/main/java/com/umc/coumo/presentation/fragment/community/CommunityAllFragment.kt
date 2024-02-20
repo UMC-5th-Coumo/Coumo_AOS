@@ -1,66 +1,64 @@
 package com.umc.coumo.presentation.fragment.community
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentCommunityAllBinding
-import com.umc.coumo.domain.model.PostItemModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.viewmodel.CommunityViewModel
-import com.umc.coumo.presentation.adapter.PostAdapter
-import com.umc.coumo.presentation.adapter.StoreCouponCountAdapter
-import com.umc.coumo.utils.EndlessRecyclerViewListener
+import com.umc.coumo.presentation.adapter.StoreInfoAdapter
 import com.umc.coumo.utils.ItemSpacingDecoration
 import com.umc.coumo.utils.binding.BindingFragment
 
 class CommunityAllFragment: BindingFragment<FragmentCommunityAllBinding>(R.layout.fragment_community_all) {
 
     private val viewModel: CommunityViewModel by activityViewModels()
-    private lateinit var postAdapter: PostAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
+       binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.getCommunityAllList()
-        postAdapter = PostAdapter()
+        val storeInfoAdapter = StoreInfoAdapter()
 
         binding.rvAll1.apply {
-            adapter = postAdapter
-            //addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.item_between_horizontal)))
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = storeInfoAdapter
+            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.item_between_horizontal)))
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
-        val scrollListener = object : EndlessRecyclerViewListener(
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        ) {
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                viewModel.getCommunityAllList()
-            }
+        binding.rvAll2.apply {
+            adapter = storeInfoAdapter
+            addItemDecoration(ItemSpacingDecoration(requireContext(),resources.getDimensionPixelSize(R.dimen.item_between_horizontal)))
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
-        postAdapter.setOnItemClickListener(object : PostAdapter.OnItemClickListener {
-            override fun onItemClick(id: Int) {
-                viewModel.setSelectedPost(viewModel.postAllList.value?.get(id))
-            }
-        })
+        val list = listOf<StoreInfoItemModel>(
+            StoreInfoItemModel(1, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
+                    "아메리카노 2000원 이벤트를 진행 중입니다."),
+            StoreInfoItemModel(2, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
+                    "아메리카노 2000원 이벤트를 진행 중입니다."),
+            StoreInfoItemModel(3, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
+                    "아메리카노 2000원 이벤트를 진행 중입니다."),
+            StoreInfoItemModel(4, null,"앙떼띠 로스터리(강남점)", "강남구 테헤란로 43-7", "양떼띠 로스터리는 2017년에 오픈한 강남의 유명 카페입니다. 강남역 직장인들을 위해 평일 오전 7시~9시에\n" +
+                    "아메리카노 2000원 이벤트를 진행 중입니다."),
 
-        viewModel.selectedPost.observe(viewLifecycleOwner, Observer {
+        )
 
-        })
+        storeInfoAdapter.submitList(list)
+    }
 
-        viewModel.postAllList.observe(viewLifecycleOwner) {
-            postAdapter.submitList(it)
+    private var backPressedTime: Long = 0
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            requireActivity().finish()
+        } else {
+            Toast.makeText(requireContext(), "한번 더 뒤로가기 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
         }
-
-        binding.rvAll1.addOnScrollListener(scrollListener)
+        backPressedTime = System.currentTimeMillis()
     }
 }
