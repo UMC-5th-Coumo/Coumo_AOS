@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_community"
+    app:startDestination="@id/communityChipFragment">
+
+
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.umc.coumo.presentation.fragment.community.PostFragment"
+        android:label="PostFragment" />
+    <fragment
+        android:id="@+id/communityChipFragment"
+        android:name="com.umc.coumo.presentation.fragment.community.CommunityChipFragment"
+        android:label="CommunityChipFragment" >
+        <action
+            android:id="@+id/action_communityChipFragment_to_postFragment"
+            app:destination="@id/postFragment" />
+    </fragment>
+</navigation>

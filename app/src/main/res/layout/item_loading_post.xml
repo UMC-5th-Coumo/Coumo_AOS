@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp">
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -31,51 +31,48 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="20dp"
             android:paddingVertical="20dp"
-
             android:paddingStart="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/iv_post">
+            app:layout_constraintEnd_toStartOf="@id/iv_post"
+            tools:ignore="RtlSymmetry">
 
             <TextView
                 android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@{item.title}"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:fontFamily="@font/pretendard_600"
                 android:textColor="#242029"
                 android:maxLines="1"
                 android:ellipsize="end"
-                tools:text="tlqkf"
+                android:background="@color/cardview_shadow_start_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{item.contents}"
                 android:textSize="12sp"
                 android:fontFamily="@font/pretendard_400"
                 android:textColor="#4E4C51"
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:layout_marginTop="12dp"
+                android:background="@color/cardview_shadow_start_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
-                tools:text="안녕하세요, 스타일헤어입니다. 오픈 기념으로 펌, 염색 시술 30% 할인 이벤트를 진행합니다.
-내일부터 일주일 간 진행할 예정이므로,
-많은 관심 부탁드립니다 :)"/>
+                />
 
             <TextView
                 android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:text="@{item.date}"
                 android:textSize="11.2sp"
                 android:fontFamily="@font/pretendard_400"
                 android:textColor="#B7B7B7"
                 android:maxLines="1"
+                android:background="@color/cardview_shadow_start_color"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_content"
@@ -94,33 +91,17 @@
 
             <TextView
                 android:id="@+id/tv_store"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:text="@{item.storeName}"
                 android:textSize="11.2sp"
                 android:fontFamily="@font/pretendard_400"
                 android:textColor="#512F8F"
                 android:maxLines="1"
+                android:background="@color/cardview_shadow_start_color"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="4dp"
                 app:layout_constraintStart_toEndOf="@id/line"
-                app:layout_constraintTop_toBottomOf="@id/tv_content"
-                tools:text="스타일헤어"/>
-
-            <TextView
-                android:id="@+id/tv_owner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 사장님"
-                android:textSize="11.2sp"
-                android:fontFamily="@font/pretendard_400"
-                android:textColor="#B7B7B7"
-                android:maxLines="1"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="2dp"
-                app:layout_constraintStart_toEndOf="@id/tv_store"
-                app:layout_constraintTop_toBottomOf="@id/tv_content"
-                tools:text="사장님"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_content" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -131,9 +112,7 @@
             android:layout_marginEnd="20dp"
             android:clipToOutline="true"
             android:background="@drawable/shape_rec_round_8"
-            android:scaleType="centerInside"
-            imageUri="@{item.imageUri[0]}"
-            android:visibility="@{item.imageUri.size() > 0 ? View.VISIBLE : View.GONE}"
+            android:backgroundTint="@color/cardview_shadow_start_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>

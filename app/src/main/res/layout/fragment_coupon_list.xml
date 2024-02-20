@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <import type="com.umc.coumo.domain.type.CouponAlignType"/>
         <variable
             name="viewModel"
@@ -138,6 +139,27 @@
                     app:layout_constraintTop_toBottomOf="@id/section_chip"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/horizontal_padding"
+                    android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintTop_toBottomOf="@id/rv_coupon">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}">
+
+                        <include layout="@layout/item_loading_coupon"/>
+                        <include layout="@layout/item_loading_coupon"/>
+
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>

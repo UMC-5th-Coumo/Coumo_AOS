@@ -1,7 +1,6 @@
 package com.umc.coumo.data.remote.datasource
 
 import android.net.Uri
-import android.util.Log
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.CoumoApi
 import com.umc.coumo.data.remote.model.request.RequestOwnerQRModel
@@ -9,10 +8,12 @@ import com.umc.coumo.data.remote.model.response.ResponseCouponModelX
 import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
+import com.umc.coumo.data.remote.model.response.ResponsePostModel
 import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MenuModel
 import com.umc.coumo.domain.model.MyPageModel
+import com.umc.coumo.domain.model.PostModel
 import com.umc.coumo.domain.model.RunTimeModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
@@ -22,6 +23,8 @@ import com.umc.coumo.domain.type.CategoryType
 import com.umc.coumo.domain.type.CouponAlignType
 import com.umc.coumo.utils.Constants.CUSTOMER_ID
 import com.umc.coumo.utils.Constants.OWNER_ID
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class CoumoRepositoryImpl @Inject constructor(
@@ -62,6 +65,16 @@ class CoumoRepositoryImpl @Inject constructor(
     override suspend fun getCouponList(filter: CouponAlignType): List<CouponModel>? {
         val data = coumoApi.getCouponList(App.prefs.getInt(CUSTOMER_ID,0),filter.api)
         return if (data.isSuccessful) mapToListCouponModel(data.body()?.result) else null
+    }
+
+    override suspend fun getCommunityPost(
+        type: String?,
+        longitude: Double,
+        latitude: Double,
+        pageId: Int
+    ): List<PostModel>? {
+        val data = coumoApi.getCommunityList(type, longitude, latitude, pageId)
+        return mapToPostModelList(data.body()?.result)
     }
 
     override suspend fun postOwnerStamp(
@@ -184,6 +197,22 @@ class CoumoRepositoryImpl @Inject constructor(
         }
     }
 
+    private fun mapToPostModelList(responseList: List<ResponsePostModel>?): List<PostModel>? {
+        return responseList?.map { response ->
+            PostModel(
+                id = response.storeId,
+                title = response.title,
+                contents = response.noticeContent,
+                date = convertDateTimeToFormat(response.createdAt),
+                storeName = response.storeName,
+                type = response.noticeType,
+                imageUri = response.noticeImages?.map {
+                    Uri.parse(it)
+                }
+            )
+        }
+    }
+
     private fun imageNullCheck(uri: String?): Uri? {
         return if (uri != null) {
             Uri.parse(uri)
@@ -204,5 +233,13 @@ class CoumoRepositoryImpl @Inject constructor(
         modifiedString.insert(2, "-")
         modifiedString.insert(7, "-")
         return modifiedString.toString()
+    }
+
+    private fun convertDateTimeToFormat(dateTime: String): String {
+        val inputFormatter = DateTimeFormatter.ISO_DATE_TIME
+        val outputFormatter = DateTimeFormatter.ofPattern("yy/MM/dd")
+
+        val parsedDateTime = LocalDateTime.parse(dateTime, inputFormatter)
+        return outputFormatter.format(parsedDateTime)
     }
 }

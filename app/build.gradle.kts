@@ -73,15 +73,15 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.12")
 
     //ktx
-        implementation ("androidx.activity:activity-ktx:1.8.2")
-        implementation ("androidx.fragment:fragment-ktx:1.6.2")
-        implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-        implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
-        implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-        implementation ("androidx.collection:collection-ktx:1.4.0")
-        implementation ("androidx.navigation:navigation-runtime-ktx:2.7.6")
-        implementation ("androidx.navigation:navigation-fragment-ktx:2.7.6")
-        implementation ("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation ("androidx.activity:activity-ktx:1.8.2")
+    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation ("androidx.collection:collection-ktx:1.4.0")
+    implementation ("androidx.navigation:navigation-runtime-ktx:2.7.6")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.6")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.6")
 
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.11.0")
@@ -97,5 +97,6 @@ dependencies {
     implementation ("com.google.android.gms:play-services-maps:18.2.0")
 
     implementation ("com.wajahatkarim:EasyFlipView:3.0.3")
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
 
 }

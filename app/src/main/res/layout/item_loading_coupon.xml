@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.umc.coumo.domain.model.CouponModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp">
+
+        <TextView
+            android:id="@+id/tv_coupon_title"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+
+            android:background="@color/cardview_shadow_start_color"
+            android:textSize="18sp"
+            android:textColor="@color/font_text"
+            android:fontFamily="@font/pretendard_700"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_shadow_start_color"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_400"
+            android:layout_marginStart="12dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_coupon_title"
+            app:layout_constraintStart_toEndOf="@id/tv_coupon_title"/>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_rect_round_6"
+            android:backgroundTint="@color/cardview_shadow_start_color"
+            android:paddingTop="28dp"
+            tools:backgroundTint="#FFDA26"
+            app:layout_constraintDimensionRatio="308:180"
+            app:layout_constraintTop_toBottomOf="@id/tv_coupon_title">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

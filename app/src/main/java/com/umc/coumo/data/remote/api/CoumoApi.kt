@@ -6,8 +6,10 @@ import com.umc.coumo.data.remote.model.response.ResponseModel
 import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
+import com.umc.coumo.data.remote.model.response.ResponsePostModel
 import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
 import com.umc.coumo.domain.type.CategoryType
+import com.umc.coumo.domain.type.CommunityTabType
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -45,13 +47,13 @@ interface CoumoApi {
         @Path("customerId") customerId: Int,
     ): Response<ResponseModel<ResponseMyPageModel>>
 
-    @GET("/api/notice/around/list/{pageId}")
+    @GET("/api/notice/around/list")
     suspend fun getCommunityList(
-        @Path("pageId") pageId: Int,
-        @Query("type") category: String? = CategoryType.DEFAULT.api,
+        @Query("type") category: String? = CommunityTabType.ALL.api,
         @Query("longitude") longitude: Double,
         @Query("latitude") latitude: Double,
-    )
+        @Query("pageId") pageId: Int,
+    ): Response<ResponseModel<List<ResponsePostModel>>>
 
     //내 쿠폰 보기 (필터)
     @GET("/api/coupon/{customerId}/list")
@@ -59,13 +61,6 @@ interface CoumoApi {
         @Path("customerId") customerId: Int,
         @Query("filter") filter: String
     ): Response<ResponseModel<ResponseCouponModelX>>
-
-    //가게의 내 쿠폰 보기
-    @GET("/api/coupon/{storeId}/{customerId}")
-    suspend fun getCouponStore(
-        @Path("storeId") storeId: Int,
-        @Path("customerId") customerId: Int,
-    ): Response<ResponseModel<Any>>
 
     @POST("/api/qr/owner/stamp")
     suspend fun postOwnerStamp(
