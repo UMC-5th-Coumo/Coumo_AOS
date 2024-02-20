@@ -10,7 +10,7 @@ import com.umc.coumo.utils.binding.BindingFragment
 class FoundIdFragment : BindingFragment<FragmentFoundIdBinding>(R.layout.fragment_found_id) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val text = requireArguments().getString("userName")?.toString()
+        val text = requireArguments().getString("userName")
         val isSuccess = !text.isNullOrEmpty()
         val bundle = Bundle()
 

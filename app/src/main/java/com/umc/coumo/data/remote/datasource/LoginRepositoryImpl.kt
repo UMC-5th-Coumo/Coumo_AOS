@@ -9,6 +9,7 @@ import com.umc.coumo.data.remote.model.request.RequestJoinModel
 import com.umc.coumo.data.remote.model.request.RequestJoinRequestVerificationModel
 import com.umc.coumo.data.remote.model.request.RequestJoinVerifyCodeModel
 import com.umc.coumo.data.remote.model.request.RequestLoginModel
+import com.umc.coumo.data.remote.model.request.RequestResetPasswordModel
 import com.umc.coumo.data.remote.model.request.RequestVerifyIdCodeModel
 import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinModel
@@ -84,6 +85,11 @@ class LoginRepositoryImpl @Inject constructor(
         App.prefs.setString("accessToken", token ?: "")
         App.prefs.setInt("ownerId", data.body()?.result?.ownerId ?: 0)
         return mapToResponseLoginAsOwner(data.body()?.result)
+    }
+
+    override suspend fun postResetPassword(loginId: String, newPassword: String): Boolean {
+        val data = loginApi.postResetPassword(RequestResetPasswordModel(loginId, newPassword))
+        return data.body()?.isSuccess ?: false
     }
 
     private fun mapToResponseLoginModel(response: ResponseLoginModel?): ResponseLoginModel? {

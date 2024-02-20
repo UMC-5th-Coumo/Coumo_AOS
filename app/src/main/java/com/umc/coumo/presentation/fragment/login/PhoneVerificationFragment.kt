@@ -3,6 +3,7 @@ package com.umc.coumo.presentation.fragment.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -72,10 +73,8 @@ class PhoneVerificationFragment: BindingFragment<FragmentPhoneVerificationBindin
                 bundle.putString("userName", viewModel.foundId)
                 if (isFindForId) {
                     findNavController().navigate(R.id.action_phoneVerificationFragment_to_foundIdFragment, bundle)
-                } else if (viewModel.isValidateUser.value == true) {
-                    findNavController().navigate(R.id.action_phoneVerificationFragment_to_resetPasswordFragment, bundle)
                 } else {
-                    ConfirmDialog("오류가 발생했습니다. 다시 시도해주세요. 그래도 오류가 발생한다면 관리자에게 문의하세요.")
+                    findNavController().navigate(R.id.action_phoneVerificationFragment_to_resetPasswordFragment, bundle)
                 }
             }
             else if (success == false) binding.tvPhoneVerificationWrongCode.visibility = View.VISIBLE
