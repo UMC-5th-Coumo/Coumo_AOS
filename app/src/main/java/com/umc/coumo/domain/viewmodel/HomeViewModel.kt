@@ -36,8 +36,8 @@ class HomeViewModel @Inject constructor(
     val category: LiveData<CategoryType> get() = _category
 
     //근처 매장 리스트
-    private val _nearStoreList = MutableLiveData<List<StoreCouponCountModel>>()
-    val nearStoreList: LiveData<List<StoreCouponCountModel>> get() = _nearStoreList
+    private val _nearStoreList = MutableLiveData<List<StoreCouponCountModel>?>()
+    val nearStoreList: LiveData<List<StoreCouponCountModel>?> get() = _nearStoreList
 
     //인기 매장 리스트
     private val _popularStoreList = MutableLiveData<List<StoreInfoItemModel>>()
@@ -55,6 +55,9 @@ class HomeViewModel @Inject constructor(
     private val _currentPage = MutableLiveData<Int>(0)
     val currentPage: LiveData<Int> get() = _currentPage
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     fun setCurrentLocation(longitude: Double, latitude: Double ) {
         _currentLocation.value = LocationLatLng(longitude, latitude)
     }
@@ -71,7 +74,10 @@ class HomeViewModel @Inject constructor(
 
     private fun getNearStoreList(category: CategoryType?) {
         viewModelScope.launch {
+            _nearStoreList.value = null
+            _isLoading.value = true
             _nearStoreList.value = repository.getNearStoreList(category = category,longitude = _currentLocation.value?.longitude!!, latitude = _currentLocation.value?.latitude!!)
+            _isLoading.value = false
         }
     }
 

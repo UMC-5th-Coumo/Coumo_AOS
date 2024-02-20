@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentCommunityFilterBinding
 import com.umc.coumo.domain.model.PostModel
@@ -24,6 +25,8 @@ class CommunityFilterFragment: BindingFragment<FragmentCommunityFilterBinding>(R
 
         val postAdapter = PostAdapter()
 
+        viewModel.getCommunityList()
+
         binding.rvFilter.apply {
             adapter = postAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -38,7 +41,18 @@ class CommunityFilterFragment: BindingFragment<FragmentCommunityFilterBinding>(R
         viewModel.postList.observe(viewLifecycleOwner) {
             postAdapter.submitList(it)
         }
+        initScrollListener()
     }
 
+    private fun initScrollListener() {
+        binding.rvFilter.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
 
+                if ((recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition() == (viewModel.postList.value?.size?:0) - 1) {
+                    //viewModel.addPage()
+                }
+            }
+        })
+    }
 }

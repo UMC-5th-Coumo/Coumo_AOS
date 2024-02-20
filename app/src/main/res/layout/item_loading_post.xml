@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="item"
+            type="com.umc.coumo.domain.model.PostModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:paddingVertical="20dp"
+            android:paddingStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_post"
+            tools:ignore="RtlSymmetry">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendard_600"
+                android:textColor="#242029"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:background="@color/cardview_shadow_start_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendard_400"
+                android:textColor="#4E4C51"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:layout_marginTop="12dp"
+                android:background="@color/cardview_shadow_start_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:textSize="11.2sp"
+                android:fontFamily="@font/pretendard_400"
+                android:textColor="#B7B7B7"
+                android:maxLines="1"
+                android:background="@color/cardview_shadow_start_color"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_content"
+                tools:text="24/01/02"/>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="#DDDDDD"
+                android:layout_marginStart="4dp"
+                android:layout_marginVertical="2dp"
+                app:layout_constraintStart_toEndOf="@id/tv_date"
+                app:layout_constraintTop_toTopOf="@id/tv_date"
+                app:layout_constraintBottom_toBottomOf="@id/tv_date"/>
+
+            <TextView
+                android:id="@+id/tv_store"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:textSize="11.2sp"
+                android:fontFamily="@font/pretendard_400"
+                android:textColor="#512F8F"
+                android:maxLines="1"
+                android:background="@color/cardview_shadow_start_color"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintStart_toEndOf="@id/line"
+                app:layout_constraintTop_toBottomOf="@id/tv_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/iv_post"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_marginEnd="20dp"
+            android:clipToOutline="true"
+            android:background="@drawable/shape_rec_round_8"
+            android:backgroundTint="@color/cardview_shadow_start_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

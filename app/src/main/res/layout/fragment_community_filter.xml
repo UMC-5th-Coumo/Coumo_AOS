@@ -4,6 +4,7 @@
 
     <data>
         <import type="com.umc.coumo.domain.type.CommunityTabType"/>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.umc.coumo.domain.viewmodel.CommunityViewModel" />
@@ -31,6 +32,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:nestedScrollingEnabled="false"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}">
+
+                <include layout="@layout/item_loading_post"/>
+                <include layout="@layout/item_loading_post"/>
+                <include layout="@layout/item_loading_post"/>
+                <include layout="@layout/item_loading_post"/>
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

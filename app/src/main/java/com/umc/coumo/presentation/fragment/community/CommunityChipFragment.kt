@@ -37,7 +37,6 @@ class CommunityChipFragment: BindingFragment<FragmentCommunityChipBinding>(R.lay
                     CommunityTabType.EVENT -> {showFragment(CommunityFilterFragment())}
                     else -> {}
                 }
-                viewModel.getCommunityList()
             }
         }
     }

@@ -27,6 +27,12 @@ class CommunityViewModel @Inject constructor(
     private val _pageId = MutableLiveData<Int>(1)
     val pageId: LiveData<Int> get() = _pageId
 
+    private val _canLoad = MutableLiveData<Boolean>(true)
+    val canLoad: LiveData<Boolean> get() = _canLoad
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
 
     fun changeTab(tabType: CommunityTabType) {
         _currentTab.value = tabType
@@ -37,8 +43,12 @@ class CommunityViewModel @Inject constructor(
         }
     }
 
-    suspend fun getCommunityList() {
-        _postList.value = repository.getCommunityPost(_currentTab.value?.api, 126.88804417884324 , 37.520786061099514, pageId.value?:1)
+    fun getCommunityList() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            _postList.value = repository.getCommunityPost(_currentTab.value?.api, 126.88804417884324 , 37.520786061099514, pageId.value?:1)
+            _isLoading.value = false
+        }
     }
 
     fun setCurrentPost(item: PostModel) {
@@ -52,9 +62,13 @@ class CommunityViewModel @Inject constructor(
     fun addPage() {
         viewModelScope.launch {
             _pageId.value = (_pageId.value?:1) + 1
-            val currentList = _postList.value
-            val newList = repository.getCommunityPost(_currentTab.value?.api, 126.88804417884324 , 37.520786061099514, pageId.value?:1)
-
+            val currentList = _postList.value?: mutableListOf()
+            if (_canLoad.value == true){}
+/*            val newList = repository.getCommunityPost(_currentTab.value?.api, 126.88804417884324 , 37.520786061099514, pageId.value?:1)
+            if (newList.isNullOrEmpty()) {
+                _canLoad.value = false
+            }
+            _postList.value = currentList + newList*/
         }
     }
 }

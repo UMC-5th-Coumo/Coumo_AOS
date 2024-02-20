@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.umc.coumo.domain.model.StoreInfoItemModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="190dp"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/iv_store"
+            android:layout_width="match_parent"
+            android:layout_height="156dp"
+            android:background="@drawable/shape_rect_round_top_6"
+            android:backgroundTint="@color/cardview_shadow_start_color"
+            android:clipToOutline="true"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rect_round_bottom_6"
+            android:backgroundTint="@color/item_background"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_store"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/pretendard_700"
+                android:background="@color/cardview_shadow_start_color"
+                android:textColor="@color/font_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/shape_rect_side_round"
+                android:fontFamily="@font/pretendard_400"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:backgroundTint="@color/cardview_shadow_start_color"
+                android:textColor="@color/font_button_main"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/pretendard_400"
+                android:lineSpacingExtra="3dp"
+                android:maxLines="2"
+                android:background="@color/cardview_shadow_start_color"
+                android:textColor="@color/font_content"
+                android:textSize="8sp"
+                tools:ignore="SmallSp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

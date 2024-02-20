@@ -21,8 +21,8 @@ class CouponViewModel @Inject constructor(
     private val _align = MutableLiveData(CouponAlignType.MOST)
     val align: LiveData<CouponAlignType> get() = _align
 
-    private val _couponList = MutableLiveData<List<CouponModel>>()
-    val couponList: LiveData<List<CouponModel>> get() = _couponList
+    private val _couponList = MutableLiveData<List<CouponModel>?>()
+    val couponList: LiveData<List<CouponModel>?> get() = _couponList
 
     private val _currentCoupon = MutableLiveData<CouponModel>(CouponModel(name = "", stampCount = 0, stampMax = 10, stampImage = null))
     val currentCoupon: LiveData<CouponModel> get() = _currentCoupon
@@ -32,6 +32,9 @@ class CouponViewModel @Inject constructor(
 
     private val _currentStoreId = MutableLiveData<Int>()
     val currentStoreId: LiveData<Int> get() = _currentStoreId
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
 
     init {
         getCouponList()
@@ -54,7 +57,10 @@ class CouponViewModel @Inject constructor(
 
     fun getCouponList() {
         viewModelScope.launch {
+            _couponList.value = null
+            _isLoading.value = true
             _couponList.value = repository.getCouponList(align.value?:CouponAlignType.MOST)
+            _isLoading.value = false
         }
     }
 
