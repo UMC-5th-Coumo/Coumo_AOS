@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_rect_round_6"
                     android:backgroundTint="#EDEDED"
-                    android:text="'서울 용산구' 소식입니다!"
+                    android:text="'서울 영등포구' 소식입니다!"
                     android:textColor="@color/main"
                     android:fontFamily="@font/pretendard_600"
                     android:layout_marginStart="2dp"
@@ -164,6 +164,14 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:selected="@{viewModel.currentTab == CommunityTabType.ALL}"/>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="0dp"
+                        android:background="@drawable/shape_blur"
+                        app:layout_constraintStart_toEndOf="@id/chip_all"
+                        app:layout_constraintTop_toTopOf="@id/chip_all"
+                        app:layout_constraintBottom_toBottomOf="@id/chip_all"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
