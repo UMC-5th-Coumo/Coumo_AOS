@@ -1,5 +1,6 @@
 package com.umc.coumo.data.remote.datasource
 
+import android.util.Log
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.LoginApi
 import com.umc.coumo.data.remote.model.request.RequestCheckDupIdModel
@@ -69,13 +70,12 @@ class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun postFindIdRequestCode(name: String, phone: String): Boolean {
         val data = loginApi.postFindIdRequestCode(RequestFindIdModel(name, phone))
-        return data.isSuccessful
+        return data.body()?.isSuccess ?: false
     }
 
     override suspend fun postVerifyIdCode(phone: String, verificationCode: String): String? {
         val data = loginApi.postVerifyIdCode(RequestVerifyIdCodeModel(phone, verificationCode))
-        return if (data.isSuccessful) data.body()?.result.toString()
-        else null
+        return data.body()?.result
     }
 
     override suspend fun postLoginAsOwner(loginId: String, password: String): ResponseLoginAsOwnerModel? {

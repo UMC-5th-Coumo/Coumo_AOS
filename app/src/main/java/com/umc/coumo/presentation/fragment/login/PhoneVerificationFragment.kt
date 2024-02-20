@@ -29,6 +29,7 @@ class PhoneVerificationFragment: BindingFragment<FragmentPhoneVerificationBindin
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        viewModel.clearVars()
 
         isFindForId = (requireArguments().getString("selected_btn").toString() == "find_id")
         viewModel.setIsFindForId(isFindForId)
