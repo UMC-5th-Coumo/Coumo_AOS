@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="coupon"
             type="com.umc.coumo.domain.viewmodel.CouponViewModel" />
@@ -41,10 +42,24 @@
                 tools:backgroundTint="#FFDA26">
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
-                    android:id="@+id/tv_qr"
+                    android:id="@+id/iv_qr"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
                     imageQR="@{coupon.currentQR}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_qr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="QR을 생성해주세요."
+                    android:textColor="@color/font_text"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/pretendard_600"
+                    android:visibility="@{coupon.currentQR == null ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

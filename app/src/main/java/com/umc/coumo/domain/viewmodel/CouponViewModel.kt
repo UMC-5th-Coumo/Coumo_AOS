@@ -1,6 +1,7 @@
 package com.umc.coumo.domain.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -50,9 +51,11 @@ class CouponViewModel @Inject constructor(
     }
 
     fun setCurrentCouponById(id: Int) {
-        _currentCoupon.value = _couponList.value?.filter { couponModel ->
+        Log.d("HTTP","$id")
+        _currentCoupon.value = _couponList.value?.first { couponModel ->
             couponModel.id == id
-        }?.first()
+        }
+        _currentStoreId.value = id
     }
 
     fun getCouponList() {
@@ -66,6 +69,7 @@ class CouponViewModel @Inject constructor(
 
     fun setCurrentStoreId(storeId: Int) {
         _currentStoreId.value = storeId
+        _currentQR.value = null
     }
 
     fun getStampQR() {

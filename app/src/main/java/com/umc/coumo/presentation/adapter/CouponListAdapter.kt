@@ -1,6 +1,7 @@
 package com.umc.coumo.presentation.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
@@ -38,7 +39,7 @@ class CouponListAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CouponModel) {
             binding.item = item
-
+            Log.d("TEST HTTP","쿠폰 모델 $item")
             val stampAdapter = StampAdapter()
             binding.rvStamp.apply {
                 adapter = stampAdapter
