@@ -33,6 +33,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
 
         val adapter = MainFragmentAdapter(this)
         binding.viewpager.adapter = adapter
+        binding.viewpager.offscreenPageLimit = 3
         binding.viewpager.isUserInputEnabled = false //스와이프 방지
 
         setNaviButton()
