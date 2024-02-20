@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentHomeDetailBinding
 import com.umc.coumo.domain.type.DetailTabType
@@ -28,6 +29,7 @@ class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fr
         setViewPager()
         setStoreImage()
         setButton()
+        setBehavior()
     }
 
     private fun setViewPager() {
@@ -51,6 +53,27 @@ class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fr
         }
     }
 
+    private fun setBehavior() {
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        binding.sectionStoreTitle.background = resources.getDrawable(R.drawable.shape_bottom_expand_sheet, null)
+                    }
+                    BottomSheetBehavior.STATE_DRAGGING, BottomSheetBehavior.STATE_COLLAPSED -> {
+                        binding.sectionStoreTitle.background = resources.getDrawable(R.drawable.shape_bottom_sheet, null)
+                    }
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
+
+        })
+    }
     private fun setStoreImage() {
         val imageAdapter = ImageViewPagerAdapter(requireContext())
 
