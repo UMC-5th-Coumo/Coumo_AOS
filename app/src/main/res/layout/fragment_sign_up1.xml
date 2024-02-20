@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <import type="android.view.View" />
@@ -86,7 +87,8 @@
                         app:layout_constraintEnd_toStartOf="@id/btn_agree_service_detail"
                         android:text="(필수) 서비스 이용약관"
                         android:textSize="16sp"
-                        android:checked="false" />
+                        android:checked="false"
+                        />
 
                     <TextView
                         android:id="@+id/btn_agree_service_detail"
@@ -109,6 +111,7 @@
                         app:layout_constraintTop_toBottomOf="@id/checkbox_agree_service"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        tools:visibility="gone"
                         android:visibility="@{viewModel.isExpandedService ? View.VISIBLE : View.GONE}">
 
                         <TextView
@@ -200,7 +203,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginHorizontal="50dp"
                     android:layout_marginBottom="30dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/shape_login_next_btn_radius"

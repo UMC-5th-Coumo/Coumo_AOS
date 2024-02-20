@@ -36,7 +36,7 @@
             android:textStyle="bold"
             android:textSize="12sp"
             android:gravity="center"
-            android:textColor="#7C43E8"
+            android:textColor="#9C74E7"
             android:background="@drawable/shape_dialog_btn_reset_password_success"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

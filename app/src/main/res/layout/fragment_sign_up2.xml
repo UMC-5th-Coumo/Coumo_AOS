@@ -54,9 +54,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="이름"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
+                    android:text="이름 "
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:drawableRight="@drawable/icon_asterisk"/>
 
                 <EditText
                     android:id="@+id/textbox_sign_up_name"
@@ -73,10 +74,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="생년월일"
-                    android:textStyle="bold"
+                    android:text="생년월일 "
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginTop="30dp"
+                    android:drawableRight="@drawable/icon_asterisk"/>
 
                 <EditText
                     android:id="@+id/textbox_sign_up_birthday"
@@ -101,10 +103,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="성별"
-                    android:textStyle="bold"
+                    android:text="성별 "
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginTop="30dp"
+                    android:drawableRight="@drawable/icon_asterisk"/>
 
                 <Spinner
                     android:id="@+id/spinner_gender"
@@ -118,10 +121,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="아이디"
+                    android:text="아이디 "
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="30dp"/>
+                    android:textStyle="normal"
+                    android:layout_marginTop="30dp"
+                    android:drawableRight="@drawable/icon_asterisk"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -168,10 +172,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="비밀번호"
+                    android:text="비밀번호 "
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="30dp"/>
+                    android:textStyle="normal"
+                    android:layout_marginTop="30dp"
+                    android:drawableRight="@drawable/icon_asterisk"/>
 
                 <EditText
                     android:id="@+id/textbox_sign_up_pw"
@@ -196,10 +201,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="비밀번호 확인하기"
+                    android:text="비밀번호 확인하기 "
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="30dp"/>
+                    android:textStyle="normal"
+                    android:layout_marginTop="30dp"
+                    android:drawableRight="@drawable/icon_asterisk"/>
 
                 <EditText
                     android:id="@+id/textbox_sign_up_pw_retype"
@@ -215,10 +221,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="이메일 주소"
-                    android:textStyle="bold"
+                    android:text="이메일 주소 "
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginTop="30dp"
+                    android:drawableRight="@drawable/icon_asterisk"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -266,10 +273,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="휴대전화 번호"
-                    android:textStyle="bold"
+                    android:text="휴대전화 번호 "
+                    android:textStyle="normal"
                     android:textSize="16sp"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginTop="30dp"
+                    android:drawableRight="@drawable/icon_asterisk"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -306,10 +314,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="인증번호 작성"
+                    android:text="인증번호 작성 "
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="30dp" />
+                    android:textStyle="normal"
+                    android:layout_marginTop="30dp"
+                    android:drawableRight="@drawable/icon_asterisk"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -351,7 +360,6 @@
                     android:background="@drawable/shape_login_next_btn_radius"
                     android:text="다음으로"
                     android:layout_marginTop="50dp"
-                    android:layout_marginHorizontal="30dp"
                     android:layout_marginBottom="26dp"/>
 
             </LinearLayout>
