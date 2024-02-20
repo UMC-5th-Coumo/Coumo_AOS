@@ -60,13 +60,6 @@ interface CoumoApi {
         @Query("filter") filter: String
     ): Response<ResponseModel<ResponseCouponModelX>>
 
-    //가게의 내 쿠폰 보기
-    @GET("/api/coupon/{storeId}/{customerId}")
-    suspend fun getCouponStore(
-        @Path("storeId") storeId: Int,
-        @Path("customerId") customerId: Int,
-    ): Response<ResponseModel<Any>>
-
     @POST("/api/qr/owner/stamp")
     suspend fun postOwnerStamp(
         @Body body: RequestOwnerQRModel
