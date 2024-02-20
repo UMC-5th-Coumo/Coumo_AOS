@@ -3,9 +3,13 @@ package com.umc.coumo.presentation.fragment.home
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -18,11 +22,38 @@ import com.umc.coumo.presentation.adapter.BannerPagerAdapter
 import com.umc.coumo.presentation.adapter.StoreInfoAdapter
 import com.umc.coumo.utils.ItemSpacingDecoration
 import com.umc.coumo.utils.binding.BindingFragment
+import kotlinx.coroutines.launch
 import java.io.IOException
 
 class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragment_home_main) {
 
     private val viewModel : HomeViewModel by activityViewModels ()
+
+    private val panelHandler = Handler(Looper.getMainLooper())
+    private val panelRunnable = object : Runnable {
+        override fun run() {
+            val currentItemCount = binding.bannerHome.adapter?.itemCount ?: 0
+            val currentItem = binding.bannerHome.currentItem
+
+            if (currentItem == currentItemCount - 1) {
+                // 현재 아이템이 마지막 아이템일 경우 처음으로 스크롤
+                binding.bannerHome.setCurrentItem(0, true)
+            } else {
+                // 다음 아이템으로 스크롤
+                binding.bannerHome.setCurrentItem(currentItem + 1, true)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        panelHandler.postDelayed(panelRunnable, 3000)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        panelHandler.removeCallbacks(panelRunnable)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -110,10 +141,13 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
 
         storeInfoAdapter.setOnItemClickListener(object : StoreInfoAdapter.OnItemClickListener{
             override fun onItemClick(id: Int) {
-                viewModel.loadStoreData(id)
-                findNavController().navigate(
-                    R.id.action_homeMainFragment_to_homeDetailFragment,
-                )
+                lifecycleScope.launch {
+                    if (viewModel.loadStoreData(id))
+                    findNavController().navigate(
+                        R.id.action_homeMainFragment_to_homeDetailFragment,
+                    )
+                }
+
             }
 
         })
@@ -125,6 +159,9 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
         val bannerItems = listOf(
             BannerCardModel(1),
             BannerCardModel(2),
+            BannerCardModel(3),
+            BannerCardModel(4),
+            BannerCardModel(5),
         )
         bannerAdapter.submitList(bannerItems)
 
@@ -142,11 +179,27 @@ class HomeMainFragment: BindingFragment<FragmentHomeMainBinding>(R.layout.fragme
 
                 val indicatorText = "$currentPage / $totalPages"
                 binding.tvIndicator.text = indicatorText
+
+                // 이전에 예약된 스크롤 작업을 제거
+                panelHandler.removeCallbacks(panelRunnable)
+
+                // 다음 스크롤을 예약
+                panelHandler.postDelayed(panelRunnable, 5000)
             }
         })
     }
 
     private fun getLocation(location: Location) {
         viewModel.setCurrentLocation(location.longitude,location.latitude)
+    }
+    private var backPressedTime: Long = 0
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            requireActivity().finish()
+        } else {
+            Toast.makeText(requireContext(), "한번 더 뒤로가기 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+        }
+        backPressedTime = System.currentTimeMillis()
     }
 }

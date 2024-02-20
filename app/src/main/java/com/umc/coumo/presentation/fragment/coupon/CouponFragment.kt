@@ -16,6 +16,4 @@ class CouponFragment: BindingFragment<FragmentCouponBinding>(R.layout.fragment_c
         super.onViewCreated(view, savedInstanceState)
 
     }
-
-
 }

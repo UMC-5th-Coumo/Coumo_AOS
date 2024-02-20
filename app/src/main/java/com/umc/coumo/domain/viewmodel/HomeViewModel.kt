@@ -25,8 +25,8 @@ class HomeViewModel @Inject constructor(
     private val _currentTab = MutableLiveData(DetailTabType.INFO)
     val currentTab: LiveData<DetailTabType> get() = _currentTab
 
-    private val _storeData = MutableLiveData<StoreInfoModel>()
-    val storeData: LiveData<StoreInfoModel> get() = _storeData
+    private val _storeData = MutableLiveData<StoreInfoModel?>()
+    val storeData: LiveData<StoreInfoModel?> get() = _storeData
 
     private val _currentStoreId = MutableLiveData<Int>()
     val currentStoreId: LiveData<Int> get() = _currentStoreId
@@ -49,13 +49,18 @@ class HomeViewModel @Inject constructor(
     private val _currentAddress = MutableLiveData<String>()
     val currentAddress: LiveData<String> get() = _currentAddress
 
+    private val _timeDropDown = MutableLiveData<Boolean>(false)
+    val timeDropDown: LiveData<Boolean> get() = _timeDropDown
+
+    private val _currentPage = MutableLiveData<Int>(0)
+    val currentPage: LiveData<Int> get() = _currentPage
+
     fun setCurrentLocation(longitude: Double, latitude: Double ) {
         _currentLocation.value = LocationLatLng(longitude, latitude)
     }
 
     fun setCurrentAddress(address: List<Address>?) {
         _currentAddress.value = address?.get(0)?.let { it.adminArea + " "+ it.subLocality + " "+ it.thoroughfare }
-        Log.d("TEST Address","${address?.get(0)}")
     }
 
     fun getPopularStoreList() {
@@ -70,12 +75,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getCouponStore(storeId: Int) {
-        viewModelScope.launch {
-            repository.getCouponStore(storeId)
-        }
-    }
-
     fun changeTab(tab: DetailTabType) {
         _currentTab.value = tab
     }
@@ -85,18 +84,35 @@ class HomeViewModel @Inject constructor(
         getNearStoreList(category)
     }
 
-    fun loadStoreData(storeId: Int) {
-        viewModelScope.launch {
-            repository.getStoreData(storeId).let {
-                if (it != null) {
-                    _storeData.value = it
-                    _currentStoreId.value = storeId
-                    getCouponStore(storeId)
-                } else {
-                    listOf<StoreInfoModel>() //값을 못 받아 왔을 때, 빈 값 처리
-                }
+    fun changeRunTime() {
+        _timeDropDown.value = !_timeDropDown.value!!
+    }
+
+    suspend fun loadStoreData(storeId: Int): Boolean {
+
+        _storeData.value = null
+
+        repository.getStoreData(storeId).let {
+            if (it != null) {
+                _currentStoreId.value = storeId
+                _timeDropDown.value = false
+                _storeData.value = it
+            } else {
+                _storeData.value = null
+                  //값을 못 받아 왔을 때, 빈 값 처리
             }
         }
+
+        return _storeData.value != null
+    }
+
+    fun resetPage() {
+        _currentPage.value = 0
+        Log.d("HTTP 페이지", "페이지 초기화")
+    }
+
+    fun addPage() {
+        _currentPage.value = _currentPage.value?.plus(1)
     }
 
 }

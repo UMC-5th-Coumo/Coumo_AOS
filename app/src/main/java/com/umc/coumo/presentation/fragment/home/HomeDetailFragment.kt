@@ -23,6 +23,8 @@ class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fr
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.executePendingBindings()
+
         setViewPager()
         setStoreImage()
         setButton()
@@ -52,14 +54,14 @@ class HomeDetailFragment: BindingFragment<FragmentHomeDetailBinding>(R.layout.fr
     private fun setStoreImage() {
         val imageAdapter = ImageViewPagerAdapter(requireContext())
 
-/*        binding.vpStoreImage.apply {
+        binding.vpStoreImage.apply {
             adapter = imageAdapter
             offscreenPageLimit = 1
-        }*/
+        }
 
         viewModel.storeData.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                imageAdapter.submitList(it.image)
+                imageAdapter.submitList(it?.image)
             }
         }
     }

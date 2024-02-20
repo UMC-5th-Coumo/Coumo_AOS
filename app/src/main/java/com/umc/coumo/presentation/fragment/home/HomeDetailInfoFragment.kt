@@ -32,6 +32,7 @@ class HomeDetailInfoFragment: BindingFragmentNoneBackPress<FragmentHomeDetailInf
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.executePendingBindings()
 
         setRecyclerView()
     }
@@ -51,8 +52,8 @@ class HomeDetailInfoFragment: BindingFragmentNoneBackPress<FragmentHomeDetailInf
 
         viewModel.storeData.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch (Dispatchers.Main) {
-                menuAdapter.submitList(it.menuList)
-                location = LatLng(it.latitude, it.longitude)
+                menuAdapter.submitList(it?.menuList)
+                location = LatLng(it?.latitude?:126.88804417884324, it?.longitude?:37.520786061099514)
                 setMap()
             }
         }

@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FCFCFC"
         tools:context=".presentation.activity.MainActivity">
 
         <androidx.viewpager2.widget.ViewPager2
@@ -21,8 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottom_navi"
@@ -36,6 +39,7 @@
                 android:background="@drawable/shape_bottom_navi"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,7 +55,9 @@
                     android:id="@+id/img_home_back"
                     android:layout_width="@dimen/bottom_navi_icon_background_size"
                     android:layout_height="@dimen/bottom_navi_icon_background_size"
-                    android:src="@drawable/shape_bottom_btn_background"
+                    android:background="@drawable/shape_bottom_btn_background"
+                    android:elevation="8dp"
+                    android:layout_marginTop="8dp"
                     android:visibility="@{viewModel.currentPageIndex == TabType.HOME ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -62,6 +68,7 @@
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/img_home"
                     android:layout_width="@dimen/bottom_navi_icon_size"
+                    android:elevation="8dp"
                     android:layout_height="@dimen/bottom_navi_icon_size"
                     android:src="@{viewModel.currentPageIndex == TabType.HOME ? @drawable/icon_home_selected : @drawable/icon_home_default}"
                     app:selectedNaviMargin2="@{viewModel.currentPageIndex == TabType.HOME}"
@@ -99,7 +106,9 @@
                     android:id="@+id/img_coupon_back"
                     android:layout_width="@dimen/bottom_navi_icon_background_size"
                     android:layout_height="@dimen/bottom_navi_icon_background_size"
-                    android:src="@drawable/shape_bottom_btn_background"
+                    android:background="@drawable/shape_bottom_btn_background"
+                    android:elevation="8dp"
+                    android:layout_marginTop="8dp"
                     android:visibility="@{viewModel.currentPageIndex == TabType.COUPON ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -110,6 +119,7 @@
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/img_coupon"
                     android:layout_width="@dimen/bottom_navi_icon_size"
+                    android:elevation="8dp"
                     android:layout_height="@dimen/bottom_navi_icon_size"
                     android:src="@{viewModel.currentPageIndex == TabType.COUPON ? @drawable/icon_coupon_selected : @drawable/icon_coupon_default}"
                     app:selectedNaviMargin2="@{viewModel.currentPageIndex == TabType.COUPON}"
@@ -147,7 +157,9 @@
                     android:id="@+id/img_community_back"
                     android:layout_width="@dimen/bottom_navi_icon_background_size"
                     android:layout_height="@dimen/bottom_navi_icon_background_size"
-                    android:src="@drawable/shape_bottom_btn_background"
+                    android:background="@drawable/shape_bottom_btn_background"
+                    android:elevation="8dp"
+                    android:layout_marginTop="8dp"
                     android:visibility="@{viewModel.currentPageIndex == TabType.COMMUNITY ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -159,6 +171,7 @@
                     android:id="@+id/img_community"
                     android:layout_width="@dimen/bottom_navi_icon_size"
                     android:layout_height="@dimen/bottom_navi_icon_size"
+                    android:elevation="8dp"
                     android:src="@{viewModel.currentPageIndex == TabType.COMMUNITY ? @drawable/icon_community_selected : @drawable/icon_community_default}"
                     app:selectedNaviMargin2="@{viewModel.currentPageIndex == TabType.COMMUNITY}"
                     app:layout_constraintStart_toStartOf="parent"
@@ -195,7 +208,9 @@
                     android:id="@+id/img_account_back"
                     android:layout_width="@dimen/bottom_navi_icon_background_size"
                     android:layout_height="@dimen/bottom_navi_icon_background_size"
-                    android:src="@drawable/shape_bottom_btn_background"
+                    android:background="@drawable/shape_bottom_btn_background"
+                    android:elevation="8dp"
+                    android:layout_marginTop="8dp"
                     android:visibility="@{viewModel.currentPageIndex == TabType.ACCOUNT ? View.VISIBLE : View.INVISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -207,6 +222,7 @@
                     android:id="@+id/img_account"
                     android:layout_width="@dimen/bottom_navi_icon_size"
                     android:layout_height="@dimen/bottom_navi_icon_size"
+                    android:elevation="8dp"
                     android:src="@{viewModel.currentPageIndex == TabType.ACCOUNT ? @drawable/icon_account_selected : @drawable/icon_account_default}"
                     app:selectedNaviMargin2="@{viewModel.currentPageIndex == TabType.ACCOUNT}"
                     app:layout_constraintStart_toStartOf="parent"

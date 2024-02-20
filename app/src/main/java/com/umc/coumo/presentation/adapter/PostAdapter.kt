@@ -1,52 +1,41 @@
 package com.umc.coumo.presentation.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.umc.coumo.databinding.ItemCouponBinding
-import com.umc.coumo.domain.model.CouponModel
+import com.umc.coumo.databinding.ItemPostBinding
+import com.umc.coumo.domain.model.PostItemModel
 import com.umc.coumo.utils.ItemDiffCallback
 
-class CouponListAdapter(
-    private val context: Context
-): ListAdapter<CouponModel, RecyclerView.ViewHolder>(
-    ItemDiffCallback<CouponModel>(
+class PostAdapter(
+
+): ListAdapter<PostItemModel, RecyclerView.ViewHolder>(
+    ItemDiffCallback<PostItemModel>(
         onContentsTheSame = {old, new -> old == new},
         onItemsTheSame = {old, new -> old.id == new.id}
     )
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return CouponViewHolder(ItemCouponBinding.inflate(inflater, parent,false))
+        return PostViewHolder(ItemPostBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
 
         when (holder) {
-            is CouponViewHolder -> {
+            is PostViewHolder -> {
                 holder.bind(item)
             }
         }
     }
 
-    inner class CouponViewHolder(
-        private val binding: ItemCouponBinding
+    inner class PostViewHolder(
+        private val binding: ItemPostBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CouponModel) {
+        fun bind(item: PostItemModel) {
             binding.item = item
-
-            val stampAdapter = StampAdapter()
-            binding.rvStamp.apply {
-                adapter = stampAdapter
-                layoutManager = GridLayoutManager(context, item.stampMax/2)
-            }
-
-            val result = MutableList(item.stampMax) { i -> i < item.stampCount }
-            stampAdapter.submitList(result)
 
             itemView.setOnClickListener {
                 listener?.onItemClick(item.id)
@@ -55,7 +44,7 @@ class CouponListAdapter(
     }
 
     interface OnItemClickListener {
-        fun onItemClick(id:Int)
+        fun onItemClick(id: Int)
     }
 
     private var listener: OnItemClickListener? = null
@@ -63,4 +52,5 @@ class CouponListAdapter(
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
+
 }

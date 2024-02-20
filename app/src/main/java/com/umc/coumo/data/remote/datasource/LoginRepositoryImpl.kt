@@ -14,7 +14,6 @@ import com.umc.coumo.data.remote.model.response.ResponseJoinModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginAsOwnerModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
 import com.umc.coumo.domain.repository.LoginRepository
-import retrofit2.Response
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor(
@@ -81,6 +80,8 @@ class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun postLoginAsOwner(loginId: String, password: String): ResponseLoginAsOwnerModel? {
         val data = loginApi.postLoginAsOwner(RequestLoginModel(loginId, password))
+        val token = data.body()?.result?.token
+        App.prefs.setString("accessToken", token ?: "")
         App.prefs.setInt("ownerId", data.body()?.result?.ownerId ?: 0)
         return mapToResponseLoginAsOwner(data.body()?.result)
     }

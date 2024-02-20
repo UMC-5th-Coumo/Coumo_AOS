@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.umc.coumo.domain.viewmodel.HomeViewModel" />
@@ -21,7 +22,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginHorizontal="@dimen/horizontal_padding">
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
@@ -30,48 +31,122 @@
                     android:layout_height="16dp"
                     android:src="@drawable/icon_time"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_time"
-                    android:text="정보 없음"
+                    currentTimeTableText="@{viewModel.storeData.time}"
                     android:textSize="14sp"
                     android:textColor="@color/font_text"
                     android:fontFamily="@font/pretendard_700"
                     android:layout_marginStart="6dp"
                     app:layout_constraintStart_toEndOf="@id/iv_time"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_time"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_time"/>
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_dropdown"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@{viewModel.timeDropDown ? @drawable/icon_dropup : @drawable/icon_dropdown}"
+                    android:layout_marginStart="6dp"
+                    android:onClick="@{() -> viewModel.changeRunTime()}"
+                    app:layout_constraintStart_toEndOf="@id/tv_time"
+                    app:layout_constraintTop_toTopOf="@id/iv_time"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_time"/>
+
+                <LinearLayout
+                    android:id="@+id/time_table"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="6dp"
+                    android:orientation="vertical"
+                    android:visibility="@{viewModel.timeDropDown ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintStart_toEndOf="@id/iv_time"
+                    app:layout_constraintTop_toBottomOf="@id/tv_time">
+
+                    <TextView
+                        android:id="@+id/tv_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        timeTableText="@{viewModel.storeData.time[0]}"
+                        style="@style/timeTableStyle"/>
+
+                    <TextView
+                        android:id="@+id/tv_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        timeTableText="@{viewModel.storeData.time[1]}"
+                        style="@style/timeTableStyle"/>
+
+                    <TextView
+                        android:id="@+id/tv_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        timeTableText="@{viewModel.storeData.time[2]}"
+                        style="@style/timeTableStyle"/>
+
+                    <TextView
+                        android:id="@+id/tv_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        timeTableText="@{viewModel.storeData.time[3]}"
+                        style="@style/timeTableStyle"/>
+
+                    <TextView
+                        android:id="@+id/tv_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        timeTableText="@{viewModel.storeData.time[4]}"
+                        style="@style/timeTableStyle"/>
+
+                    <TextView
+                        android:id="@+id/tv_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        timeTableText="@{viewModel.storeData.time[5]}"
+                        style="@style/timeTableStyle"/>
+
+                    <TextView
+                        android:id="@+id/tv_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        timeTableText="@{viewModel.storeData.time[6]}"
+                        style="@style/timeTableStyle"/>
+
+                </LinearLayout>
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/iv_call"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/icon_call"
-                    android:layout_marginStart="24dp"
-                    app:layout_constraintStart_toEndOf="@id/tv_time"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_call"
+                    app:layout_constraintTop_toBottomOf="@id/time_table"/>
 
                 <TextView
                     android:id="@+id/tv_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_time"
-                    android:text="정보 없음"
+                    android:text="@{viewModel.storeData.telephone}"
                     android:textSize="14sp"
                     android:textColor="@color/font_text"
                     android:fontFamily="@font/pretendard_700"
                     android:layout_marginStart="6dp"
                     app:layout_constraintStart_toEndOf="@id/iv_call"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
+                    app:layout_constraintTop_toTopOf="@id/iv_call"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_call"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <TextView
                 android:id="@+id/tv_store_intro"
@@ -79,10 +154,10 @@
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.storeData.description}"
                 android:textSize="14sp"
-                android:textColor="#161515"
+                android:textColor="#413E47"
                 android:fontFamily="@font/pretendard_400"
                 android:layout_marginHorizontal="@dimen/horizontal_padding"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:lineSpacingExtra="6dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -98,7 +173,7 @@
                     android:text="메뉴"
                     android:textSize="16sp"
                     android:textColor="@color/font_text"
-                    android:fontFamily="@font/pretendard_700"
+                    android:fontFamily="@font/pretendard_600"
                     android:lineSpacingExtra="6dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -155,7 +230,7 @@
                     android:text="지도로 위치보기"
                     android:textSize="16sp"
                     android:textColor="@color/font_text"
-                    android:fontFamily="@font/pretendard_700"
+                    android:fontFamily="@font/pretendard_600"
                     android:lineSpacingExtra="6dp"
                     android:layout_marginStart="6dp"/>
             </androidx.appcompat.widget.LinearLayoutCompat>

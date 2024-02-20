@@ -8,6 +8,8 @@ data class StoreInfoModel(
     val location: String,
     val longitude: Double,
     val latitude: Double,
+    val telephone: String,
+    val time: List<RunTimeModel>,
     val image: List<Uri>?,
     val coupon: CouponModel,
     val menuList: List<MenuModel>?,

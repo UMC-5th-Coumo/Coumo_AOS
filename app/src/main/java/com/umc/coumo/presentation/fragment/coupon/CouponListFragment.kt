@@ -58,8 +58,9 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
         }
 
         couponListAdapter.setOnItemClickListener(object : CouponListAdapter.OnItemClickListener {
-            override fun onItemClick(id: String) {
+            override fun onItemClick(id: Int) {
                 val dialog = CouponDialog(viewModel)
+                viewModel.setCurrentCouponById(id)
                 dialog.show(parentFragmentManager, null)
             }
         })
@@ -70,6 +71,5 @@ class CouponListFragment: BindingFragment<FragmentCouponListBinding>(R.layout.fr
             }
         }
     }
-
 
 }
