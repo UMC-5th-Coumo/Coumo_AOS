@@ -57,7 +57,7 @@ class OwnerQRFragment: BindingFragment<FragmentOwnerQrBinding>(R.layout.fragment
                         if (viewModel.postStampOwner(
                                 jsonObject.getInt("storeId"),
                                 jsonObject.getInt("customerId"),
-                                1)
+                                )
                             ) {
                             Toast.makeText(requireContext(), "적립 성공", Toast.LENGTH_SHORT).show()
                             findNavController().popBackStack()
@@ -71,8 +71,8 @@ class OwnerQRFragment: BindingFragment<FragmentOwnerQrBinding>(R.layout.fragment
                         if (viewModel.postPaymentOwner(
                                 jsonObject.getInt("storeId"),
                                 jsonObject.getInt("customerId"),
-                                1
                             )
+
                         ) {
                             Toast.makeText(requireContext(), "사용 성공", Toast.LENGTH_SHORT).show()
                             findNavController().popBackStack()
