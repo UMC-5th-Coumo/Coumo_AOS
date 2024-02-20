@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Coumo</string>
 
+    <string name="welcome">쿠모가 환영합니다😘</string>
+
     <!-- login page -->
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>
