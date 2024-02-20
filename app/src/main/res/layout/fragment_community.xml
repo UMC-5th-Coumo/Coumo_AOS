@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="android.view.View"/>
         <import type="com.umc.coumo.domain.type.CommunityTabType"/>
         <variable
             name="viewModel"
@@ -88,67 +87,65 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <HorizontalScrollView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:scrollbars="none"
-                        android:visibility="@{viewModel.isOnDetail ? View.GONE : View.VISIBLE}"
-                        app:layout_constraintBottom_toBottomOf="@id/chip_all"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/chip_all"
-                        app:layout_constraintTop_toTopOf="@id/chip_all">
+                        app:layout_constraintTop_toTopOf="@id/chip_all"
+                        app:layout_constraintBottom_toBottomOf="@id/chip_all"
+                        app:layout_constraintEnd_toEndOf="parent">
 
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:paddingEnd="@dimen/horizontal_padding"
+                            android:orientation="horizontal"
                             tools:ignore="RtlSymmetry">
 
                             <TextView
                                 android:id="@+id/chip_new_menu"
-                                style="@style/ChipTextStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:background="@drawable/selector_chip_background"
-                                android:onClick="@{() -> viewModel.changeTab(CommunityTabType.NEW_PRODUCT)}"
                                 android:text="@string/new_menu"
+                                style="@style/ChipTextStyle"
+                                android:background="@drawable/selector_chip_background"
                                 android:textColor="@color/selector_chip_text_color"
+                                android:layout_marginStart="4dp"
+                                android:onClick="@{() -> viewModel.changeTab(CommunityTabType.NEW_PRODUCT)}"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:selected="@{viewModel.currentTab == CommunityTabType.NEW_PRODUCT}" />
+                                app:selected="@{viewModel.currentTab == CommunityTabType.NEW_PRODUCT}"/>
 
                             <TextView
                                 android:id="@+id/chip_no_show"
-                                style="@style/ChipTextStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:background="@drawable/selector_chip_background"
-                                android:onClick="@{() -> viewModel.changeTab(CommunityTabType.NO_SHOW)}"
                                 android:text="@string/no_show"
+                                style="@style/ChipTextStyle"
+                                android:background="@drawable/selector_chip_background"
                                 android:textColor="@color/selector_chip_text_color"
+                                android:layout_marginStart="4dp"
+                                android:onClick="@{() -> viewModel.changeTab(CommunityTabType.NO_SHOW)}"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:selected="@{viewModel.currentTab == CommunityTabType.NO_SHOW}" />
+                                app:selected="@{viewModel.currentTab == CommunityTabType.NO_SHOW}"/>
 
                             <TextView
                                 android:id="@+id/chip_event"
-                                style="@style/ChipTextStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="4dp"
-                                android:background="@drawable/selector_chip_background"
-                                android:onClick="@{() -> viewModel.changeTab(CommunityTabType.EVENT)}"
                                 android:text="@string/event"
+                                style="@style/ChipTextStyle"
+                                android:background="@drawable/selector_chip_background"
                                 android:textColor="@color/selector_chip_text_color"
+                                android:layout_marginStart="4dp"
+                                android:onClick="@{() -> viewModel.changeTab(CommunityTabType.EVENT)}"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:selected="@{viewModel.currentTab == CommunityTabType.EVENT}" />
+                                app:selected="@{viewModel.currentTab == CommunityTabType.EVENT}"/>
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -156,18 +153,17 @@
 
                     <TextView
                         android:id="@+id/chip_all"
-                        style="@style/ChipTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/horizontal_padding"
-                        android:background="@drawable/selector_chip_background"
-                        android:onClick="@{() -> viewModel.changeTab(CommunityTabType.ALL)}"
                         android:text="@string/view_all"
+                        style="@style/ChipTextStyle"
+                        android:background="@drawable/selector_chip_background"
                         android:textColor="@color/selector_chip_text_color"
-                        android:visibility="@{viewModel.isOnDetail() ? View.GONE : View.VISIBLE}"
+                        android:layout_marginStart="@dimen/horizontal_padding"
+                        android:onClick="@{() -> viewModel.changeTab(CommunityTabType.ALL)}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:selected="@{viewModel.currentTab == CommunityTabType.ALL}" />
+                        app:selected="@{viewModel.currentTab == CommunityTabType.ALL}"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
