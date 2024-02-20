@@ -50,7 +50,7 @@ class CommunityFilterFragment: BindingFragment<FragmentCommunityFilterBinding>(R
                 super.onScrolled(recyclerView, dx, dy)
 
                 if ((recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition() == (viewModel.postList.value?.size?:0) - 1) {
-                    //viewModel.addPage()
+                    viewModel.addPage()
                 }
             }
         })

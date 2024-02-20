@@ -1,5 +1,6 @@
 package com.umc.coumo.domain.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -47,6 +48,8 @@ class CommunityViewModel @Inject constructor(
         viewModelScope.launch {
             _isLoading.value = true
             _postList.value = repository.getCommunityPost(_currentTab.value?.api, 126.88804417884324 , 37.520786061099514, pageId.value?:1)
+
+            _canLoad.value = (_postList.value?.size?:0) >= 10 //10개가 안 찼으면 로드 불가
             _isLoading.value = false
         }
     }
@@ -57,18 +60,24 @@ class CommunityViewModel @Inject constructor(
 
     private fun clearPage() {
         _pageId.value = 1
+        _canLoad.value = true
     }
 
     fun addPage() {
+        Log.d("TEST scroll http", "페이지 증가!! ${_canLoad.value}")
         viewModelScope.launch {
-            _pageId.value = (_pageId.value?:1) + 1
-            val currentList = _postList.value?: mutableListOf()
-            if (_canLoad.value == true){}
-/*            val newList = repository.getCommunityPost(_currentTab.value?.api, 126.88804417884324 , 37.520786061099514, pageId.value?:1)
-            if (newList.isNullOrEmpty()) {
-                _canLoad.value = false
+            if (_canLoad.value != false) {
+                _pageId.value = (_pageId.value?:1) + 1
+                val currentList = _postList.value?: mutableListOf()
+                val newList = repository.getCommunityPost(_currentTab.value?.api, 126.88804417884324 , 37.520786061099514, pageId.value?:1)?: mutableListOf()
+                if (newList.size == 10) {
+                    _canLoad.value = true
+                    _postList.value = currentList + newList
+                } else {
+                    _canLoad.value = false
+                    _postList.value = currentList + newList
+                }
             }
-            _postList.value = currentList + newList*/
         }
     }
 }
