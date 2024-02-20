@@ -24,4 +24,5 @@ interface LoginRepository {
     suspend fun postJoinRequestVerification(name: String, phone: String): Boolean
     suspend fun postJoinVerifyCode(phone: String, verificationCode: String): Boolean
     suspend fun postLoginAsOwner(loginId: String, password: String): ResponseLoginAsOwnerModel?
+    suspend fun postResetPassword(loginId: String, newPassword: String): Boolean
 }

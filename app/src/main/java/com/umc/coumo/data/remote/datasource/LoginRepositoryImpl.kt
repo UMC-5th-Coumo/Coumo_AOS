@@ -1,5 +1,6 @@
 package com.umc.coumo.data.remote.datasource
 
+import android.util.Log
 import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.LoginApi
 import com.umc.coumo.data.remote.model.request.RequestCheckDupIdModel
@@ -8,6 +9,7 @@ import com.umc.coumo.data.remote.model.request.RequestJoinModel
 import com.umc.coumo.data.remote.model.request.RequestJoinRequestVerificationModel
 import com.umc.coumo.data.remote.model.request.RequestJoinVerifyCodeModel
 import com.umc.coumo.data.remote.model.request.RequestLoginModel
+import com.umc.coumo.data.remote.model.request.RequestResetPasswordModel
 import com.umc.coumo.data.remote.model.request.RequestVerifyIdCodeModel
 import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinModel
@@ -69,13 +71,12 @@ class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun postFindIdRequestCode(name: String, phone: String): Boolean {
         val data = loginApi.postFindIdRequestCode(RequestFindIdModel(name, phone))
-        return data.isSuccessful
+        return data.body()?.isSuccess ?: false
     }
 
     override suspend fun postVerifyIdCode(phone: String, verificationCode: String): String? {
         val data = loginApi.postVerifyIdCode(RequestVerifyIdCodeModel(phone, verificationCode))
-        return if (data.isSuccessful) data.body()?.result.toString()
-        else null
+        return data.body()?.result?.loginId
     }
 
     override suspend fun postLoginAsOwner(loginId: String, password: String): ResponseLoginAsOwnerModel? {
@@ -84,6 +85,11 @@ class LoginRepositoryImpl @Inject constructor(
         App.prefs.setString("accessToken", token ?: "")
         App.prefs.setInt("ownerId", data.body()?.result?.ownerId ?: 0)
         return mapToResponseLoginAsOwner(data.body()?.result)
+    }
+
+    override suspend fun postResetPassword(loginId: String, newPassword: String): Boolean {
+        val data = loginApi.postResetPassword(RequestResetPasswordModel(loginId, newPassword))
+        return data.body()?.isSuccess ?: false
     }
 
     private fun mapToResponseLoginModel(response: ResponseLoginModel?): ResponseLoginModel? {

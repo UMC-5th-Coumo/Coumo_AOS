@@ -20,6 +20,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.clearVars()
 
         // 여기 try catch는 비효율적이라 다시 짜야할듯
         try {

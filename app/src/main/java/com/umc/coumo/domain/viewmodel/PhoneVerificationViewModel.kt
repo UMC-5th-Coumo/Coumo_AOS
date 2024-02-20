@@ -1,5 +1,6 @@
 package com.umc.coumo.domain.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,32 +15,29 @@ class PhoneVerificationViewModel @Inject constructor(
     private val repository: LoginRepository
 ) : ViewModel() {
 
-    private val _isValidateUser = MutableLiveData<Boolean>(false)
-    val isValidateUser: LiveData<Boolean> get() = _isValidateUser
+    private val _isValidateUser = MutableLiveData<Boolean?>(null)
+    val isValidateUser: LiveData<Boolean?> get() = _isValidateUser
 
-    private val _isValidateCode = MutableLiveData<Boolean>(false)
-    val isValidateCode: LiveData<Boolean> get() = _isValidateCode
+    private val _isValidateCode = MutableLiveData<Boolean?>(null)
+    val isValidateCode: LiveData<Boolean?> get() = _isValidateCode
 
     private val _isFindForId = MutableLiveData<Boolean>(true)
     val isFindForId: LiveData<Boolean> get() = _isFindForId
-    private val _afterPressVerificationBtn = MutableLiveData(false)
-    val afterPressVerificationBtn: LiveData<Boolean> get() = _afterPressVerificationBtn
-
-    private val _afterPressNextBtn = MutableLiveData(false)
-    val afterPressNextBtn: LiveData<Boolean> get() = _afterPressNextBtn
 
     var foundId: String? = null
 
     fun postFindIdRequestCode(name: String, phone: String) {
+        _isValidateUser.value = null
         viewModelScope.launch {
             _isValidateUser.value = repository.postFindIdRequestCode(name, phone)
         }
     }
     fun postVerifyIdCode(phone: String, verificationCode: String) {
+        _isValidateCode.value = null
         viewModelScope.launch {
             val response = repository.postVerifyIdCode(phone, verificationCode)
             if (response != null) {
-                foundId = response
+                foundId = response.toString()
                 _isValidateCode.value = true
             }
             else {
@@ -50,12 +48,11 @@ class PhoneVerificationViewModel @Inject constructor(
 
 
     fun setIsFindForId(bool: Boolean) { _isFindForId.value = bool }
-    fun trueAfterPressVerificationBtn() { _afterPressVerificationBtn.value = true }
-    fun trueAfterPressNextBtn() { _afterPressNextBtn.value = true }
+    fun setIsValidateCode(bool: Boolean?) { _isValidateCode.value = bool }
 
     fun clearVars() {
-        _isValidateCode.value = false
-        _isValidateUser.value = false
+        _isValidateCode.value = null
+        _isValidateUser.value = null
     }
 
 }

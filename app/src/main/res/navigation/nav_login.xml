@@ -32,6 +32,9 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/signUp1Fragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_signUp2Fragment_to_signUpSuccess"
+            app:destination="@id/signUpSuccess" />
     </fragment>
     <fragment
         android:id="@+id/phoneVerificationFragment"
@@ -71,5 +74,15 @@
         <action
             android:id="@+id/action_selectLoginAsFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSuccess"
+        android:name="com.umc.coumo.presentation.fragment.login.SignUpSuccess"
+        android:label="SignUpSuccess" >
+        <action
+            android:id="@+id/action_clap_to_home"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/phoneVerificationFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

@@ -41,7 +41,7 @@
 
         <EditText
             android:id="@+id/textbox_login_id"
-            android:layout_width="254dp"
+            android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:autofillHints="username"
@@ -54,7 +54,7 @@
 
         <EditText
             android:id="@+id/textbox_login_password"
-            android:layout_width="254dp"
+            android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:autofillHints="password"
@@ -87,7 +87,6 @@
             android:backgroundTint="@color/main"
             android:textColor="@color/font_button_main"
             android:background="@drawable/shape_login_next_btn_radius"
-            android:layout_marginHorizontal="20dp"
             android:text="@{viewModel.loginAsCustomer ? @string/login_as_customer : @string/login_as_owner}"
             app:layout_constraintBottom_toBottomOf="@id/linear_register"
             app:layout_constraintEnd_toEndOf="parent"

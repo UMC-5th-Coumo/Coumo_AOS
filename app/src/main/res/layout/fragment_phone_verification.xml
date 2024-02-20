@@ -95,11 +95,11 @@
                 android:id="@+id/tv_phone_verification_not_found"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="입력하신 정보와 일치하는 아이디가 없습니다"
+                android:text="입력하신 정보와 일치하는 계정이 없습니다"
                 android:textColor="@color/design_default_color_error"
                 android:textSize="12sp"
                 android:layout_marginTop="30dp"
-                android:visibility="@{!viewModel.isValidateUser &amp;&amp; viewModel.afterPressNextBtn &amp;&amp; !viewModel.isFindForId ? View.VISIBLE : View.GONE}"/>
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                     android:id="@+id/btn_phone_verification_request"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@{viewModel.afterPressVerificationBtn ? @string/resend_code : @string/send_code}"
+                    android:text="@string/send_code"
                     android:textSize="12sp"
                     android:layout_marginStart="10dp"
                     android:enabled="false"/>
@@ -144,7 +144,7 @@
                 android:textColor="@color/design_default_color_error"
                 android:textSize="12sp"
                 android:layout_marginTop="10dp"
-                android:visibility="@{!viewModel.isValidateCode &amp;&amp; viewModel.isValidateUser &amp;&amp; viewModel.afterPressNextBtn ? View.VISIBLE : View.GONE}"/>
+                android:visibility="gone"/>
         </LinearLayout>
 
         <Button
@@ -154,11 +154,11 @@
             android:text="다음으로"
             android:textSize="16sp"
             android:enabled="false"
+            android:background="@drawable/shape_login_next_btn_radius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="54dp"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginBottom="26dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

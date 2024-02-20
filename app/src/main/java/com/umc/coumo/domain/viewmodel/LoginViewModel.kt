@@ -49,7 +49,11 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-
+    fun clearVars() {
+        _isNotValidateAccount.value = false
+        _loginResult.value = false
+        _afterPressLoginBtn.value = false
+    }
     fun trueAfterPressLoginBtn() { _afterPressLoginBtn.value = true }
     fun setLoginResult(bool : Boolean) { _loginResult.value = bool }
     fun setIsNotValidateAccount(bool: Boolean) { _isNotValidateAccount.value = bool }

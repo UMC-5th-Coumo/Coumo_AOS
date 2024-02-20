@@ -6,6 +6,7 @@ import com.umc.coumo.data.remote.model.request.RequestJoinModel
 import com.umc.coumo.data.remote.model.request.RequestJoinRequestVerificationModel
 import com.umc.coumo.data.remote.model.request.RequestJoinVerifyCodeModel
 import com.umc.coumo.data.remote.model.request.RequestLoginModel
+import com.umc.coumo.data.remote.model.request.RequestResetPasswordModel
 import com.umc.coumo.data.remote.model.request.RequestVerifyIdCodeModel
 import com.umc.coumo.data.remote.model.response.ResponseCheckDupIdModel
 import com.umc.coumo.data.remote.model.response.ResponseJoinModel
@@ -13,6 +14,7 @@ import com.umc.coumo.data.remote.model.response.ResponseJoinVerifyCodeModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginAsOwnerModel
 import com.umc.coumo.data.remote.model.response.ResponseLoginModel
 import com.umc.coumo.data.remote.model.response.ResponseModel
+import com.umc.coumo.data.remote.model.response.ResponseVerifyIdCodeModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -53,11 +55,16 @@ interface LoginApi {
     @POST("/customer/verify-code")
     suspend fun postVerifyIdCode(
         @Body params: RequestVerifyIdCodeModel
-    ): Response<ResponseModel<String>>
+    ): Response<ResponseModel<ResponseVerifyIdCodeModel>>
 
     @POST("/owner/login")
     suspend fun postLoginAsOwner(
         @Body params: RequestLoginModel
     ): Response<ResponseModel<ResponseLoginAsOwnerModel>>
+
+    @POST("/customer/reset-password/set-pw")
+    suspend fun postResetPassword(
+        @Body params: RequestResetPasswordModel
+    ): Response<ResponseModel<String>>
 
 }

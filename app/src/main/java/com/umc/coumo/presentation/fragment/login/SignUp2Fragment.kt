@@ -1,19 +1,15 @@
 package com.umc.coumo.presentation.fragment.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
-import com.umc.coumo.data.remote.model.request.RequestJoinModel
 import com.umc.coumo.databinding.FragmentSignUp2Binding
 import com.umc.coumo.domain.viewmodel.SignUp2ViewModel
-import com.umc.coumo.presentation.activity.MainActivity
 import com.umc.coumo.presentation.dialog.ConfirmDialog
 import com.umc.coumo.utils.binding.BindingFragment
 
@@ -42,8 +38,10 @@ class SignUp2Fragment : BindingFragment<FragmentSignUp2Binding> (R.layout.fragme
 
         viewmodel.isSignUpSuccess.observe(viewLifecycleOwner, Observer { success ->
             if (success == true) {
-                ConfirmDialog("회원가입을 성공하였습니다.\n쿠모의 회원이 되신 것을 축하드립니다!").show(parentFragmentManager, null)
-                findNavController().navigate(R.id.action_home)
+                //ConfirmDialog("회원가입을 성공하였습니다.\n쿠모의 회원이 되신 것을 축하드립니다!").show(parentFragmentManager, null)
+                val bundle = Bundle()
+                bundle.putString("userName", binding.textboxSignUpName.text.toString())
+                findNavController().navigate(R.id.action_signUp2Fragment_to_signUpSuccess, bundle)
             } else if (success == false) {
                 ConfirmDialog("회원가입 절차에서 오류가 발생하였습니다.\n재시도를 하시거나, 관리자에게 문의해주세요.").show(parentFragmentManager, null)
             }

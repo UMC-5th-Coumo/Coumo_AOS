@@ -3,6 +3,7 @@ package com.umc.coumo.presentation.fragment.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -66,16 +67,22 @@ class PhoneVerificationFragment: BindingFragment<FragmentPhoneVerificationBindin
         })
 
         viewModel.isValidateCode.observe(viewLifecycleOwner, Observer { success ->
-            if (success) {
+            if (success == true) {
+                binding.tvPhoneVerificationWrongCode.visibility = View.GONE
+                val bundle = Bundle()
+                bundle.putString("userName", viewModel.foundId)
                 if (isFindForId) {
-                    val bundle = Bundle()
-                    bundle.putString("userName", viewModel.foundId)
                     findNavController().navigate(R.id.action_phoneVerificationFragment_to_foundIdFragment, bundle)
-                } else if (viewModel.isValidateUser.value == true) {
-                    findNavController().navigate(R.id.action_phoneVerificationFragment_to_resetPasswordFragment)
+                } else {
+                    findNavController().navigate(R.id.action_phoneVerificationFragment_to_resetPasswordFragment, bundle)
                 }
-                else ConfirmDialog("인증은 성공했으나, 존재하지 않는 사용자 입니다.").show(parentFragmentManager, null)
             }
+            else if (success == false) binding.tvPhoneVerificationWrongCode.visibility = View.VISIBLE
+        })
+
+        viewModel.isValidateUser.observe(viewLifecycleOwner, Observer { success ->
+            if (success == true) binding.tvPhoneVerificationNotFound.visibility = View.GONE
+            else if (success == false) binding.tvPhoneVerificationNotFound.visibility = View.VISIBLE
         })
 
         binding.btnPhoneVerificationRequest.setOnClickListener {
@@ -83,10 +90,11 @@ class PhoneVerificationFragment: BindingFragment<FragmentPhoneVerificationBindin
                 binding.textboxPhoneVerificationName.text.toString(),
                 binding.textboxPhoneVerificationPhoneNumber.text.toString()
             )
+            binding.btnPhoneVerificationRequest.text = "인증번호 재발송"
             ConfirmDialog("인증번호 전송을 요청했습니다.").show(parentFragmentManager, null)
-            viewModel.trueAfterPressVerificationBtn()
             binding.textboxPhoneVerificationCode.isEnabled = true
         }
+
         binding.btnPhoneVerificationLeftArrow.setOnClickListener {
             onBackPressed()
         }
