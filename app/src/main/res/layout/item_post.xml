@@ -13,8 +13,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="24dp"
         android:layout_marginHorizontal="8dp">
         
         <View
@@ -22,10 +20,19 @@
             android:layout_height="1dp"
             android:background="#DDDDDD"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            app:layout_constraintBottom_toBottomOf="parent"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="20dp"
+            android:paddingVertical="20dp"
+
+            android:paddingStart="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_post">
 
@@ -121,6 +128,7 @@
             android:id="@+id/iv_post"
             android:layout_width="76dp"
             android:layout_height="76dp"
+            android:paddingEnd="20dp"
             android:clipToOutline="true"
             imageUri="@{item.imageUri[0]}"
             android:visibility="@{item.imageUri.size() > 0 ? View.VISIBLE : View.GONE}"

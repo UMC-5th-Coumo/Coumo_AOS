@@ -2,6 +2,7 @@ package com.umc.coumo.domain.repository
 
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MyPageModel
+import com.umc.coumo.domain.model.PostModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
 import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.model.StoreInfoModel
@@ -39,4 +40,11 @@ interface CoumoRepository {
         customerId: Int,
         stampCnt: Int,
     ): Boolean
+
+    suspend fun getCommunityPost(
+        type: String?,
+        longitude: Double,
+        latitude: Double,
+        pageId: Int,
+    ): List<PostModel>?
 }
