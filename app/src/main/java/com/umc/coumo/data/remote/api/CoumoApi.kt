@@ -79,6 +79,7 @@ interface CoumoApi {
 
     @GET("/api/notice/around/list")
     suspend fun getCommunityAll(
+        @Query("type") type: String,
         @Query("longitude") longitude: Double,
         @Query("latitude") latitude: Double,
         @Query("pageId") pageId: Int

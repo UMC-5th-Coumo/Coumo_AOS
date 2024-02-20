@@ -13,6 +13,7 @@ import com.umc.coumo.data.remote.model.response.ResponseStoreDataModel
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MenuModel
 import com.umc.coumo.domain.model.MyPageModel
+import com.umc.coumo.domain.model.PostItemModel
 import com.umc.coumo.domain.model.PostModel
 import com.umc.coumo.domain.model.RunTimeModel
 import com.umc.coumo.domain.model.StoreCouponCountModel
@@ -109,8 +110,22 @@ class CoumoRepositoryImpl @Inject constructor(
         val data = coumoApi.getCommunityAll(
             longitude = longitude,
             latitude = latitude,
-            pageId = pageId)
-        return mapToPostModelList(data.body()?.result)
+            pageId = pageId,
+            type = "(null)")
+        //return mapToPostModelList(data.body()?.result)
+        return listOf<PostModel>(
+            PostModel("0", "야호~", "2322", "야호~", null),
+            PostModel("1", "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ", "2323", "곽철용", null),
+            PostModel("2", "예이~예이~예이~예이~예이~예이~예이~예이~예이~예이~", "2323", "하이", null),
+            PostModel("왕십리에서 한잔 할사람~", "본인 키 180대 남자임", "2323", "우", null),
+            PostModel("한잔해~", "에~~~~~~오~~!!에~~~~~~오~~!!에~~~~~~오~~!!에~~~~~~오~~!!에~~~~~~오~~!!에~~~~~~오~~!!", "2323", "종민", null),
+            PostModel("5", "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ", "2323", "야호~가게", null),
+            PostModel("6", "ㅇㅇ??", "2323", "영", null),
+            PostModel("7", "엥?", "2323", "아이고", null),
+            PostModel("8", "너느은~", "2323", "하하", null),
+            PostModel("9", "안되겠다~", "2323", "호호", null),
+            PostModel( "10", "너느으으으은~너느으으으은~너느으으으은~너느으으으은~너느으으으은~너느으으으은~", "2323", "홍박사", null)
+        )
     }
 
     private fun mapToMyPageModel(response: ResponseMyPageModel?): MyPageModel? {

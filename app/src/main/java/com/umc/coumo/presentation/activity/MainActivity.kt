@@ -12,6 +12,7 @@ import com.umc.coumo.R
 import com.umc.coumo.databinding.ActivityMainBinding
 import com.umc.coumo.domain.type.TabType
 import com.umc.coumo.domain.viewmodel.AccountViewModel
+import com.umc.coumo.domain.viewmodel.CommunityViewModel
 import com.umc.coumo.domain.viewmodel.HomeViewModel
 import com.umc.coumo.domain.viewmodel.MainViewModel
 import com.umc.coumo.presentation.adapter.MainFragmentAdapter

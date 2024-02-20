@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.umc.coumo.domain.viewmodel.CommunityViewModel" />
 
     </data>
 
@@ -16,6 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="우리동네 소식들 모아보기"
+            android:textStyle="bold"
+            android:textColor="@color/font_main"
             android:layout_marginTop="36dp"
             style="@style/CommunityTitle"
             android:layout_marginStart="@dimen/horizontal_padding"
