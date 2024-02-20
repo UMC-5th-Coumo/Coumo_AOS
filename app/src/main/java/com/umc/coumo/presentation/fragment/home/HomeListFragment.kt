@@ -13,6 +13,7 @@ import com.umc.coumo.domain.viewmodel.AccountViewModel
 import com.umc.coumo.domain.viewmodel.HomeViewModel
 import com.umc.coumo.presentation.adapter.StoreCouponCountAdapter
 import com.umc.coumo.utils.binding.BindingFragment
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragment_home_list) {
@@ -50,12 +51,12 @@ class HomeListFragment: BindingFragment<FragmentHomeListBinding>(R.layout.fragme
 
         storeCouponAdapter.setOnItemClickListener(object : StoreCouponCountAdapter.OnItemClickListener {
             override fun onItemClick(id: Int) {
-                lifecycleScope.launch {
+                lifecycleScope.launch(Dispatchers.Main) {
                 if (viewModel.loadStoreData(id))
                     findNavController().navigate(
-                        R.id.action_homeMainFragment_to_homeDetailFragment,
+                        R.id.action_homeListFragment_to_homeDetailFragment, null
                     )
-            }
+                }
             }
         })
 
