@@ -64,10 +64,10 @@ class CommunityViewModel @Inject constructor(
     }
 
     fun addPage() {
-        Log.d("TEST scroll http", "페이지 증가!! ${_canLoad.value}")
+        Log.d("TEST scroll http", "페이지 증가!! ${_canLoad.value} ${_postList.value}")
         viewModelScope.launch {
-            if (_canLoad.value != false) {
-                _pageId.value = (_pageId.value?:1) + 1
+            if (_canLoad.value != false && (_postList.value?.size?:0) > 0) {
+                _pageId.value = (_pageId.value?:0) + 1
                 val currentList = _postList.value?: mutableListOf()
                 val newList = repository.getCommunityPost(_currentTab.value?.api, 126.88804417884324 , 37.520786061099514, pageId.value?:1)?: mutableListOf()
                 if (newList.size == 10) {
