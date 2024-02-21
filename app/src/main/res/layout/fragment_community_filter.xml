@@ -31,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:nestedScrollingEnabled="false"/>
+            android:paddingBottom="16dp"
+            android:nestedScrollingEnabled="true"/>
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:layout_width="match_parent"
