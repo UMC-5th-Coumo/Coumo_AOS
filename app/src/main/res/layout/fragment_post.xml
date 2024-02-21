@@ -14,6 +14,16 @@
         android:layout_height="match_parent"
         android:layout_marginTop="32dp">
 
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/btn_toolbar_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_chevron_left"
+            android:layout_marginStart="26dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/chip_new_menu"
+            app:layout_constraintBottom_toBottomOf="@id/chip_new_menu"/>
+
         <TextView
             android:id="@+id/chip_new_menu"
             android:layout_width="wrap_content"
@@ -22,9 +32,9 @@
             style="@style/ChipTextStyle"
             android:background="@drawable/selector_chip_background"
             android:textColor="@color/selector_chip_text_color"
-            android:layout_marginStart="26dp"
+            android:layout_marginStart="8dp"
             selected="@{true}"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_toolbar_back"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

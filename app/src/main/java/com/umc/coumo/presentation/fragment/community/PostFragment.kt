@@ -26,6 +26,11 @@ class PostFragment: BindingFragment<FragmentPostBinding>(R.layout.fragment_post)
         binding.executePendingBindings()
 
         setRecyclerView()
+
+
+        binding.btnToolbarBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setRecyclerView() {

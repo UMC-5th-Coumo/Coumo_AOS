@@ -3,6 +3,7 @@ package com.umc.coumo.domain.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.umc.coumo.data.remote.model.response.ResponseModel
 import com.umc.coumo.domain.repository.CoumoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -18,11 +19,11 @@ class OwnerViewModel @Inject constructor(
     private val _countPayment = MutableLiveData<Int>(1);
     val countPayment: LiveData<Int> get() = _countPayment
 
-    suspend fun postStampOwner(storeId: Int, customerId: Int,): Boolean {
+    suspend fun postStampOwner(storeId: Int, customerId: Int,): ResponseModel<Any>? {
         return repository.postOwnerStamp(storeId, customerId, _countStamp.value?:1)
     }
 
-    suspend fun postPaymentOwner(storeId: Int, customerId: Int,): Boolean {
+    suspend fun postPaymentOwner(storeId: Int, customerId: Int,): ResponseModel<Any>? {
         return repository.postOwnerPayment(storeId, customerId, _countPayment.value?:1)
     }
 

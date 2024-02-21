@@ -65,11 +65,11 @@ interface CoumoApi {
     @POST("/api/qr/owner/stamp")
     suspend fun postOwnerStamp(
         @Body body: RequestOwnerQRModel
-    ): Response<Any>
+    ): Response<ResponseModel<Any>>
 
     @POST("/api/qr/owner/payment")
     suspend fun postOwnerPayment(
         @Body body: RequestOwnerQRModel
-    ): Response<Any>
+    ): Response<ResponseModel<Any>>
 
 }
