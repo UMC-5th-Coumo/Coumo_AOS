@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
     private val _popularStoreList = MutableLiveData<List<StoreInfoItemModel>>()
     val popularStoreList: LiveData<List<StoreInfoItemModel>> get() = _popularStoreList
 
-    private val _currentLocation = MutableLiveData<LocationLatLng>(LocationLatLng(126.88804417884324 , 37.520786061099514))
+    private val _currentLocation = MutableLiveData<LocationLatLng>(LocationLatLng(126.8876 , 37.5204))
     val currentLocation: LiveData<LocationLatLng> get() = _currentLocation
 
     private val _currentAddress = MutableLiveData<String>()
