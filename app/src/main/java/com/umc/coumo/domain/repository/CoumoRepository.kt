@@ -1,5 +1,6 @@
 package com.umc.coumo.domain.repository
 
+import com.umc.coumo.data.remote.model.response.ResponseModel
 import com.umc.coumo.domain.model.CouponModel
 import com.umc.coumo.domain.model.MyPageModel
 import com.umc.coumo.domain.model.PostModel
@@ -8,6 +9,7 @@ import com.umc.coumo.domain.model.StoreInfoItemModel
 import com.umc.coumo.domain.model.StoreInfoModel
 import com.umc.coumo.domain.type.CategoryType
 import com.umc.coumo.domain.type.CouponAlignType
+import retrofit2.Response
 
 interface CoumoRepository {
 
@@ -33,13 +35,13 @@ interface CoumoRepository {
         storeId: Int,
         customerId: Int,
         stampCnt: Int,
-    ): Boolean
+    ): ResponseModel<Any>?
 
     suspend fun postOwnerPayment(
         storeId: Int,
         customerId: Int,
         stampCnt: Int,
-    ): Boolean
+    ): ResponseModel<Any>?
 
     suspend fun getCommunityPost(
         type: String?,

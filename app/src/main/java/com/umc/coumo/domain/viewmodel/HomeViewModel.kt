@@ -68,7 +68,9 @@ class HomeViewModel @Inject constructor(
 
     fun getPopularStoreList() {
         viewModelScope.launch {
+            _isLoading.value = true
             _popularStoreList.value = repository.getPopularStoreList(longitude = _currentLocation.value?.longitude!!, latitude = _currentLocation.value?.latitude!!) //빈 값 없으니 이렇게 처리
+            _isLoading.value = false
         }
     }
 

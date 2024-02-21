@@ -4,18 +4,22 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.umc.coumo.R
 import com.umc.coumo.databinding.FragmentOwnerMainBinding
+import com.umc.coumo.domain.viewmodel.OwnerViewModel
 import com.umc.coumo.utils.PermissionUtils
 import com.umc.coumo.utils.binding.BindingFragment
 
 class OwnerMainFragment: BindingFragment<FragmentOwnerMainBinding>(R.layout.fragment_owner_main) {
 
     private lateinit var permissionUtils: PermissionUtils
-
+    private val viewModel: OwnerViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         permissionUtils = PermissionUtils(this)
 

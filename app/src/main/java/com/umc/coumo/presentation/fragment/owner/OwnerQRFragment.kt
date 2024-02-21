@@ -54,31 +54,30 @@ class OwnerQRFragment: BindingFragment<FragmentOwnerQrBinding>(R.layout.fragment
                 val jsonObject = JSONObject(result.result.text)
                 if (arguments?.getString("OwnerType")=="Stamp") {
                     lifecycleScope.launch {
-                        if (viewModel.postStampOwner(
-                                jsonObject.getInt("storeId"),
-                                jsonObject.getInt("customerId"),
-                                )
-                            ) {
-                            Toast.makeText(requireContext(), "적립 성공", Toast.LENGTH_SHORT).show()
+                        val i = viewModel.postStampOwner(
+                            jsonObject.getInt("storeId"),
+                            jsonObject.getInt("customerId"),
+                        )
+                        if (i?.isSuccess== true) {
+                            Toast.makeText(requireContext(), i.message, Toast.LENGTH_SHORT).show()
                             findNavController().popBackStack()
                         }
                         else
-                            Toast.makeText(requireContext(),"적립 실패", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(),i?.message, Toast.LENGTH_SHORT).show()
                     }
                 }
                 else {
                     lifecycleScope.launch {
-                        if (viewModel.postPaymentOwner(
-                                jsonObject.getInt("storeId"),
-                                jsonObject.getInt("customerId"),
-                            )
-
-                        ) {
-                            Toast.makeText(requireContext(), "사용 성공", Toast.LENGTH_SHORT).show()
+                        val i = viewModel.postPaymentOwner(
+                            jsonObject.getInt("storeId"),
+                            jsonObject.getInt("customerId"),
+                        )
+                        if (i?.isSuccess == true) {
+                            Toast.makeText(requireContext(), i.message, Toast.LENGTH_SHORT).show()
                             findNavController().popBackStack()
                         }
                         else
-                            Toast.makeText(requireContext(), "사용 실패", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), i?.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }

@@ -5,6 +5,7 @@ import com.umc.coumo.App
 import com.umc.coumo.data.remote.api.CoumoApi
 import com.umc.coumo.data.remote.model.request.RequestOwnerQRModel
 import com.umc.coumo.data.remote.model.response.ResponseCouponModelX
+import com.umc.coumo.data.remote.model.response.ResponseModel
 import com.umc.coumo.data.remote.model.response.ResponseMyPageModel
 import com.umc.coumo.data.remote.model.response.ResponseNearStoreModel
 import com.umc.coumo.data.remote.model.response.ResponsePopularStoreModel
@@ -81,28 +82,28 @@ class CoumoRepositoryImpl @Inject constructor(
         storeId: Int,
         customerId: Int,
         stampCnt: Int
-    ): Boolean {
+    ): ResponseModel<Any>? {
         val data = coumoApi.postOwnerStamp(RequestOwnerQRModel(
             storeId = storeId,
             customerId = customerId,
             ownerId = App.prefs.getInt(OWNER_ID,35),
             stampCnt = stampCnt
         ))
-        return data.isSuccessful
+        return data.body()
     }
 
     override suspend fun postOwnerPayment(
         storeId: Int,
         customerId: Int,
         stampCnt: Int
-    ): Boolean {
+    ): ResponseModel<Any>? {
         val data = coumoApi.postOwnerPayment(RequestOwnerQRModel(
             storeId = storeId,
             customerId = customerId,
             ownerId = App.prefs.getInt(OWNER_ID,35),
             stampCnt = stampCnt
         ))
-        return data.isSuccessful
+        return data.body()
     }
 
     private fun mapToMyPageModel(response: ResponseMyPageModel?): MyPageModel? {
