@@ -58,7 +58,7 @@ class CommunityViewModel @Inject constructor(
         _post.value = item
     }
 
-    private fun clearPage() {
+    fun clearPage() {
         _pageId.value = 1
         _canLoad.value = true
     }

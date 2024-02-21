@@ -25,8 +25,6 @@ class CommunityFilterFragment: BindingFragment<FragmentCommunityFilterBinding>(R
 
         val postAdapter = PostAdapter()
 
-        viewModel.getCommunityList()
-
         binding.rvFilter.apply {
             adapter = postAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -42,6 +40,12 @@ class CommunityFilterFragment: BindingFragment<FragmentCommunityFilterBinding>(R
             postAdapter.submitList(it)
         }
         initScrollListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.clearPage()
+        viewModel.getCommunityList()
     }
 
     private fun initScrollListener() {
