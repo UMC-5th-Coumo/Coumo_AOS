@@ -40,14 +40,14 @@ class CommunityViewModel @Inject constructor(
         viewModelScope.launch {
             _postList.value = null
             clearPage()
-            _postList.value = repository.getCommunityPost(_currentTab.value?.api, 126.88804417884324 , 37.520786061099514, pageId.value?:1)
+            _postList.value = repository.getCommunityPost(_currentTab.value?.api, 126.8876 , 37.5204, pageId.value?:1)
         }
     }
 
     fun getCommunityList() {
         viewModelScope.launch {
             _isLoading.value = true
-            _postList.value = repository.getCommunityPost(_currentTab.value?.api, 126.88804417884324 , 37.520786061099514, pageId.value?:1)
+            _postList.value = repository.getCommunityPost(_currentTab.value?.api, 126.8876 , 37.5204 ,pageId.value?:1)
 
             _canLoad.value = (_postList.value?.size?:0) >= 10 //10개가 안 찼으면 로드 불가
             _isLoading.value = false
